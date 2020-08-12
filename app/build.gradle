@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion Android.compileSdkVersion
+    buildToolsVersion Android.buildToolsVersion
+
+    defaultConfig {
+        applicationId Config.applicationId
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation Lib.appcompat
+    implementation Lib.constraintLayout
+
+    testImplementation Lib.junit
+    androidTestImplementation Lib.extJunit
+    androidTestImplementation Lib.espressoCore
+
+}
