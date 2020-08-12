@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noscale.edelweiss.common.widget.EdelweissConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_17sdp"
+    >
+
+    <EditText
+        android:id="@+id/et_registration_first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/et_registration_last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/et_registration_first_name"
+        app:layout_constraintTop_toBottomOf="@id/et_registration_first_name"
+        />
+
+    <EditText
+        android:id="@+id/et_registration_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/et_registration_first_name"
+        app:layout_constraintTop_toBottomOf="@id/et_registration_last_name"
+        />
+
+    <EditText
+        android:id="@+id/et_registration_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="@id/et_registration_first_name"
+        app:layout_constraintTop_toBottomOf="@id/et_registration_email"
+        />
+
+    <EditText
+        android:id="@+id/et_registration_repassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="@id/et_registration_first_name"
+        app:layout_constraintTop_toBottomOf="@id/et_registration_password"
+        />
+
+    <Button
+        android:id="@+id/b_registration_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_txt"
+        app:layout_constraintTop_toBottomOf="@+id/et_registration_repassword"
+        app:layout_constraintLeft_toLeftOf="@id/et_registration_first_name"
+        />
+
+    <TextView
+        android:id="@+id/tv_registration_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_txt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/b_registration_submit"
+        />
+
+</com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

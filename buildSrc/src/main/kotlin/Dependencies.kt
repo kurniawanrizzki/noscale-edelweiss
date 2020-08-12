@@ -18,6 +18,8 @@ object Config {
 object Version {
     val vAppcompat = "1.2.0"
     val vConstraintLayout = "1.1.3"
+    val vIntuit = "1.0.6"
+
     val vJunit = "4.12"
     val vExtJunit = "1.1.1"
     val vExpressoCore = "3.2.0"
@@ -28,6 +30,8 @@ object Version {
 object Lib {
     val appcompat = "androidx.appcompat:appcompat:${Version.vAppcompat}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Version.vConstraintLayout}"
+    val sdp = "com.intuit.sdp:sdp-android:${Version.vIntuit}"
+    val ssp = "com.intuit.ssp:ssp-android:${Version.vIntuit}"
 
     val junit = "junit:junit:${Version.vJunit}"
     val extJunit = "androidx.test.ext:junit:${Version.vExtJunit}"
