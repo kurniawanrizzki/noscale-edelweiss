@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Edelweiss</string>
+
+    <string name="waiting_txt">Please waiting...</string>
+
+    <string name="email_txt">Email</string>
+    <string name="password_txt">Password</string>
+    <string name="sign_in_txt">Sign In</string>
+    <string name="sign_up_txt">Sign Up</string>
+    <string name="sign_up_action_txt">Sign up here</string>
 </resources>
