@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.UICommon;
+import com.noscale.edelweiss.dashboard.DashboardActivity;
 import com.noscale.edelweiss.registration.RegistrationActivity;
 
 /**
@@ -42,6 +43,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), RegistrationActivity.class);
+                startActivity(i);
+            }
+        });
+
+        view.findViewById(R.id.b_login_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), DashboardActivity.class);
                 startActivity(i);
             }
         });

@@ -23,6 +23,10 @@
         <activity
             android:name=".registration.RegistrationActivity"
             />
+
+        <activity
+            android:name=".dashboard.DashboardActivity"
+            />
     </application>
 
 </manifest>
