@@ -29,6 +29,10 @@
             />
 
         <activity
+            android:name=".wp.WeddingPackageActivity"
+            />
+
+        <activity
             android:name=".schedule.ScheduleActivity"
             />
 

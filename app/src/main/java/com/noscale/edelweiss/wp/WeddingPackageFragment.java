@@ -1,4 +1,4 @@
-package com.noscale.edelweiss.testimonial;
+package com.noscale.edelweiss.wp;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,19 +12,19 @@ import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
-import com.noscale.edelweiss.data.Testimonial;
+import com.noscale.edelweiss.data.WeddingPackage;
 import java.util.ArrayList;
 
 /**
  * TODO: Add class header description
  * Created by kurniawanrizzki on 15/08/20.
  */
-public class TestimonialFragment extends BaseFragment implements TestimonialContract.View {
+public class WeddingPackageFragment extends BaseFragment implements WeddingPackageContract.View {
 
-    private SimpleRecyclerAdapter<Testimonial> mAdapter;
+    private SimpleRecyclerAdapter<WeddingPackage> mAdapter;
 
-    public static TestimonialFragment newInstance () {
-        return new TestimonialFragment();
+    public static WeddingPackageFragment newInstance () {
+        return new WeddingPackageFragment();
     }
 
     @Nullable
@@ -43,27 +43,27 @@ public class TestimonialFragment extends BaseFragment implements TestimonialCont
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAdapter = new SimpleRecyclerAdapter<>(new ArrayList<Testimonial>(), R.layout.item_testimonial, new SimpleRecyclerAdapter.OnViewHolder<Testimonial>() {
+        mAdapter = new SimpleRecyclerAdapter<>(new ArrayList<WeddingPackage>(), R.layout.item_wedding_package, new SimpleRecyclerAdapter.OnViewHolder<WeddingPackage>() {
             @Override
-            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Testimonial item) {
-                TextView tvName = holder.itemView.findViewById(R.id.tv_wp_detail);
-                TextView tvContent = holder.itemView.findViewById(R.id.tv_wp_name);
+            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, WeddingPackage item) {
+                TextView tvName = holder.itemView.findViewById(R.id.tv_wp_name);
+                TextView tvPrice = holder.itemView.findViewById(R.id.tv_wp_price);
 
                 tvName.setText(item.getName());
-                tvContent.setText(item.getContent());
+                tvPrice.setText(item.getPrice());
             }
         });
 
-        RecyclerView rvTestimonial = view.findViewById(R.id.rv_fragment_list);
+        RecyclerView rvWeddingPackage = view.findViewById(R.id.rv_fragment_list);
         TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
 
-        rvTestimonial.setAdapter(mAdapter);
-        tvTitle.setText(getString(R.string.testimonial_txt));
+        rvWeddingPackage.setAdapter(mAdapter);
+        tvTitle.setText(getString(R.string.package_txt));
     }
 
     @Override
-    public void setPresenter(TestimonialContract.Presenter presenter) {
-        mPresenter = presenter;
+    public void setPresenter(WeddingPackageContract.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 
     @Override
