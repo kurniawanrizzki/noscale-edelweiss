@@ -1,4 +1,4 @@
-package com.noscale.edelweiss.schedule;
+package com.noscale.edelweiss.testimonial;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,20 +12,19 @@ import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
-import com.noscale.edelweiss.data.Schedule;
-
+import com.noscale.edelweiss.data.Testimonial;
 import java.util.ArrayList;
 
 /**
  * TODO: Add class header description
- * Created by kurniawanrizzki on 13/08/20.
+ * Created by kurniawanrizzki on 15/08/20.
  */
-public class ScheduleFragment extends BaseFragment implements ScheduleContract.View {
+public class TestimonialFragment extends BaseFragment implements TestimonialContract.View {
 
-    private SimpleRecyclerAdapter<Schedule> mAdapter;
+    private SimpleRecyclerAdapter<Testimonial> mAdapter;
 
-    public static ScheduleFragment newInstance () {
-        return new ScheduleFragment();
+    public static TestimonialFragment newInstance () {
+        return new TestimonialFragment();
     }
 
     @Nullable
@@ -44,28 +43,26 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAdapter = new SimpleRecyclerAdapter<>(new ArrayList<Schedule>(), R.layout.item_schedule, new SimpleRecyclerAdapter.OnViewHolder<Schedule>() {
+        mAdapter = new SimpleRecyclerAdapter<>(new ArrayList<Testimonial>(), R.layout.item_testimonial, new SimpleRecyclerAdapter.OnViewHolder<Testimonial>() {
             @Override
-            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Schedule item) {
-                TextView tvName = holder.itemView.findViewById(R.id.tv_schedule_name);
-                TextView tvDate = holder.itemView.findViewById(R.id.tv_schedule_date);
-                TextView tvStatus = holder.itemView.findViewById(R.id.tv_schedule_status);
+            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Testimonial item) {
+                TextView tvName = holder.itemView.findViewById(R.id.tv_testimonial_name);
+                TextView tvContent = holder.itemView.findViewById(R.id.tv_testimonial_content);
 
                 tvName.setText(item.getName());
-                tvDate.setText(item.getDate());
-                tvStatus.setText(item.getStatus().toString());
+                tvContent.setText(item.getContent());
             }
         });
 
-        RecyclerView rvSchedule = view.findViewById(R.id.rv_fragment_list);
+        RecyclerView rvTestimonial = view.findViewById(R.id.rv_fragment_list);
         TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
 
-        rvSchedule.setAdapter(mAdapter);
-        tvTitle.setText(getString(R.string.schedule_title_txt));
+        rvTestimonial.setAdapter(mAdapter);
+        tvTitle.setText(getString(R.string.testimonial_txt));
     }
 
     @Override
-    public void setPresenter(ScheduleContract.Presenter presenter) {
+    public void setPresenter(TestimonialContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
