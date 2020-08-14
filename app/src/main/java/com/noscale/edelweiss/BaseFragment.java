@@ -29,6 +29,9 @@ public class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+
+        if (null != mPresenter) {
+            mPresenter.start();
+        }
     }
 }

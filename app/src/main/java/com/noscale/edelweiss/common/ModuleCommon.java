@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.about.AboutUsActivity;
 import com.noscale.edelweiss.data.Module;
 import com.noscale.edelweiss.schedule.ScheduleActivity;
 import com.noscale.edelweiss.testimonial.TestimonialActivity;
@@ -66,7 +67,8 @@ public class ModuleCommon {
         modules.add(new Module(R.string.about_us_txt, R.drawable.ic_info, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(context, AboutUsActivity.class);
+                context.startActivity(i);
             }
         }));
 

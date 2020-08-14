@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noscale.edelweiss.common.widget.EdelweissConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_17sdp"
+    >
+
+    <TextView
+        android:id="@+id/tv_about_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_us_txt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <ScrollView
+        android:id="@+id/sv_about_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_marginBottom="@dimen/_17sdp"
+        app:layout_constraintBottom_toTopOf="@id/ll_about_container"
+        app:layout_constraintTop_toBottomOf="@id/tv_about_title"
+        >
+
+        <TextView
+            android:id="@+id/tv_about_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/lorem/random"/>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_about_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_about_office_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="@dimen/_7sdp"
+                app:srcCompat="@drawable/ic_office"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/office_txt"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_about_workshop_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="@dimen/_7sdp"
+                app:srcCompat="@drawable/ic_home"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/workshop_txt"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_about_phone_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="@dimen/_7sdp"
+                app:srcCompat="@drawable/ic_phone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/phone_txt"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

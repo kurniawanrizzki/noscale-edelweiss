@@ -37,7 +37,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putBoolean(SHOULD_LOAD_FROM_REPOSITORY_KEY, mPresenter.isDataMissing());
+        if (null != mPresenter) {
+            outState.putBoolean(SHOULD_LOAD_FROM_REPOSITORY_KEY, mPresenter.isDataMissing());
+        }
+
         super.onSaveInstanceState(outState);
     }
 
