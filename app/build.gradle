@@ -28,6 +28,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation Lib.appcompat
     implementation Lib.recyclerview
+    implementation Lib.cardview
     implementation Lib.constraintLayout
 
     implementation Lib.sdp

@@ -27,6 +27,10 @@
         <activity
             android:name=".dashboard.DashboardActivity"
             />
+        
+        <activity
+            android:name=".schedule.ScheduleActivity"
+            />
     </application>
 
 </manifest>

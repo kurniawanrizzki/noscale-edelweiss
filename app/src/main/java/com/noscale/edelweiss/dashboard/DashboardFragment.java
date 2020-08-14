@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -18,8 +17,6 @@ import com.noscale.edelweiss.common.ModuleCommon;
 import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Module;
-
-import java.util.ArrayList;
 
 /**
  * TODO: Add class header description
@@ -49,7 +46,7 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAdapter = new SimpleRecyclerAdapter<>(ModuleCommon.getModules(), R.layout.item_module, new SimpleRecyclerAdapter.OnViewHolder<Module>() {
+        mAdapter = new SimpleRecyclerAdapter<>(ModuleCommon.getModules(getContext()), R.layout.item_module, new SimpleRecyclerAdapter.OnViewHolder<Module>() {
             @Override
             public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Module item) {
                 AppCompatImageView ivIcon = holder.itemView.findViewById(R.id.iv_module_icon);

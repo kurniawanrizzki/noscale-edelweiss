@@ -1,8 +1,12 @@
 package com.noscale.edelweiss.common;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.data.Module;
+import com.noscale.edelweiss.schedule.ScheduleActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +16,7 @@ import java.util.List;
  */
 public class ModuleCommon {
 
-    public static List<Module> getModules () {
+    public static List<Module> getModules (final Context context) {
         List<Module> modules = new ArrayList<>();
 
         modules.add(new Module(R.string.gallery_txt, R.drawable.ic_gallery, new View.OnClickListener() {
@@ -39,7 +43,8 @@ public class ModuleCommon {
         modules.add(new Module(R.string.schedule_txt, R.drawable.ic_schedule, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(context, ScheduleActivity.class);
+                context.startActivity(i);
             }
         }));
 
