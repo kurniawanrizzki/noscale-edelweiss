@@ -9,21 +9,21 @@
     >
 
     <TextView
-        android:id="@+id/tv_schedule_title"
+        android:id="@+id/tv_fragment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/schedule_title_txt"
+        tools:text="@tools:sample/lorem"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_schedule_list"
+        android:id="@+id/rv_fragment_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_17sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/tv_schedule_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_fragment_title"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_schedule"
         tools:itemCount="3"

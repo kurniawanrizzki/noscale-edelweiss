@@ -27,10 +27,15 @@
         <activity
             android:name=".dashboard.DashboardActivity"
             />
-        
+
         <activity
             android:name=".schedule.ScheduleActivity"
             />
+
+        <activity
+            android:name=".testimonial.TestimonialActivity"
+            />
+
     </application>
 
 </manifest>
