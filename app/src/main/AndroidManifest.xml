@@ -36,6 +36,10 @@
             android:name=".testimonial.TestimonialActivity"
             />
 
+        <activity
+            android:name=".about.AboutUsActivity"
+            />
+
     </application>
 
 </manifest>

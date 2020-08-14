@@ -12,6 +12,10 @@
 
     <string name="schedule_title_txt">Wedding Schedule</string>
 
+    <string name="office_txt">Office</string>
+    <string name="workshop_txt">Workshop</string>
+    <string name="phone_txt">Phone</string>
+
     <string name="gallery_txt">Gallery</string>
     <string name="package_txt">Package</string>
     <string name="booking_txt">Booking</string>
