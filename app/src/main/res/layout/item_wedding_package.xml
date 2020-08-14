@@ -22,18 +22,27 @@
             android:id="@+id/tv_wp_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/detail_txt"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem"
             />
 
         <TextView
             android:id="@+id/tv_wp_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toLeftOf="@id/tv_wp_detail"
             app:layout_constraintTop_toTopOf="@id/tv_wp_detail"
             app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <TextView
+            android:id="@+id/tv_wp_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_wp_name"
+            app:layout_constraintLeft_toLeftOf="@id/tv_wp_name"
             tools:text="@tools:sample/lorem"
             />
 

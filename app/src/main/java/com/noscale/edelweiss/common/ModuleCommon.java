@@ -8,6 +8,7 @@ import com.noscale.edelweiss.about.AboutUsActivity;
 import com.noscale.edelweiss.data.Module;
 import com.noscale.edelweiss.schedule.ScheduleActivity;
 import com.noscale.edelweiss.testimonial.TestimonialActivity;
+import com.noscale.edelweiss.wp.WeddingPackageActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,8 @@ public class ModuleCommon {
         modules.add(new Module(R.string.package_txt, R.drawable.ic_package, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(context, WeddingPackageActivity.class);
+                context.startActivity(i);
             }
         }));
 
