@@ -10,6 +10,8 @@
     <string name="sign_up_txt">Sign Up</string>
     <string name="sign_up_action_txt">Sign up here</string>
 
+    <string name="schedule_title_txt">Wedding Schedule</string>
+
     <string name="gallery_txt">Gallery</string>
     <string name="package_txt">Package</string>
     <string name="booking_txt">Booking</string>

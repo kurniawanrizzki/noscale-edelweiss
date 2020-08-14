@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginBottom="@dimen/_7sdp"
+    android:background="@color/cardview_light_background"
+    app:cardCornerRadius="@dimen/_4sdp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_schedule_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_13sdp"
+        >
+
+        <TextView
+            android:id="@+id/tv_schedule_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <TextView
+            android:id="@+id/tv_schedule_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/tv_schedule_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_schedule_name"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <TextView
+            android:id="@+id/tv_schedule_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_schedule_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_schedule_date"
+            tools:text="@tools:sample/lorem"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
