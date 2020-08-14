@@ -27,6 +27,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation Lib.appcompat
+    implementation Lib.recyclerview
     implementation Lib.constraintLayout
 
     implementation Lib.sdp

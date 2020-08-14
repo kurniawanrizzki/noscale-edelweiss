@@ -19,6 +19,7 @@ object Version {
     val vAppcompat = "1.2.0"
     val vConstraintLayout = "1.1.3"
     val vIntuit = "1.0.6"
+    val vRecyclerview = "1.1.0"
 
     val vJunit = "4.12"
     val vExtJunit = "1.1.1"
@@ -32,6 +33,7 @@ object Lib {
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Version.vConstraintLayout}"
     val sdp = "com.intuit.sdp:sdp-android:${Version.vIntuit}"
     val ssp = "com.intuit.ssp:ssp-android:${Version.vIntuit}"
+    val recyclerview = "androidx.recyclerview:recyclerview:${Version.vRecyclerview}"
 
     val junit = "junit:junit:${Version.vJunit}"
     val extJunit = "androidx.test.ext:junit:${Version.vExtJunit}"

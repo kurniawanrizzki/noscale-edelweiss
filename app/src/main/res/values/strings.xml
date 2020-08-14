@@ -2,10 +2,19 @@
     <string name="app_name">Edelweiss</string>
 
     <string name="waiting_txt">Please waiting...</string>
+    <string name="welcome_txt">Welcome,</string>
 
     <string name="email_txt">Email</string>
     <string name="password_txt">Password</string>
     <string name="sign_in_txt">Sign In</string>
     <string name="sign_up_txt">Sign Up</string>
     <string name="sign_up_action_txt">Sign up here</string>
+
+    <string name="gallery_txt">Gallery</string>
+    <string name="package_txt">Package</string>
+    <string name="booking_txt">Booking</string>
+    <string name="schedule_txt">Schedule</string>
+    <string name="testimonial_txt">Testimonial</string>
+    <string name="payment_txt">Payment</string>
+    <string name="about_us_txt">About Us</string>
 </resources>
