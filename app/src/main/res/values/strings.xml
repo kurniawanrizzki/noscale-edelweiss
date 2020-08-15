@@ -9,6 +9,7 @@
     <string name="sign_in_txt">Sign In</string>
     <string name="sign_up_txt">Sign Up</string>
     <string name="sign_up_action_txt">Sign up here</string>
+    <string name="click_here_txt">Click here</string>
 
     <string name="schedule_title_txt">Wedding Schedule</string>
 
@@ -25,6 +26,17 @@
     <string name="booking_fee_txt">Booking Fee</string>
     <string name="booking_guide_txt">Your booking status can be seen on Wedding Schedule</string>
     <string name="submit_txt">Process</string>
+
+    <string name="later_txt">Later</string>
+    <string name="payment_direction_txt">Go to Payment</string>
+    <string name="payment_options_txt">Payment Options</string>
+    <string name="payment_amount_txt">Amount</string>
+    <string name="payment_receipt_txt">Receipt</string>
+
+    <string name="booking_success_txt">Booking Success!</string>
+    <string name="payment_booking_complete_txt">Payment Confirmation uploaded,</string>
+    <string name="payment_booking_contact_txt">Contact us more info</string>
+    <string name="payment_booking_guidance_txt">Note:\nYour booking status can be seen on Wedding Schedule</string>
 
     <string name="gallery_txt">Gallery</string>
     <string name="package_txt">Package</string>

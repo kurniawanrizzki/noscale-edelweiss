@@ -1,4 +1,4 @@
-package com.noscale.edelweiss.booking;
+package com.noscale.edelweiss.payment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,24 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.booking.complete.CompleteBookingActivity;
 import com.noscale.edelweiss.common.UICommon;
+import com.noscale.edelweiss.payment.complete.CompletePaymentActivity;
 
 /**
  * TODO: Add class header description
  * Created by kurniawanrizzki on 16/08/20.
  */
-public class BookingFragment extends BaseFragment implements BookingContract.View {
+public class PaymentFragment extends BaseFragment implements PaymentContract.View {
 
-    public static BookingFragment newInstance () {
-        return new BookingFragment();
+    public static PaymentFragment newInstance () {
+        return new PaymentFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(
-                R.layout.fragment_booking,
+                R.layout.fragment_payment,
                 container,
                 false
         );
@@ -38,19 +38,17 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.b_booking_submit).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(getContext(), CompleteBookingActivity.class);
-                        startActivity(i);
-                    }
-                }
-        );
+        view.findViewById(R.id.b_payment_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), CompletePaymentActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
-    public void setPresenter(BookingContract.Presenter presenter) {
+    public void setPresenter(PaymentContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
