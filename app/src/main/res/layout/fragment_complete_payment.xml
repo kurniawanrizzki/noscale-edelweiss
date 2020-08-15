@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noscale.edelweiss.common.widget.EdelweissConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_17sdp"
+    >
+
+    <TextView
+        android:id="@+id/tv_payment_booking_uploaded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_booking_complete_txt"
+        app:layout_constraintBottom_toTopOf="@id/tv_payment_booking_contact_us"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_payment_booking_contact_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_booking_contact_txt"
+        android:layout_marginBottom="@dimen/_17sdp"
+        app:layout_constraintBottom_toTopOf="@id/iv_payment_booking_wa"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_payment_booking_wa"
+        android:layout_width="@dimen/_43sdp"
+        android:layout_height="@dimen/_43sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_whatsapp"
+        />
+
+    <TextView
+        android:id="@+id/tv_payment_booking_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/click_here_txt"
+        android:layout_marginTop="@dimen/_17sdp"
+        app:layout_constraintTop_toBottomOf="@id/iv_payment_booking_wa"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_payment_booking_guidance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_booking_guidance_txt"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

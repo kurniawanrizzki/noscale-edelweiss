@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noscale.edelweiss.common.widget.EdelweissConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_17sdp"
+    >
+
+    <TextView
+        android:id="@+id/tv_booking_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/booking_success_txt"
+        android:layout_marginBottom="@dimen/_27sdp"
+        app:layout_constraintBottom_toTopOf="@id/tv_booking_go_to_payment"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_booking_go_to_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_direction_txt"
+        android:layout_marginTop="@dimen/_17sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/b_booking_later"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:text="@string/later_txt"
+        app:layout_constraintTop_toBottomOf="@id/tv_booking_go_to_payment"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

@@ -45,6 +45,18 @@
             />
 
         <activity
+            android:name=".booking.complete.CompleteBookingActivity"
+            />
+
+        <activity
+            android:name=".payment.PaymentActivity"
+            />
+
+        <activity
+            android:name=".payment.complete.CompletePaymentActivity"
+            />
+
+        <activity
             android:name=".about.AboutUsActivity"
             />
 
