@@ -29,6 +29,10 @@
             />
 
         <activity
+            android:name=".gallery.GalleryActivity"
+            />
+
+        <activity
             android:name=".wp.WeddingPackageActivity"
             />
 

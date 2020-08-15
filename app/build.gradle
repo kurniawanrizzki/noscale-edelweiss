@@ -29,6 +29,7 @@ dependencies {
     implementation Lib.appcompat
     implementation Lib.recyclerview
     implementation Lib.cardview
+    implementation Lib.material
     implementation Lib.constraintLayout
 
     implementation Lib.sdp
