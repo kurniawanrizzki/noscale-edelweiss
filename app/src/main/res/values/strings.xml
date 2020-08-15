@@ -17,6 +17,15 @@
     <string name="phone_txt">Phone</string>
     <string name="detail_txt">Detail</string>
 
+    <string name="name_txt">Name</string>
+    <string name="address_txt">Address</string>
+    <string name="event_date_txt">Event Date</string>
+    <string name="event_time_txt">Event Time</string>
+    <string name="category_txt">Category</string>
+    <string name="booking_fee_txt">Booking Fee</string>
+    <string name="booking_guide_txt">Your booking status can be seen on Wedding Schedule</string>
+    <string name="submit_txt">Process</string>
+
     <string name="gallery_txt">Gallery</string>
     <string name="package_txt">Package</string>
     <string name="booking_txt">Booking</string>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noscale.edelweiss.common.widget.EdelweissConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_17sdp"
+    >
+
+    <TextView
+        android:id="@+id/tv_booking_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/booking_txt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        app:layout_constraintTop_toBottomOf="@id/tv_booking_title"
+        app:layout_constraintBottom_toTopOf="@+id/b_booking_submit"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_booking_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_booking_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_txt"
+                app:layout_constraintTop_toTopOf="@id/et_booking_name"
+                app:layout_constraintBottom_toBottomOf="@id/et_booking_name"
+                app:layout_constraintRight_toLeftOf="@+id/et_booking_name"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <EditText
+                android:id="@+id/et_booking_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.7"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/address_txt"
+                app:layout_constraintTop_toTopOf="@id/et_booking_address"
+                app:layout_constraintBottom_toBottomOf="@id/et_booking_address"
+                app:layout_constraintRight_toLeftOf="@+id/et_booking_address"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <EditText
+                android:id="@+id/et_booking_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:lines="5"
+                app:layout_constraintRight_toRightOf="@id/et_booking_name"
+                app:layout_constraintTop_toBottomOf="@id/et_booking_name"
+                app:layout_constraintWidth_percent="0.7"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_txt"
+                app:layout_constraintTop_toTopOf="@id/et_booking_phone"
+                app:layout_constraintBottom_toBottomOf="@id/et_booking_phone"
+                app:layout_constraintRight_toLeftOf="@+id/et_booking_phone"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <EditText
+                android:id="@+id/et_booking_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layout_constraintRight_toRightOf="@id/et_booking_address"
+                app:layout_constraintTop_toBottomOf="@id/et_booking_address"
+                app:layout_constraintWidth_percent="0.7"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/event_date_txt"
+                app:layout_constraintTop_toTopOf="@id/et_booking_date"
+                app:layout_constraintBottom_toBottomOf="@id/et_booking_date"
+                app:layout_constraintRight_toLeftOf="@+id/et_booking_date"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <EditText
+                android:id="@+id/et_booking_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:drawableRight="@drawable/ic_calendar"
+                app:layout_constraintRight_toRightOf="@id/et_booking_phone"
+                app:layout_constraintTop_toBottomOf="@id/et_booking_phone"
+                app:layout_constraintWidth_percent="0.7"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/event_time_txt"
+                app:layout_constraintTop_toTopOf="@id/et_booking_time"
+                app:layout_constraintBottom_toBottomOf="@id/et_booking_time"
+                app:layout_constraintRight_toLeftOf="@+id/et_booking_time"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <EditText
+                android:id="@+id/et_booking_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layout_constraintRight_toRightOf="@id/et_booking_date"
+                app:layout_constraintTop_toBottomOf="@id/et_booking_date"
+                app:layout_constraintWidth_percent="0.7"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/category_txt"
+                app:layout_constraintTop_toTopOf="@id/sp_booking_category"
+                app:layout_constraintBottom_toBottomOf="@id/sp_booking_category"
+                app:layout_constraintRight_toLeftOf="@+id/sp_booking_category"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_booking_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layout_constraintRight_toRightOf="@id/et_booking_time"
+                app:layout_constraintTop_toBottomOf="@id/et_booking_time"
+                app:layout_constraintWidth_percent="0.7"
+                tools:entries="@tools:sample/cities"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_package"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/package_txt"
+                app:layout_constraintTop_toTopOf="@id/sp_booking_package"
+                app:layout_constraintBottom_toBottomOf="@id/sp_booking_package"
+                app:layout_constraintRight_toLeftOf="@+id/sp_booking_package"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_booking_package"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layout_constraintRight_toRightOf="@id/sp_booking_category"
+                app:layout_constraintTop_toBottomOf="@id/sp_booking_category"
+                app:layout_constraintWidth_percent="0.7"
+                tools:entries="@tools:sample/cities"
+                />
+
+            <TextView
+                android:id="@+id/tv_booking_fee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/booking_fee_txt"
+                app:layout_constraintTop_toTopOf="@id/et_booking_fee"
+                app:layout_constraintBottom_toBottomOf="@id/et_booking_fee"
+                app:layout_constraintRight_toLeftOf="@+id/et_booking_fee"
+                app:layout_constraintWidth_percent="0.3"
+                />
+
+            <EditText
+                android:id="@+id/et_booking_fee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                app:layout_constraintRight_toRightOf="@id/sp_booking_package"
+                app:layout_constraintTop_toBottomOf="@id/sp_booking_package"
+                app:layout_constraintWidth_percent="0.7"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/b_booking_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:text="@string/submit_txt"
+        app:layout_constraintBottom_toTopOf="@+id/tv_booking_guide"
+        />
+
+    <TextView
+        android:id="@+id/tv_booking_guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/booking_guide_txt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>
