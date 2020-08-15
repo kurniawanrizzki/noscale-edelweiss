@@ -7,6 +7,7 @@ import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.about.AboutUsActivity;
 import com.noscale.edelweiss.booking.BookingActivity;
 import com.noscale.edelweiss.data.Module;
+import com.noscale.edelweiss.gallery.GalleryActivity;
 import com.noscale.edelweiss.payment.PaymentActivity;
 import com.noscale.edelweiss.schedule.ScheduleActivity;
 import com.noscale.edelweiss.testimonial.TestimonialActivity;
@@ -26,7 +27,8 @@ public class ModuleCommon {
         modules.add(new Module(R.string.gallery_txt, R.drawable.ic_gallery, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(context, GalleryActivity.class);
+                context.startActivity(i);
             }
         }));
 
