@@ -2,16 +2,13 @@ package com.noscale.edelweiss.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.common.UICommon;
-import com.noscale.edelweiss.dashboard.DashboardActivity;
-import com.noscale.edelweiss.registration.RegistrationActivity;
+import com.noscale.edelweiss.dashboard.DashboardFragment;
 
 /**
  * TODO: Add class header description
@@ -23,37 +20,38 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         return new LoginFragment();
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.fragment_login,
-                container,
-                false
-        );
-
-        return view;
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mMainView = view.findViewById(R.id.ll_login_container);
+
+        EditText etEmail = view.findViewById(R.id.et_login_email);
+        EditText etPassword = view.findViewById(R.id.et_login_password);
+
         view.findViewById(R.id.tv_login_signup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), RegistrationActivity.class);
-                startActivity(i);
             }
         });
 
         view.findViewById(R.id.b_login_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), DashboardActivity.class);
-                startActivity(i);
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+
+                if (!isValidated(email, password)) return;
+
+                showProgressView(true);
+                ((LoginContract.Presenter) mPresenter).signIn(email, password);
             }
         });
+    }
+
+    @Override
+    protected int getResLayout() {
+        return R.layout.fragment_login;
     }
 
     @Override
@@ -62,7 +60,33 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
     @Override
-    public void showProgressView(boolean isShow) {
-        UICommon.showProgressView(mMainView, mProgressView, isShow);
+    public void goToDashboard() {
+        showProgressView(false);
+
+        Intent i = new Intent(getContext(), DashboardFragment.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void showFailureLogin() {
+        showMessage(getString(R.string.warning_title_txt), getString(R.string.authenticated_failure_txt));
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        showMessage(getString(R.string.error_title_txt), message);
+    }
+
+    @Override
+    public boolean isValidated(String... input) {
+        for (String i : input) {
+            boolean isValidated = (null != i) && (i.length() > 0);
+
+            if (!isValidated) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

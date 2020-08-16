@@ -19,12 +19,6 @@ public class GalleryPresenter implements GalleryContract.Presenter {
 
     @Override
     public void start() {
-        if (!mIsDataMissing) {
-            mView.showProgressView(false);
-            return;
-        }
-
-        mView.showProgressView(false);
     }
 
     @Override

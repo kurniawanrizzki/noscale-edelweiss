@@ -3,7 +3,7 @@ package com.noscale.edelweiss.login;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseActivity;
-import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 
 /**
  * TODO: Add class header description
@@ -16,7 +16,7 @@ public class LoginActivity extends BaseActivity {
         mFragment = LoginFragment.newInstance();
         mPresenter = new LoginPresenter(
                 (LoginContract.View) mFragment,
-                shouldLoadDataFromRepository(savedInstanceState)
+                AppConfiguration.getInstance(this)
         );
     }
 

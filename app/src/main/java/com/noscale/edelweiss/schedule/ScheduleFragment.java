@@ -1,19 +1,15 @@
 package com.noscale.edelweiss.schedule;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Schedule;
-
 import java.util.ArrayList;
 
 /**
@@ -26,18 +22,6 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
 
     public static ScheduleFragment newInstance () {
         return new ScheduleFragment();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.widget_fragment_with_title,
-                container,
-                false
-        );
-
-        return view;
     }
 
     @Override
@@ -65,12 +49,12 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
     }
 
     @Override
-    public void setPresenter(ScheduleContract.Presenter presenter) {
-        mPresenter = presenter;
+    protected int getResLayout() {
+        return R.layout.widget_fragment_with_title;
     }
 
     @Override
-    public void showProgressView(boolean isShow) {
-        UICommon.showProgressView(mMainView, mProgressView, isShow);
+    public void setPresenter(ScheduleContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

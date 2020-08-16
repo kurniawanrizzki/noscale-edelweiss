@@ -1,9 +1,7 @@
 package com.noscale.edelweiss.dashboard;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.ModuleCommon;
-import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Module;
 
@@ -28,18 +25,6 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
 
     public static DashboardFragment newInstance () {
         return new DashboardFragment();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.fragment_dashboard,
-                container,
-                false
-        );
-
-        return view;
     }
 
     @Override
@@ -67,12 +52,12 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
     }
 
     @Override
-    public void setPresenter(DashboardContract.Presenter presenter) {
-        mPresenter = presenter;
+    protected int getResLayout() {
+        return R.layout.fragment_dashboard;
     }
 
     @Override
-    public void showProgressView(boolean isShow) {
-        UICommon.showProgressView(mMainView, mProgressView, isShow);
+    public void setPresenter(DashboardContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

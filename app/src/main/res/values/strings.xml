@@ -8,6 +8,7 @@
     <string name="password_txt">Password</string>
     <string name="sign_in_txt">Sign In</string>
     <string name="sign_up_txt">Sign Up</string>
+    <string name="sign_up_guidance_txt">Don\'t have an account?</string>
     <string name="sign_up_action_txt">Sign up here</string>
     <string name="click_here_txt">Click here</string>
 
@@ -45,4 +46,10 @@
     <string name="testimonial_txt">Testimonial</string>
     <string name="payment_txt">Payment</string>
     <string name="about_us_txt">About Us</string>
+    <string name="sign_out_txt">Sign out</string>
+
+    <string name="ok_txt">OK</string>
+    <string name="warning_title_txt">Warning</string>
+    <string name="error_title_txt">Error</string>
+    <string name="authenticated_failure_txt">Email and password didn\'t matched.</string>
 </resources>

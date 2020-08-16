@@ -2,14 +2,11 @@ package com.noscale.edelweiss.payment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.payment.complete.CompletePaymentActivity;
 
 /**
@@ -20,18 +17,6 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
 
     public static PaymentFragment newInstance () {
         return new PaymentFragment();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.fragment_payment,
-                container,
-                false
-        );
-
-        return view;
     }
 
     @Override
@@ -48,12 +33,12 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
     }
 
     @Override
-    public void setPresenter(PaymentContract.Presenter presenter) {
-        mPresenter = presenter;
+    protected int getResLayout() {
+        return R.layout.fragment_payment;
     }
 
     @Override
-    public void showProgressView(boolean isShow) {
-        UICommon.showProgressView(mMainView, mProgressView, isShow);
+    public void setPresenter(PaymentContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

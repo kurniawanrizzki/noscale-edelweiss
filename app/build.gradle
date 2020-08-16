@@ -12,6 +12,12 @@ android {
         versionName Config.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -31,6 +37,8 @@ dependencies {
     implementation Lib.cardview
     implementation Lib.material
     implementation Lib.constraintLayout
+    implementation Lib.retrofit
+    implementation Lib.gson
 
     implementation Lib.sdp
     implementation Lib.ssp
