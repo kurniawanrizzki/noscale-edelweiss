@@ -24,6 +24,10 @@ public class UICommon {
     }
 
     public static void showDialog (Context context, String resTitle, String resContent) {
+        showDialog(context, resTitle, resContent, null);
+    }
+
+    public static void showDialog (Context context, String resTitle, String resContent, DialogInterface.OnClickListener listener) {
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setCancelable(false)
                 .setTitle(resTitle)
@@ -31,12 +35,29 @@ public class UICommon {
                 .setPositiveButton(R.string.ok_txt, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
+                        if (null == listener) {
+                            dialogInterface.dismiss();
+                            return;
+                        }
+
+                        listener.onClick(dialogInterface, i);
                     }
                 })
                 .create();
 
         dialog.show();
+    }
+
+    public static boolean isInputStringValidated (String... input) {
+        for (String i : input) {
+            boolean isValidated = (null != i) && !i.isEmpty();
+
+            if (!isValidated) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

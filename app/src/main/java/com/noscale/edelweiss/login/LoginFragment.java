@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.dashboard.DashboardFragment;
+import com.noscale.edelweiss.common.UICommon;
+import com.noscale.edelweiss.dashboard.DashboardActivity;
+import com.noscale.edelweiss.registration.RegistrationActivity;
 
 /**
  * TODO: Add class header description
@@ -32,6 +34,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         view.findViewById(R.id.tv_login_signup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(getContext(), RegistrationActivity.class);
+                startActivity(i);
             }
         });
 
@@ -41,7 +45,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
-                if (!isValidated(email, password)) return;
+                if (!UICommon.isInputStringValidated(email, password)) return;
 
                 showProgressView(true);
                 ((LoginContract.Presenter) mPresenter).signIn(email, password);
@@ -63,7 +67,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public void goToDashboard() {
         showProgressView(false);
 
-        Intent i = new Intent(getContext(), DashboardFragment.class);
+        Intent i = new Intent(getContext(), DashboardActivity.class);
         startActivity(i);
     }
 
@@ -75,18 +79,5 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void showErrorMessage(String message) {
         showMessage(getString(R.string.error_title_txt), message);
-    }
-
-    @Override
-    public boolean isValidated(String... input) {
-        for (String i : input) {
-            boolean isValidated = (null != i) && (i.length() > 0);
-
-            if (!isValidated) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

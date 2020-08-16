@@ -17,7 +17,7 @@ public class AuthenticationRemoteDataSource implements AuthenticationDataSource 
 
     private static AuthenticationRemoteDataSource instance;
 
-    public static AuthenticationRemoteDataSource newInstance () {
+    public static AuthenticationRemoteDataSource getInstance () {
         if (null == instance) instance = new AuthenticationRemoteDataSource();
         return instance;
     }
@@ -51,6 +51,33 @@ public class AuthenticationRemoteDataSource implements AuthenticationDataSource 
                 callback.onSignInError(message);
             }
         });
+    }
+
+    @Override
+    public void signUp(String firstName, String lastName, String email, String password, SignUpCallback callback) {
+        SignUpRequest request = new SignUpRequest(firstName, lastName, email, password);
+
+        Call<SignUpResponse> response = mService.getAuthenticationApi().signUp(request);
+        response.enqueue(new Callback<SignUpResponse>() {
+            @Override
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                SignUpResponse res = response.body();
+
+                if ((null != res) && res.isOk()) {
+                    callback.onSignUpSuccess();
+                    return;
+                }
+
+                callback.onSignUpFailure(res.getStatusMessage());
+            }
+
+            @Override
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                callback.onSignUpError(message);
+            }
+        });
+
     }
 
 }

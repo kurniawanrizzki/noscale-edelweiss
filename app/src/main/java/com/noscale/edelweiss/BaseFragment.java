@@ -1,5 +1,6 @@
 package com.noscale.edelweiss;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +58,11 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void showMessage(String title, String message) {
+        showMessage(title, message, null);
+    }
+
+    protected void showMessage(String title, String message, DialogInterface.OnClickListener listener) {
         showProgressView(false);
-        UICommon.showDialog(getContext(), title, message);
+        UICommon.showDialog(getContext(), title, message, listener);
     }
 }

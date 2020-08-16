@@ -13,5 +13,13 @@ public interface AuthenticationDataSource {
         void onSignInError(String message);
     }
 
+    interface SignUpCallback {
+        void onSignUpSuccess ();
+        void onSignUpFailure (String message);
+        void onSignUpError (String message);
+    }
+
     void signIn (String email, String password, SignInCallback callback);
+
+    void signUp (String firstName, String lastName, String email, String password, SignUpCallback callback);
 }

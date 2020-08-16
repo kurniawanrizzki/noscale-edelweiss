@@ -11,4 +11,7 @@ import retrofit2.http.POST;
 public interface AuthenticationAPI {
     @POST("login")
     Call<SignInResponse> signIn (@Body SignInRequest request);
+
+    @POST("register")
+    Call<SignUpResponse> signUp (@Body SignUpRequest request);
 }

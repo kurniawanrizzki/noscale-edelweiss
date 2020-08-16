@@ -34,7 +34,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void signIn(String email, String password) {
-        AuthenticationRemoteDataSource.newInstance().signIn(email, password, new AuthenticationDataSource.SignInCallback() {
+        AuthenticationRemoteDataSource.getInstance().signIn(email, password, new AuthenticationDataSource.SignInCallback() {
             @Override
             public void onSignInSuccess(User user) {
                 mConfiguration.setAuthenticated(true);

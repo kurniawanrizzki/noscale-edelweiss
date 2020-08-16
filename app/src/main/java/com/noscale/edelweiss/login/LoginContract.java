@@ -12,7 +12,6 @@ public interface LoginContract {
         void goToDashboard ();
         void showFailureLogin();
         void showErrorMessage (String message);
-        boolean isValidated (String... input);
     }
 
     interface Presenter extends BasePresenter {

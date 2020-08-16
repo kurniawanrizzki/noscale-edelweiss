@@ -14,7 +14,7 @@ public class RegistrationActivity extends BaseActivity {
         mFragment = RegistrationFragment.newInstance();
 
         mPresenter = new RegistrationPresenter(
-                (RegistrationContract.View) mFragment, shouldLoadDataFromRepository(savedInstanceState)
+                (RegistrationContract.View) mFragment
         );
     }
 

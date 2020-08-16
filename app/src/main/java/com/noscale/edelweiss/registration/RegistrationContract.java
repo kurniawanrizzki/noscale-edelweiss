@@ -9,10 +9,13 @@ import com.noscale.edelweiss.BaseView;
  */
 public interface RegistrationContract {
     interface View extends BaseView<BasePresenter> {
-
+        void goToLogin ();
+        void showSuccessfulSignUp ();
+        void showFailureSignUp(String message);
+        void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
-
+        void signUp (String firstName, String lastName, String email, String password);
     }
 }
