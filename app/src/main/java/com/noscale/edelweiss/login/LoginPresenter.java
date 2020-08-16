@@ -38,6 +38,8 @@ public class LoginPresenter implements LoginContract.Presenter {
             @Override
             public void onSignInSuccess(User user) {
                 mConfiguration.setAuthenticated(true);
+                mConfiguration.setUserId(user.getId());
+
                 mView.goToDashboard();
             }
 

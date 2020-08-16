@@ -5,6 +5,7 @@ import com.noscale.edelweiss.BaseView;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.WeddingPackage;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -13,14 +14,18 @@ import java.util.List;
  */
 public interface BookingContract {
     interface View extends BaseView<Presenter> {
+        void completeBooking ();
         void appendCategory (List<Category> categories);
         void appendPackage (List<WeddingPackage> packages);
         void notifyProgressDone ();
+        void showSingleErrorMessage(String message);
         void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
+        void submit (String address, String phoneNumber, String eventDate, String eventTime, String bookingFee);
         void getCategories ();
         void getPackages ();
+        Calendar getCalendar ();
     }
 }

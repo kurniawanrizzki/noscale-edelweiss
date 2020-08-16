@@ -1,6 +1,7 @@
 package com.noscale.edelweiss.data.source.remote;
 
 import com.noscale.edelweiss.data.source.remote.authentication.AuthenticationAPI;
+import com.noscale.edelweiss.data.source.remote.booking.BookingAPI;
 import com.noscale.edelweiss.data.source.remote.category.CategoryAPI;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentAPI;
 import com.noscale.edelweiss.data.source.remote.schedule.ScheduleAPI;
@@ -17,9 +18,9 @@ public class APIService {
 
     private static APIService instance;
 
-    private static final String BASE_URL = "http://192.168.43.254:6666/edelwish-service/v1/";
+    private static final String BASE_URL = "http://192.168.0.6:6666/edelwish-service/v1/";
 
-    private static final String BASE_URL_ALT = "http://192.168.43.254:6666/edelwish-service/v2/";
+    private static final String BASE_URL_ALT = "http://192.168.0.6:6666/edelwish-service/v2/";
 
     private AuthenticationAPI mAuthenticationApi;
 
@@ -32,6 +33,8 @@ public class APIService {
     private CategoryAPI mCategoryApi;
 
     private PackageAPI mPackageApi;
+
+    private BookingAPI mBookingApi;
 
     public static APIService getInstance() {
         if (null == instance) instance = new APIService();
@@ -55,6 +58,7 @@ public class APIService {
         mPaymentApi = client.create(PaymentAPI.class);
         mCategoryApi = client.create(CategoryAPI.class);
         mPackageApi = altClient.create(PackageAPI.class);
+        mBookingApi = client.create(BookingAPI.class);
     }
 
     public AuthenticationAPI getAuthenticationApi () {
@@ -79,5 +83,9 @@ public class APIService {
 
     public PackageAPI getPackageApi () {
         return mPackageApi;
+    }
+
+    public BookingAPI getBookingApi () {
+        return mBookingApi;
     }
 }

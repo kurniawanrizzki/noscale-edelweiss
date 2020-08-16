@@ -24,6 +24,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected BasePresenter mPresenter;
 
+    protected boolean isProgressShown;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public abstract class BaseFragment extends Fragment {
     protected abstract int getResLayout ();
 
     protected void showProgressView(boolean isShow) {
+        isProgressShown = isShow;
         UICommon.showProgressView(mMainView, mProgressView, isShow);
     }
 
