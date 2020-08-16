@@ -1,5 +1,7 @@
 package com.noscale.edelweiss.data.source;
 
+import com.noscale.edelweiss.data.PaymentType;
+
 import java.util.List;
 
 /**

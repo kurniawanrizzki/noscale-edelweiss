@@ -1,5 +1,6 @@
 package com.noscale.edelweiss.payment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.data.source.PaymentType;
+import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.payment.complete.CompletePaymentActivity;
 import java.util.List;
 
@@ -104,6 +105,14 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
 
     @Override
     public void showErrorMessage(String message) {
-        showMessage(getString(R.string.error_title_txt), message);
+        showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+
+                showProgressView(true);
+                ((PaymentContract.Presenter) mPresenter).fetch();
+            }
+        });
     }
 }

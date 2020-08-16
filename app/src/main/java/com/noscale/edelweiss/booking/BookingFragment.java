@@ -8,6 +8,10 @@ import androidx.annotation.Nullable;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.booking.complete.CompleteBookingActivity;
+import com.noscale.edelweiss.data.Category;
+import com.noscale.edelweiss.data.WeddingPackage;
+
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -32,6 +36,8 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
                     }
                 }
         );
+
+        showProgressView(true);
     }
 
     @Override
@@ -42,5 +48,25 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
     @Override
     public void setPresenter(BookingContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void appendCategory(List<Category> categories) {
+
+    }
+
+    @Override
+    public void appendPackage(List<WeddingPackage> packages) {
+
+    }
+
+    @Override
+    public void notifyProgressDone() {
+        showProgressView(false);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        showMessage(getString(R.string.error_title_txt), message);
     }
 }

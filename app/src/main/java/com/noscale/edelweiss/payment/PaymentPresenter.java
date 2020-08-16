@@ -1,7 +1,7 @@
 package com.noscale.edelweiss.payment;
 
 import com.noscale.edelweiss.data.source.PaymentDataSource;
-import com.noscale.edelweiss.data.source.PaymentType;
+import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentRemoteDataSource;
 import java.util.List;
 

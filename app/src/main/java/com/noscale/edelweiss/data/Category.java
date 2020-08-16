@@ -1,4 +1,4 @@
-package com.noscale.edelweiss.data.source;
+package com.noscale.edelweiss.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,15 +7,15 @@ import com.google.gson.annotations.SerializedName;
  * TODO: Add class header description
  * Created by kurniawanrizzki on 17/08/20.
  */
-public class PaymentType {
+public class Category {
 
     @SerializedName("id")
     @Expose
     private int id;
 
-    @SerializedName("paymentName")
+    @SerializedName("name")
     @Expose
-    private String paymentName;
+    private String name;
 
     public int getId() {
         return id;
@@ -25,11 +25,11 @@ public class PaymentType {
         this.id = id;
     }
 
-    public String getPaymentName() {
-        return paymentName;
+    public String getName() {
+        return name;
     }
 
-    public void setPaymentName(String paymentName) {
-        this.paymentName = paymentName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

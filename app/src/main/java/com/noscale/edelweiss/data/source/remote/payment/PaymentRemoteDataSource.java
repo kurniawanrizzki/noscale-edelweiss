@@ -1,7 +1,7 @@
 package com.noscale.edelweiss.data.source.remote.payment;
 
 import com.noscale.edelweiss.data.source.PaymentDataSource;
-import com.noscale.edelweiss.data.source.PaymentType;
+import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.APIService;
 import java.util.List;
 import retrofit2.Call;

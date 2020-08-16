@@ -2,7 +2,7 @@ package com.noscale.edelweiss.data.source.remote.payment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.noscale.edelweiss.data.source.PaymentType;
+import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.BaseResponse;
 
 import java.util.List;
