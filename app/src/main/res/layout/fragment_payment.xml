@@ -8,104 +8,114 @@
     android:padding="@dimen/_17sdp"
     >
 
-    <TextView
-        android:id="@+id/tv_payment_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/payment_txt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_payment_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_13sdp"
-        android:layout_marginBottom="@dimen/_13sdp"
-        app:layout_constraintTop_toBottomOf="@id/tv_payment_title"
-        app:layout_constraintBottom_toTopOf="@+id/b_payment_submit"
-        >
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_payment_form"
+        <TextView
+            android:id="@+id/tv_payment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_txt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_13sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_payment_title"
+            app:layout_constraintBottom_toTopOf="@+id/b_payment_submit"
+            >
 
-            <TextView
-                android:id="@+id/tv_payment_option"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/payment_options_txt"
-                app:layout_constraintTop_toTopOf="@id/sp_payment_options"
-                app:layout_constraintBottom_toBottomOf="@id/sp_payment_options"
-                app:layout_constraintRight_toLeftOf="@+id/sp_payment_options"
-                app:layout_constraintWidth_percent="0.3"
-                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_payment_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/sp_payment_options"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.7"
-                />
+                <TextView
+                    android:id="@+id/tv_payment_option"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_options_txt"
+                    app:layout_constraintTop_toTopOf="@id/sp_payment_options"
+                    app:layout_constraintBottom_toBottomOf="@id/sp_payment_options"
+                    app:layout_constraintRight_toLeftOf="@+id/sp_payment_options"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
 
-            <TextView
-                android:id="@+id/tv_payment_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/payment_amount_txt"
-                app:layout_constraintTop_toTopOf="@id/et_payment_amount"
-                app:layout_constraintBottom_toBottomOf="@id/et_payment_amount"
-                app:layout_constraintRight_toLeftOf="@+id/et_payment_amount"
-                app:layout_constraintWidth_percent="0.3"
-                />
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_payment_options"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
 
-            <EditText
-                android:id="@+id/et_payment_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
-                app:layout_constraintRight_toRightOf="@id/sp_payment_options"
-                app:layout_constraintTop_toBottomOf="@id/sp_payment_options"
-                app:layout_constraintWidth_percent="0.7"
-                />
+                <TextView
+                    android:id="@+id/tv_payment_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_amount_txt"
+                    app:layout_constraintTop_toTopOf="@id/et_payment_amount"
+                    app:layout_constraintBottom_toBottomOf="@id/et_payment_amount"
+                    app:layout_constraintRight_toLeftOf="@+id/et_payment_amount"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
 
-            <TextView
-                android:id="@+id/tv_payment_receipt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/payment_amount_txt"
-                app:layout_constraintTop_toTopOf="@id/et_payment_receipt"
-                app:layout_constraintBottom_toBottomOf="@id/et_payment_receipt"
-                app:layout_constraintRight_toLeftOf="@+id/et_payment_receipt"
-                app:layout_constraintWidth_percent="0.3"
-                />
+                <EditText
+                    android:id="@+id/et_payment_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="@id/sp_payment_options"
+                    app:layout_constraintTop_toBottomOf="@id/sp_payment_options"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
 
-            <EditText
-                android:id="@+id/et_payment_receipt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_cloud"
-                android:layout_marginTop="@dimen/_7sdp"
-                app:layout_constraintRight_toRightOf="@id/et_payment_amount"
-                app:layout_constraintTop_toBottomOf="@id/et_payment_amount"
-                app:layout_constraintWidth_percent="0.7"
-                />
+                <TextView
+                    android:id="@+id/tv_payment_receipt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_amount_txt"
+                    app:layout_constraintTop_toTopOf="@id/et_payment_receipt"
+                    app:layout_constraintBottom_toBottomOf="@id/et_payment_receipt"
+                    app:layout_constraintRight_toLeftOf="@+id/et_payment_receipt"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/et_payment_receipt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:drawableRight="@drawable/ic_cloud"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="@id/et_payment_amount"
+                    app:layout_constraintTop_toBottomOf="@id/et_payment_amount"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
 
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/b_payment_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:text="@string/submit_txt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/b_payment_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:text="@string/submit_txt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

@@ -1,6 +1,7 @@
 package com.noscale.edelweiss.data.source.remote;
 
 import com.noscale.edelweiss.data.source.remote.authentication.AuthenticationAPI;
+import com.noscale.edelweiss.data.source.remote.payment.PaymentAPI;
 import com.noscale.edelweiss.data.source.remote.schedule.ScheduleAPI;
 import com.noscale.edelweiss.data.source.remote.testimonial.TestimonialAPI;
 import retrofit2.Retrofit;
@@ -22,6 +23,8 @@ public class APIService {
 
     private TestimonialAPI mTestimonialApi;
 
+    private PaymentAPI mPaymentApi;
+
     public static APIService getInstance() {
         if (null == instance) instance = new APIService();
         return instance;
@@ -36,6 +39,7 @@ public class APIService {
         mAuthenticationApi = client.create(AuthenticationAPI.class);
         mScheduleApi = client.create(ScheduleAPI.class);
         mTestimonialApi = client.create(TestimonialAPI.class);
+        mPaymentApi = client.create(PaymentAPI.class);
     }
 
     public AuthenticationAPI getAuthenticationApi () {
@@ -48,5 +52,9 @@ public class APIService {
 
     public TestimonialAPI getTestimonialApi () {
         return mTestimonialApi;
+    }
+
+    public PaymentAPI getPaymentApi () {
+        return mPaymentApi;
     }
 }
