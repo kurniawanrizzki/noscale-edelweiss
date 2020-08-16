@@ -29,4 +29,9 @@
         tools:itemCount="3"
         />
 
+    <include
+        android:id="@+id/inc_fragment_empty"
+        layout="@layout/widget_empty"
+        />
+
 </com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

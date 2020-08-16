@@ -58,4 +58,5 @@
     <string name="error_title_txt">Error</string>
     <string name="success_registration_txt">Your registration successful.</string>
     <string name="authenticated_failure_txt">Email and password didn\'t matched.</string>
+    <string name="no_data_txt">There is/are no data.</string>
 </resources>

@@ -20,6 +20,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected View mProgressView;
 
+    protected View mEmptyView;
+
     protected BasePresenter mPresenter;
 
     @Nullable

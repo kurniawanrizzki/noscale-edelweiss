@@ -1,6 +1,7 @@
 package com.noscale.edelweiss.data.source.remote;
 
 import com.noscale.edelweiss.data.source.remote.authentication.AuthenticationAPI;
+import com.noscale.edelweiss.data.source.remote.schedule.ScheduleAPI;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,6 +18,8 @@ public class APIService {
 
     private AuthenticationAPI mAuthenticationApi;
 
+    private ScheduleAPI mScheduleApi;
+
     public static APIService getInstance() {
         if (null == instance) instance = new APIService();
         return instance;
@@ -29,9 +32,14 @@ public class APIService {
                 .build();
 
         mAuthenticationApi = client.create(AuthenticationAPI.class);
+        mScheduleApi = client.create(ScheduleAPI.class);
     }
 
     public AuthenticationAPI getAuthenticationApi () {
         return mAuthenticationApi;
+    }
+
+    public ScheduleAPI getScheduleApi () {
+        return mScheduleApi;
     }
 }
