@@ -20,6 +20,7 @@ import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.booking.complete.CompleteBookingActivity;
 import com.noscale.edelweiss.common.UICommon;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.WeddingPackage;
 import java.text.SimpleDateFormat;
@@ -57,7 +58,7 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int userId = 0;
+                        int userId = AppConfiguration.getInstance(getContext()).getUserId();
                         String address = tvAddress.getText().toString();
                         String phoneNumber = tvPhoneNumber.getText().toString();
                         String eventDate = tvEventDate.getText().toString();
@@ -76,6 +77,7 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
                         showProgressView(true);
                         ((BookingContract.Presenter) mPresenter).submit(
+                                userId,
                                 address,
                                 phoneNumber,
                                 eventDate,

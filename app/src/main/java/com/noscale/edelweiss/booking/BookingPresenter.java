@@ -57,8 +57,9 @@ public class BookingPresenter implements BookingContract.Presenter {
     }
 
     @Override
-    public void submit(String address, String phoneNumber, String eventDate, String eventTime, String bookingFee) {
+    public void submit(int userId, String address, String phoneNumber, String eventDate, String eventTime, String bookingFee) {
 
+        mRequest.setUserId(userId);
         mRequest.setAddress(address);
         mRequest.setPhoneNumber(phoneNumber);
         mRequest.setEventDateTime(eventDate+" "+eventTime);

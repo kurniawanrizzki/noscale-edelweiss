@@ -23,7 +23,7 @@ public interface BookingContract {
     }
 
     interface Presenter extends BasePresenter {
-        void submit (String address, String phoneNumber, String eventDate, String eventTime, String bookingFee);
+        void submit (int userId, String address, String phoneNumber, String eventDate, String eventTime, String bookingFee);
         void getCategories ();
         void getPackages ();
         Calendar getCalendar ();
