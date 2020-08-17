@@ -2,6 +2,9 @@ package com.noscale.edelweiss.payment;
 
 import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
+import com.noscale.edelweiss.data.PaymentType;
+
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -9,10 +12,11 @@ import com.noscale.edelweiss.BaseView;
  */
 public interface PaymentContract {
     interface View extends BaseView<Presenter> {
-
+        void appendData (List<PaymentType> types);
+        void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
-
+        void fetch ();
     }
 }

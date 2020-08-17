@@ -17,6 +17,8 @@ public class AppConfiguration {
 
     private static final String IS_AUTHENTICATED_KEY = "IS_AUTHENTICATED_KEY";
 
+    private static final String AUTHENTICATED_ID_KEY = "AUTHENTICATED_ID_KEY";
+
     protected AppConfiguration(Context context) {
         this.mContext = context;
 
@@ -39,7 +41,15 @@ public class AppConfiguration {
         mPreference.putBoolean(IS_AUTHENTICATED_KEY, isAuthenticated);
     }
 
+    public void setUserId (int userId) {
+        mPreference.putInteger(AUTHENTICATED_ID_KEY, userId);
+    }
+
     public boolean isAuthenticated () {
         return mPreference.getBoolean(IS_AUTHENTICATED_KEY, false);
+    }
+
+    public int getUserId () {
+        return mPreference.getInteger(AUTHENTICATED_ID_KEY, 0);
     }
 }

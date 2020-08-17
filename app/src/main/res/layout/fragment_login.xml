@@ -7,40 +7,71 @@
     android:padding="@dimen/_17sdp"
     >
 
-    <EditText
-        android:id="@+id/et_login_email"
+    <LinearLayout
+        android:id="@+id/ll_login_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/et_login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        app:layout_constraintLeft_toLeftOf="@id/et_login_email"
-        app:layout_constraintTop_toBottomOf="@id/et_login_email"
-        />
-
-    <Button
-        android:id="@+id/b_login_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_in_txt"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_password"
-        app:layout_constraintLeft_toLeftOf="@id/et_login_email"
-        />
-
-    <TextView
-        android:id="@+id/tv_login_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up_action_txt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_login_submit"
-        />
+        >
 
+        <EditText
+            android:id="@+id/et_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            />
+
+        <Button
+            android:id="@+id/b_login_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:textAllCaps="false"
+            android:text="@string/sign_in_txt"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_login_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_login_signup_guidance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sign_up_guidance_txt"
+                />
+
+            <TextView
+                android:id="@+id/tv_login_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlue"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sign_up_action_txt"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

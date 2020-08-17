@@ -6,8 +6,10 @@ import android.view.View;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.about.AboutUsActivity;
 import com.noscale.edelweiss.booking.BookingActivity;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.data.Module;
 import com.noscale.edelweiss.gallery.GalleryActivity;
+import com.noscale.edelweiss.login.LoginActivity;
 import com.noscale.edelweiss.payment.PaymentActivity;
 import com.noscale.edelweiss.schedule.ScheduleActivity;
 import com.noscale.edelweiss.testimonial.TestimonialActivity;
@@ -76,6 +78,17 @@ public class ModuleCommon {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, AboutUsActivity.class);
+                context.startActivity(i);
+            }
+        }));
+
+        modules.add(new Module(R.string.sign_out_txt, R.drawable.ic_logout, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppConfiguration.getInstance(context).setAuthenticated(false);
+                AppConfiguration.getInstance(context).setUserId(0);
+
+                Intent i = new Intent(context, LoginActivity.class);
                 context.startActivity(i);
             }
         }));

@@ -1,20 +1,16 @@
 package com.noscale.edelweiss.schedule;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Schedule;
-
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -28,40 +24,22 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
         return new ScheduleFragment();
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.widget_fragment_with_title,
-                container,
-                false
-        );
-
-        return view;
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAdapter = new SimpleRecyclerAdapter<>(new ArrayList<Schedule>(), R.layout.item_schedule, new SimpleRecyclerAdapter.OnViewHolder<Schedule>() {
-            @Override
-            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Schedule item) {
-                TextView tvName = holder.itemView.findViewById(R.id.tv_schedule_name);
-                TextView tvDate = holder.itemView.findViewById(R.id.tv_schedule_date);
-                TextView tvStatus = holder.itemView.findViewById(R.id.tv_schedule_status);
+        mMainView = view.findViewById(R.id.rv_fragment_list);
+        mEmptyView = view.findViewById(R.id.inc_fragment_empty);
 
-                tvName.setText(item.getName());
-                tvDate.setText(item.getDate());
-                tvStatus.setText(item.getStatus().toString());
-            }
-        });
-
-        RecyclerView rvSchedule = view.findViewById(R.id.rv_fragment_list);
         TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
-
-        rvSchedule.setAdapter(mAdapter);
         tvTitle.setText(getString(R.string.schedule_title_txt));
+
+        showProgressView(true);
+    }
+
+    @Override
+    protected int getResLayout() {
+        return R.layout.widget_fragment_with_title;
     }
 
     @Override
@@ -70,7 +48,37 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
     }
 
     @Override
-    public void showProgressView(boolean isShow) {
-        UICommon.showProgressView(mMainView, mProgressView, isShow);
+    public void showPage(List<Schedule> schedules) {
+        showProgressView(false);
+
+        mAdapter = new SimpleRecyclerAdapter<>(schedules, R.layout.item_schedule, new SimpleRecyclerAdapter.OnViewHolder<Schedule>() {
+            @Override
+            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Schedule item) {
+                TextView tvName = holder.itemView.findViewById(R.id.tv_schedule_name);
+                TextView tvDate = holder.itemView.findViewById(R.id.tv_schedule_date);
+                TextView tvStatus = holder.itemView.findViewById(R.id.tv_schedule_status);
+
+                tvName.setText(item.getName());
+                tvDate.setText(item.getDateTime());
+                tvStatus.setText(item.getStatus().toString());
+            }
+        });
+
+        RecyclerView rvSchedule = getView().findViewById(R.id.rv_fragment_list);
+        rvSchedule.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void showEmptyPage() {
+        showProgressView(false);
+
+        mMainView.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        showEmptyPage();
+        showMessage(getString(R.string.error_title_txt), message);
     }
 }

@@ -2,6 +2,9 @@ package com.noscale.edelweiss.schedule;
 
 import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
+import com.noscale.edelweiss.data.Schedule;
+
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -9,10 +12,12 @@ import com.noscale.edelweiss.BaseView;
  */
 public interface ScheduleContract {
     interface View extends BaseView<Presenter> {
-
+        void showPage (List<Schedule> schedules);
+        void showEmptyPage ();
+        void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
-
+        void fetch ();
     }
 }

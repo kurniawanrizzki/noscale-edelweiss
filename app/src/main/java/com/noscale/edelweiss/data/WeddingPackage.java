@@ -1,6 +1,8 @@
 package com.noscale.edelweiss.data;
 
-import com.noscale.edelweiss.wp.TypeBuffet;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -8,19 +10,41 @@ import com.noscale.edelweiss.wp.TypeBuffet;
  */
 public class WeddingPackage {
 
+    @SerializedName("id")
+    @Expose
     private int id;
 
+    @SerializedName("name")
+    @Expose
     private String name;
 
+    @SerializedName("price")
+    @Expose
     private String price;
 
+    @SerializedName("totalBuffet")
+    @Expose
     private String totalBuffet;
 
-    private TypeBuffet typeBuffet;
+    @SerializedName("buffetId")
+    @Expose
+    private int buffetId;
 
-    private String detail;
+    @SerializedName("buffetName")
+    @Expose
+    private String buffetName;
 
-    private String bonus;
+    @SerializedName("detailBuffets")
+    @Expose
+    private List<WeddingBuffet> detailBuffets;
+
+    @SerializedName("detailPackages")
+    @Expose
+    private List<WeddingPackageDetail> detailPackages;
+
+    @SerializedName("bonus")
+    @Expose
+    private List<String> bonus;
 
     public int getId() {
         return id;
@@ -54,27 +78,43 @@ public class WeddingPackage {
         this.totalBuffet = totalBuffet;
     }
 
-    public TypeBuffet getTypeBuffet() {
-        return typeBuffet;
+    public int getBuffetId() {
+        return buffetId;
     }
 
-    public void setTypeBuffet(TypeBuffet typeBuffet) {
-        this.typeBuffet = typeBuffet;
+    public void setBuffetId(int buffetId) {
+        this.buffetId = buffetId;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getBuffetName() {
+        return buffetName;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setBuffetName(String buffetName) {
+        this.buffetName = buffetName;
     }
 
-    public String getBonus() {
+    public List<WeddingBuffet> getDetailBuffets() {
+        return detailBuffets;
+    }
+
+    public void setDetailBuffets(List<WeddingBuffet> detailBuffets) {
+        this.detailBuffets = detailBuffets;
+    }
+
+    public List<WeddingPackageDetail> getDetailPackages() {
+        return detailPackages;
+    }
+
+    public void setDetailPackages(List<WeddingPackageDetail> detailPackages) {
+        this.detailPackages = detailPackages;
+    }
+
+    public List<String> getBonus() {
         return bonus;
     }
 
-    public void setBonus(String bonus) {
+    public void setBonus(List<String> bonus) {
         this.bonus = bonus;
     }
 }
