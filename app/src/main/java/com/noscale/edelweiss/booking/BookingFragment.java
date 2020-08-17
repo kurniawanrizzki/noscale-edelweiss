@@ -23,6 +23,8 @@ import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.WeddingPackage;
+import com.noscale.edelweiss.wp.WeddingPackageContract;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -209,6 +211,7 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Category item = categories.get(i);
+                ((BookingContract.Presenter) mPresenter).setSelectedCategory(item);
             }
 
             @Override
@@ -254,6 +257,7 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 WeddingPackage item = packages.get(i);
+                ((BookingContract.Presenter) mPresenter).setSelectedWeddingPackage(item);
             }
 
             @Override
