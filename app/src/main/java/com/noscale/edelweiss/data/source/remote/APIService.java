@@ -1,5 +1,6 @@
 package com.noscale.edelweiss.data.source.remote;
 
+import com.noscale.edelweiss.BuildConfig;
 import com.noscale.edelweiss.data.source.remote.authentication.AuthenticationAPI;
 import com.noscale.edelweiss.data.source.remote.booking.BookingAPI;
 import com.noscale.edelweiss.data.source.remote.category.CategoryAPI;
@@ -19,9 +20,11 @@ public class APIService {
 
     private static APIService instance;
 
-    private static final String BASE_URL = "http://192.168.0.6:6666/edelwish-service/v1/";
+    private static final String HOST = BuildConfig.APP_HOST+":"+BuildConfig.APP_PORT;
 
-    private static final String BASE_URL_ALT = "http://192.168.0.6:6666/edelwish-service/v2/";
+    private static final String BASE_URL = "http://" + HOST + "/edelwish-service/v1/";
+
+    private static final String BASE_URL_ALT = "http://" + HOST + "/edelwish-service/v2/";
 
     private AuthenticationAPI mAuthenticationApi;
 
