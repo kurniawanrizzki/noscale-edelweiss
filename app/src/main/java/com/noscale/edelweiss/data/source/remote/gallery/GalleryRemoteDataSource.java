@@ -35,7 +35,7 @@ public class GalleryRemoteDataSource implements GalleryDataSource {
             public void onResponse(Call<GalleryResponse> call, Response<GalleryResponse> response) {
                 GalleryResponse res = response.body();
 
-                if ((null == res) && res.isOk()) {
+                if ((null != res) && res.isOk()) {
                     List<Gallery> galleries = res.getGalleries();
                     callback.onLoadGallery(galleries);
                 }
