@@ -1,16 +1,19 @@
 package com.noscale.edelweiss.wp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.WeddingPackage;
+import com.noscale.edelweiss.wp.creation.WeddingPackageCreationActivity;
 import java.util.List;
 
 /**
@@ -33,7 +36,14 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
         mEmptyView = view.findViewById(R.id.inc_fragment_empty);
 
         TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
+        FloatingActionButton bCreation = view.findViewById(R.id.fab_fragment_create);
+
         tvTitle.setText(getString(R.string.package_txt));
+
+        bCreation.setOnClickListener((v) -> {
+            Intent i = new Intent(getContext(), WeddingPackageCreationActivity.class);
+            startActivity(i);
+        });
 
         showProgressView(true);
     }

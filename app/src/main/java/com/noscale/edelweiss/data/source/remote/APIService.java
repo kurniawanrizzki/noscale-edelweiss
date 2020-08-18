@@ -3,6 +3,7 @@ package com.noscale.edelweiss.data.source.remote;
 import com.noscale.edelweiss.BuildConfig;
 import com.noscale.edelweiss.data.source.remote.authentication.AuthenticationAPI;
 import com.noscale.edelweiss.data.source.remote.booking.BookingAPI;
+import com.noscale.edelweiss.data.source.remote.buffet.BuffetAPI;
 import com.noscale.edelweiss.data.source.remote.category.CategoryAPI;
 import com.noscale.edelweiss.data.source.remote.gallery.GalleryAPI;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentAPI;
@@ -42,6 +43,8 @@ public class APIService {
 
     private GalleryAPI mGalleryApi;
 
+    private BuffetAPI mBuffetApi;
+
     public static APIService getInstance() {
         if (null == instance) instance = new APIService();
         return instance;
@@ -64,6 +67,7 @@ public class APIService {
         mPaymentApi = client.create(PaymentAPI.class);
         mCategoryApi = client.create(CategoryAPI.class);
         mPackageApi = altClient.create(PackageAPI.class);
+        mBuffetApi = altClient.create(BuffetAPI.class);
         mBookingApi = client.create(BookingAPI.class);
         mGalleryApi = client.create(GalleryAPI.class);
     }
@@ -90,6 +94,10 @@ public class APIService {
 
     public PackageAPI getPackageApi () {
         return mPackageApi;
+    }
+
+    public BuffetAPI getBuffetApi () {
+        return mBuffetApi;
     }
 
     public BookingAPI getBookingApi () {
