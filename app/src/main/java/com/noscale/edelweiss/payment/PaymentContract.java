@@ -2,6 +2,7 @@ package com.noscale.edelweiss.payment;
 
 import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
+import com.noscale.edelweiss.data.Booking;
 import com.noscale.edelweiss.data.PaymentType;
 
 import java.util.List;
@@ -12,11 +13,15 @@ import java.util.List;
  */
 public interface PaymentContract {
     interface View extends BaseView<Presenter> {
-        void appendData (List<PaymentType> types);
-        void showErrorMessage (String message);
+        void appendData (List<PaymentType> types, List<Booking> bookings);
+        void showErrorMessage (String message, Runnable r);
+        void showSuccessMessage ();
     }
 
     interface Presenter extends BasePresenter {
+        void setBooking (Booking booking);
+        void setPaymentType (PaymentType type);
         void fetch ();
+        void submit (String receipt, float amount);
     }
 }

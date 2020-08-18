@@ -3,6 +3,8 @@ package com.noscale.edelweiss.data.source.remote.wp;
 import com.noscale.edelweiss.data.WeddingPackage;
 import com.noscale.edelweiss.data.source.PackageDataSource;
 import com.noscale.edelweiss.data.source.remote.APIService;
+
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +40,10 @@ public class PackageRemoteDataSource implements PackageDataSource {
                 if ((null != res) && res.isOk()) {
                     List<WeddingPackage> data = res.getPackages();
                     callback.onLoadWeddingPackages(data);
+                    return;
                 }
+
+                callback.onLoadWeddingPackages(new ArrayList<>());
             }
 
             @Override
