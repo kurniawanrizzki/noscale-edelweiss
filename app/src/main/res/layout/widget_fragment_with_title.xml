@@ -48,8 +48,8 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_fragment_create"
-            android:layout_width="@dimen/_43sdp"
-            android:layout_height="@dimen/_43sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@drawable/ic_add"
             app:backgroundTint="@color/colorPrimary"

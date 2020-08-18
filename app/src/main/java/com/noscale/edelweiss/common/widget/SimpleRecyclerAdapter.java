@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SimpleRecyclerAdapter<T> extends RecyclerView.Adapter<SimpleRecyclerAdapter.SimpleViewHolder> {
 
-    private List<T> mMainData;
+    protected List<T> mMainData;
 
     private int mLayoutRes;
 
@@ -46,6 +46,18 @@ public class SimpleRecyclerAdapter<T> extends RecyclerView.Adapter<SimpleRecycle
     public void onBindViewHolder(@NonNull SimpleViewHolder holder, int position) {
         T item = mMainData.get(position);
         mListener.onBindView(holder, item);
+    }
+
+    public void addItemAt (int index, T item) {
+        mMainData.add(index, item);
+    }
+
+    public void addItem (T item) {
+        mMainData.add(item);
+    }
+
+    public List<T> getMainData () {
+        return mMainData;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {

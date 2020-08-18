@@ -41,6 +41,10 @@
             />
 
         <activity
+            android:name=".wp.creation.WeddingPackageCreationActivity"
+            />
+
+        <activity
             android:name=".schedule.ScheduleActivity"
             />
 

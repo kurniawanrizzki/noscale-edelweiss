@@ -52,10 +52,19 @@
     <string name="about_us_txt">About Us</string>
     <string name="sign_out_txt">Sign out</string>
 
+    <string name="package_name_txt">Package Name</string>
+    <string name="package_price_txt">Package Price</string>
+    <string name="total_buffet_txt">Total Buffet</string>
+    <string name="buffet_type_txt">Buffet</string>
+    <string name="detail_package_txt">Detail Package</string>
+    <string name="bonus_package_txt">Bonus</string>
+    <string name="add_bonus_txt">+ Add Bonus</string>
+
     <string name="ok_txt">OK</string>
     <string name="success_txt">Success</string>
     <string name="warning_title_txt">Warning</string>
     <string name="error_title_txt">Error</string>
+    <string name="package_success_txt">Package Success!</string>
     <string name="payment_success_txt">Payment Success!</string>
     <string name="testimonial_success_txt">Testimonial Success!</string>
     <string name="success_registration_txt">Your registration successful.</string>

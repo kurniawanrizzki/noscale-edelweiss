@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noscale.edelweiss.common.widget.EdelweissConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_17sdp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_package_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/sv_package_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_17sdp"
+            app:layout_constraintBottom_toTopOf="@+id/b_package_create"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_package_form_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                >
+
+                <TextView
+                    android:id="@+id/tv_package_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/package_name_txt"
+                    app:layout_constraintTop_toTopOf="@id/et_package_name"
+                    app:layout_constraintBottom_toBottomOf="@id/et_package_name"
+                    app:layout_constraintRight_toLeftOf="@+id/et_package_name"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
+
+                <EditText
+                    android:id="@+id/et_package_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_package_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/package_price_txt"
+                    app:layout_constraintTop_toTopOf="@id/et_package_price"
+                    app:layout_constraintBottom_toBottomOf="@id/et_package_price"
+                    app:layout_constraintRight_toLeftOf="@+id/et_package_price"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
+
+                <EditText
+                    android:id="@+id/et_package_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="@id/et_package_name"
+                    app:layout_constraintTop_toBottomOf="@id/et_package_name"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_package_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_buffet_txt"
+                    app:layout_constraintTop_toTopOf="@id/et_package_total"
+                    app:layout_constraintBottom_toBottomOf="@id/et_package_total"
+                    app:layout_constraintRight_toLeftOf="@+id/et_package_total"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
+
+                <EditText
+                    android:id="@+id/et_package_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="@id/et_package_name"
+                    app:layout_constraintTop_toBottomOf="@id/et_package_price"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_package_buffet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buffet_type_txt"
+                    app:layout_constraintTop_toTopOf="@id/sp_package_buffet"
+                    app:layout_constraintBottom_toBottomOf="@id/sp_package_buffet"
+                    app:layout_constraintRight_toLeftOf="@+id/sp_package_buffet"
+                    app:layout_constraintWidth_percent="0.3"
+                    />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_package_buffet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintRight_toRightOf="@id/et_package_name"
+                    app:layout_constraintTop_toBottomOf="@id/et_package_total"
+                    app:layout_constraintWidth_percent="0.7"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_package_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_package_txt"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_package_buffet"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_package_buffet"
+                    />
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nsv_package_detail_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_package_detail"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_package_detail"
+                    >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_package_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_form_wp_option"
+                        tools:itemCount="3"
+                        />
+
+                </androidx.core.widget.NestedScrollView>
+
+                <TextView
+                    android:id="@+id/tv_package_bonus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bonus_package_txt"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/nsv_package_detail_container"
+                    app:layout_constraintLeft_toLeftOf="@id/nsv_package_detail_container"
+                    />
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nsv_package_bonus_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_package_bonus"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_package_bonus"
+                    >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_package_bonus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="3"
+                        />
+
+                </androidx.core.widget.NestedScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/b_package_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_txt"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>
