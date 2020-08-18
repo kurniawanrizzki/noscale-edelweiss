@@ -55,7 +55,7 @@ public class PaymentPresenter implements PaymentContract.Presenter {
 
     @Override
     public void fetch() {
-        PaymentRemoteDataSource.getInstance().getPaymentTypes(mConfiguration.getUserId(), new PaymentDataSource.GetLoadCallback() {
+        PaymentRemoteDataSource.getInstance().getPaymentTypes(mConfiguration.getAuthenticatedId(), new PaymentDataSource.GetLoadCallback() {
             @Override
             public void onLoadPaymentType(List<PaymentType> types, List<Booking> bookings) {
                 mView.appendData(types, bookings);

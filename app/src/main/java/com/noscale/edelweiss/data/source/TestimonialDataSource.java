@@ -16,5 +16,12 @@ public interface TestimonialDataSource {
         void onLoadTestimonialFailure (String message);
     }
 
+    interface PostCallback {
+        void onSuccess ();
+        void onError (String message);
+    }
+
     void getList (GetLoadCallback callback);
+
+    void submit (int userId, String testimonial, PostCallback callback);
 }

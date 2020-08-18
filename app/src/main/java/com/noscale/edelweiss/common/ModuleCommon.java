@@ -86,7 +86,9 @@ public class ModuleCommon {
             @Override
             public void onClick(View view) {
                 AppConfiguration.getInstance(context).setAuthenticated(false);
-                AppConfiguration.getInstance(context).setUserId(0);
+                AppConfiguration.getInstance(context).setAuthenticatedId(0);
+                AppConfiguration.getInstance(context).setAuthenticatedUserName("");
+                AppConfiguration.getInstance(context).setAuthenticatedUserType(0);
 
                 Intent i = new Intent(context, LoginActivity.class);
                 context.startActivity(i);

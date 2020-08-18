@@ -39,6 +39,7 @@ public class BookingRemoteDataSource implements BookingDataSource {
 
                     if ((null != res) && res.isOk()) {
                         callback.onSuccess();
+                        return;
                     }
 
                     callback.onFailure(response.errorBody().string());
