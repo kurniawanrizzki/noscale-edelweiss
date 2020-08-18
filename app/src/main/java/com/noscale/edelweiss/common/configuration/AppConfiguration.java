@@ -19,6 +19,10 @@ public class AppConfiguration {
 
     private static final String AUTHENTICATED_ID_KEY = "AUTHENTICATED_ID_KEY";
 
+    private static final String AUTHENTICATED_USER_NAME_KEY = "AUTHENTICATED_USER_NAME_KEY";
+
+    private static final String AUTHENTICATED_USER_TYPE_KEY = "AUTHENTICATED_USER_TYPE_KEY";
+
     protected AppConfiguration(Context context) {
         this.mContext = context;
 
@@ -41,15 +45,31 @@ public class AppConfiguration {
         mPreference.putBoolean(IS_AUTHENTICATED_KEY, isAuthenticated);
     }
 
-    public void setUserId (int userId) {
-        mPreference.putInteger(AUTHENTICATED_ID_KEY, userId);
+    public void setAuthenticatedId(int authenticatedId) {
+        mPreference.putInteger(AUTHENTICATED_ID_KEY, authenticatedId);
     }
 
     public boolean isAuthenticated () {
         return mPreference.getBoolean(IS_AUTHENTICATED_KEY, false);
     }
 
-    public int getUserId () {
+    public int getAuthenticatedId() {
         return mPreference.getInteger(AUTHENTICATED_ID_KEY, 0);
+    }
+
+    public void setAuthenticatedUserName (String fullName) {
+        mPreference.putString(AUTHENTICATED_USER_NAME_KEY, fullName);
+    }
+
+    public String getAuthenticatedUserName () {
+        return mPreference.getString(AUTHENTICATED_USER_NAME_KEY, "");
+    }
+
+    public void setAuthenticatedUserType (int type) {
+        mPreference.putInteger(AUTHENTICATED_USER_TYPE_KEY, type);
+    }
+
+    public int getAuthenticatedUserType ()  {
+        return mPreference.getInteger(AUTHENTICATED_USER_TYPE_KEY, 1);
     }
 }

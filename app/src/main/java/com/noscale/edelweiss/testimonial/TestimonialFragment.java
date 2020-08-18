@@ -1,15 +1,20 @@
 package com.noscale.edelweiss.testimonial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Testimonial;
+import com.noscale.edelweiss.testimonial.creation.TestimonialCreateActivity;
+
 import java.util.List;
 
 /**
@@ -28,10 +33,20 @@ public class TestimonialFragment extends BaseFragment implements TestimonialCont
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMainView = view.findViewById(R.id.rv_fragment_list);
+        mMainView = view.findViewById(R.id.col_fragment_container);
         mEmptyView = view.findViewById(R.id.inc_fragment_empty);
 
         TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
+        FloatingActionButton fabTestimonial = view.findViewById(R.id.fab_fragment_create);
+
+        fabTestimonial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), TestimonialCreateActivity.class);
+                startActivity(i);
+            }
+        });
+
         tvTitle.setText(getString(R.string.testimonial_txt));
 
         showProgressView(true);

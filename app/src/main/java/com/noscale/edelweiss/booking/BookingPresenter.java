@@ -79,6 +79,16 @@ public class BookingPresenter implements BookingContract.Presenter {
     }
 
     @Override
+    public void setSelectedCategory(Category category) {
+        mRequest.setWeddingCategory(category.getId());
+    }
+
+    @Override
+    public void setSelectedWeddingPackage(WeddingPackage wp) {
+        mRequest.setWeddingPackage(wp.getId());
+    }
+
+    @Override
     public void getCategories() {
         boolean isCategoryDone = APIMap.get("category");
 

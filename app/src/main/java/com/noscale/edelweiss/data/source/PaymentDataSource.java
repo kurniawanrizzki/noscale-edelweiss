@@ -1,6 +1,8 @@
 package com.noscale.edelweiss.data.source;
 
+import com.noscale.edelweiss.data.Booking;
 import com.noscale.edelweiss.data.PaymentType;
+import com.noscale.edelweiss.data.source.remote.payment.PaymentSubmissionRequest;
 
 import java.util.List;
 
@@ -10,9 +12,16 @@ import java.util.List;
  */
 public interface PaymentDataSource {
     interface GetLoadCallback {
-        void onLoadPaymentType (List<PaymentType> types);
+        void onLoadPaymentType (List<PaymentType> types, List<Booking> bookings);
         void onFailurePaymentType (String message);
     }
 
-    void getPaymentTypes (GetLoadCallback callback);
+    interface PostLoadCallback {
+        void onSuccess ();
+        void onError (String message);
+    }
+
+    void getPaymentTypes (int userId, GetLoadCallback callback);
+
+    void submit (PaymentSubmissionRequest request, PostLoadCallback callback);
 }

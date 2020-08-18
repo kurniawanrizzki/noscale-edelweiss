@@ -1,21 +1,19 @@
-package com.noscale.edelweiss.gallery;
+package com.noscale.edelweiss.testimonial.creation;
 
 import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
-import com.noscale.edelweiss.data.Gallery;
-import java.util.List;
 
 /**
  * TODO: Add class header description
  * Created by kurniawanrizzki on 18/08/20.
  */
-public interface GalleryContract {
+public interface TestimonialCreateContract {
     interface View extends BaseView<Presenter> {
-        void append (List<Gallery> galleries);
-        void showErrorMessage (String message);
+        void showSuccessMessage ();
+        void showErrorMessage (String message, Runnable runnable);
     }
 
     interface Presenter extends BasePresenter {
-        void fetch ();
+        void submit (int userId, String testimonial);
     }
 }

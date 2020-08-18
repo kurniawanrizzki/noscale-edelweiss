@@ -1,8 +1,12 @@
 package com.noscale.edelweiss.payment;
 
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
+import com.noscale.edelweiss.data.Booking;
 import com.noscale.edelweiss.data.source.PaymentDataSource;
 import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentRemoteDataSource;
+import com.noscale.edelweiss.data.source.remote.payment.PaymentSubmissionRequest;
+
 import java.util.List;
 
 /**
@@ -15,10 +19,15 @@ public class PaymentPresenter implements PaymentContract.Presenter {
 
     private boolean mIsDataMissing;
 
-    public PaymentPresenter (PaymentContract.View view, boolean isDataMissing) {
+    private AppConfiguration mConfiguration;
+
+    private final PaymentSubmissionRequest mRequest = new PaymentSubmissionRequest();
+
+    public PaymentPresenter (PaymentContract.View view, AppConfiguration configuration, boolean isDataMissing) {
         view.setPresenter(this);
 
         this.mView = view;
+        this.mConfiguration = configuration;
         this.mIsDataMissing = isDataMissing;
     }
 
@@ -35,16 +44,55 @@ public class PaymentPresenter implements PaymentContract.Presenter {
     }
 
     @Override
+    public void setBooking(Booking booking) {
+        mRequest.setBookingNumber(booking.getBookingNumber());
+    }
+
+    @Override
+    public void setPaymentType(PaymentType type) {
+        mRequest.setPaymentTypeId(type.getId());
+    }
+
+    @Override
     public void fetch() {
-        PaymentRemoteDataSource.getInstance().getPaymentTypes(new PaymentDataSource.GetLoadCallback() {
+        PaymentRemoteDataSource.getInstance().getPaymentTypes(mConfiguration.getAuthenticatedId(), new PaymentDataSource.GetLoadCallback() {
             @Override
-            public void onLoadPaymentType(List<PaymentType> types) {
-                mView.appendData(types);
+            public void onLoadPaymentType(List<PaymentType> types, List<Booking> bookings) {
+                mView.appendData(types, bookings);
             }
 
             @Override
             public void onFailurePaymentType(String message) {
-                mView.showErrorMessage(message);
+                mView.showErrorMessage(message, new Runnable() {
+                    @Override
+                    public void run() {
+                        fetch();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void submit(String receipt, float amount) {
+
+        mRequest.setAmount(amount);
+        mRequest.setReceipt(receipt);
+
+        PaymentRemoteDataSource.getInstance().submit(mRequest, new PaymentDataSource.PostLoadCallback() {
+            @Override
+            public void onSuccess() {
+                mView.showSuccessMessage();
+            }
+
+            @Override
+            public void onError(String message) {
+                mView.showErrorMessage(message, new Runnable() {
+                    @Override
+                    public void run() {
+                        submit(receipt, amount);
+                    }
+                });
             }
         });
     }

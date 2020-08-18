@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.ModuleCommon;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Module;
 
@@ -46,9 +47,12 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         RecyclerView rvModule = view.findViewById(R.id.rv_dashboard_modules);
+        TextView tvSubTitle = view.findViewById(R.id.tv_dashboard_subtitle);
 
         rvModule.setLayoutManager(layoutManager);
         rvModule.setAdapter(mAdapter);
+
+        tvSubTitle.setText(AppConfiguration.getInstance(getContext()).getAuthenticatedUserName());
     }
 
     @Override
