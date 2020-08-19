@@ -20,7 +20,7 @@ public class Booking {
 
     @SerializedName("paymentList")
     @Expose
-    private List<String> paymentList;
+    private List<Payment> paymentList;
 
     public int getId() {
         return id;
@@ -38,11 +38,11 @@ public class Booking {
         this.bookingNumber = bookingNumber;
     }
 
-    public List<String> getPaymentList() {
+    public List<Payment> getPaymentList() {
         return paymentList;
     }
 
-    public void setPaymentList(List<String> paymentList) {
+    public void setPaymentList(List<Payment> paymentList) {
         this.paymentList = paymentList;
     }
 }
