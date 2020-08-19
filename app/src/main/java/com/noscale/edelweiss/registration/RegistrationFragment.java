@@ -78,6 +78,11 @@ public class RegistrationFragment extends BaseFragment implements RegistrationCo
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void goToLogin() {
         Intent i = new Intent(getContext(), LoginActivity.class);
         startActivity(i);

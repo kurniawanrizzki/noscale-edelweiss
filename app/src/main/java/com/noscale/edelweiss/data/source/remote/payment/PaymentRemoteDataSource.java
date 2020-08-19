@@ -7,6 +7,7 @@ import com.noscale.edelweiss.data.source.remote.APIService;
 import com.noscale.edelweiss.data.source.remote.BaseResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,13 +39,15 @@ public class PaymentRemoteDataSource implements PaymentDataSource {
             @Override
             public void onResponse(Call<PaymentTypeResponse> call, Response<PaymentTypeResponse> response) {
                 PaymentTypeResponse res = response.body();
+                List<PaymentType> types = new ArrayList<>();
+                List<Booking> bookings = new ArrayList<>();
 
                 if ((null != res) && res.isOk()) {
-                    List<PaymentType> types = res.getTypes();
-                    List<Booking> bookings = res.getBookings();
-
-                    callback.onLoadPaymentType(types, bookings);
+                    types = res.getTypes();
+                    bookings = res.getBookings();
                 }
+
+                callback.onLoadPaymentType(types, bookings);
             }
 
             @Override

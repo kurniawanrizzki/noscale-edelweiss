@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
@@ -55,5 +53,10 @@ public class CompleteBookingFragment extends BaseFragment implements BaseView {
     @Override
     protected int getResLayout() {
         return R.layout.fragment_complete_booking;
+    }
+
+    @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
     }
 }

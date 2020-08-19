@@ -1,6 +1,7 @@
 package com.noscale.edelweiss.data.source;
 
 import com.noscale.edelweiss.data.Gallery;
+import com.noscale.edelweiss.data.source.remote.gallery.GallerySubmissionRequest;
 
 import java.util.List;
 
@@ -15,5 +16,12 @@ public interface GalleryDataSource {
         void onErrorLoadGallery (String message);
     }
 
+    interface PostCallback {
+        void onSuccess ();
+        void onError (String message);
+    }
+
     void getList (GetLoadCallback callback);
+
+    void submit (GallerySubmissionRequest request, PostCallback callback);
 }

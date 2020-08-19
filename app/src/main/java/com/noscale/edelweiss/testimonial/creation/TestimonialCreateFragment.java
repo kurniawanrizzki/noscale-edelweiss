@@ -59,6 +59,11 @@ public class TestimonialCreateFragment extends BaseFragment implements Testimoni
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void setPresenter(TestimonialCreateContract.Presenter presenter) {
         mPresenter = presenter;
     }

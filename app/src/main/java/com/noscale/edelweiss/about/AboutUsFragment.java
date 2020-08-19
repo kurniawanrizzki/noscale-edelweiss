@@ -22,4 +22,9 @@ public class AboutUsFragment extends BaseFragment implements AboutUsContract.Vie
     protected int getResLayout() {
         return R.layout.fragment_about_us;
     }
+
+    @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
 }

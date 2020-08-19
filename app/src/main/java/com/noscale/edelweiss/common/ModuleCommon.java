@@ -8,6 +8,7 @@ import com.noscale.edelweiss.about.AboutUsActivity;
 import com.noscale.edelweiss.booking.BookingActivity;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.data.Module;
+import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.gallery.GalleryActivity;
 import com.noscale.edelweiss.login.LoginActivity;
 import com.noscale.edelweiss.payment.PaymentActivity;
@@ -26,6 +27,8 @@ public class ModuleCommon {
     public static List<Module> getModules (final Context context) {
         List<Module> modules = new ArrayList<>();
 
+        User.Type type = AppConfiguration.getInstance(context).getAuthenticatedUserType();
+
         modules.add(new Module(R.string.gallery_txt, R.drawable.ic_gallery, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,13 +45,15 @@ public class ModuleCommon {
             }
         }));
 
-        modules.add(new Module(R.string.booking_txt, R.drawable.ic_book, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, BookingActivity.class);
-                context.startActivity(i);
-            }
-        }));
+        if (type.equals(User.Type.DEFAULT)) {
+            modules.add(new Module(R.string.booking_txt, R.drawable.ic_book, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, BookingActivity.class);
+                    context.startActivity(i);
+                }
+            }));
+        }
 
         modules.add(new Module(R.string.schedule_txt, R.drawable.ic_schedule, new View.OnClickListener() {
             @Override
@@ -66,13 +71,15 @@ public class ModuleCommon {
             }
         }));
 
-        modules.add(new Module(R.string.payment_txt, R.drawable.ic_payment, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, PaymentActivity.class);
-                context.startActivity(i);
-            }
-        }));
+        if (type.equals(User.Type.DEFAULT)) {
+            modules.add(new Module(R.string.payment_txt, R.drawable.ic_payment, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PaymentActivity.class);
+                    context.startActivity(i);
+                }
+            }));
+        }
 
         modules.add(new Module(R.string.about_us_txt, R.drawable.ic_info, new View.OnClickListener() {
             @Override

@@ -2,6 +2,7 @@ package com.noscale.edelweiss.common.configuration;
 
 import android.content.Context;
 import com.noscale.edelweiss.common.EdelweissSharedPreference;
+import com.noscale.edelweiss.data.User;
 
 /**
  * TODO: Add class header description
@@ -69,7 +70,13 @@ public class AppConfiguration {
         mPreference.putInteger(AUTHENTICATED_USER_TYPE_KEY, type);
     }
 
-    public int getAuthenticatedUserType ()  {
-        return mPreference.getInteger(AUTHENTICATED_USER_TYPE_KEY, 1);
+    public User.Type getAuthenticatedUserType ()  {
+        int type = mPreference.getInteger(AUTHENTICATED_USER_TYPE_KEY, 1);
+
+        for (User.Type t : User.Type.values()) {
+            if (type == t.getCode()) return t;
+        }
+
+        return User.Type.DEFAULT;
     }
 }

@@ -21,6 +21,11 @@ public class CompletePaymentFragment extends BaseFragment implements BaseView {
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void setPresenter(BasePresenter presenter) {
 
     }
