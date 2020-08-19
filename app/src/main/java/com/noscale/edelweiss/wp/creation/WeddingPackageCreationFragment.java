@@ -131,6 +131,11 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void setPresenter(WeddingPackageCreationContract.Presenter presenter) {
         mPresenter = presenter;
     }

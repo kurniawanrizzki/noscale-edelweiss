@@ -61,6 +61,11 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void setPresenter(DashboardContract.Presenter presenter) {
         mPresenter = presenter;
     }

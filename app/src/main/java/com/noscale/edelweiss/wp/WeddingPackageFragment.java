@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
+import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.data.WeddingPackage;
 import com.noscale.edelweiss.wp.creation.WeddingPackageCreationActivity;
 import java.util.List;
@@ -51,6 +53,12 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
     @Override
     protected int getResLayout() {
         return R.layout.widget_fragment_with_title;
+    }
+
+    @Override
+    protected boolean isAccessTypeAccepted() {
+        User.Type type = AppConfiguration.getInstance(getContext()).getAuthenticatedUserType();
+        return type == User.Type.ADMIN;
     }
 
     @Override

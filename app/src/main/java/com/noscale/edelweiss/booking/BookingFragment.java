@@ -23,7 +23,6 @@ import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.WeddingPackage;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -159,6 +158,11 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
     @Override
     protected int getResLayout() {
         return R.layout.fragment_booking;
+    }
+
+    @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
     }
 
     @Override

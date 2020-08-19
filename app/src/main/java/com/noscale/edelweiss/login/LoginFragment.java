@@ -59,6 +59,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         mPresenter = presenter;
     }

@@ -21,5 +21,15 @@ public class Gallery {
     @Expose
     private String imageUrl;
 
+    public int getId() {
+        return id;
+    }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

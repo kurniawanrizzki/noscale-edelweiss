@@ -77,6 +77,11 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
     }
 
     @Override
+    protected boolean isAccessTypeAccepted() {
+        return true;
+    }
+
+    @Override
     public void setPresenter(PaymentContract.Presenter presenter) {
         mPresenter = presenter;
     }
@@ -222,7 +227,9 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
 
         if ((requestCode == 1) && resultCode == getActivity().RESULT_OK) {
             Uri selectedImage = data.getData();
-            etReceipt.setText(selectedImage.getPath());
+            String path = UICommon.getImageFilePath(getContext(), selectedImage);
+
+            etReceipt.setText(path);
         }
     }
 

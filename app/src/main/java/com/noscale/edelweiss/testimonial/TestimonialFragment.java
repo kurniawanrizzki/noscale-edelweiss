@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Testimonial;
+import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.testimonial.creation.TestimonialCreateActivity;
 
 import java.util.List;
@@ -93,5 +95,11 @@ public class TestimonialFragment extends BaseFragment implements TestimonialCont
     public void showErrorMessage(String message) {
         showEmptyPage();
         showMessage(getString(R.string.error_title_txt), message);
+    }
+
+    @Override
+    protected boolean isAccessTypeAccepted() {
+        User.Type type = AppConfiguration.getInstance(getContext()).getAuthenticatedUserType();
+        return type == User.Type.DEFAULT;
     }
 }

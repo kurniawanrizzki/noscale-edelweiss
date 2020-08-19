@@ -44,6 +44,8 @@ public abstract class BaseFragment extends Fragment {
 
         mMainView = view.findViewById(R.id.cl_fragment_container);
         mProgressView = view.findViewById(R.id.inc_fragment_progress);
+
+        setViewByAccessType(view.findViewById(R.id.fab_fragment_create));
     }
 
     @Override
@@ -70,4 +72,17 @@ public abstract class BaseFragment extends Fragment {
         showProgressView(false);
         UICommon.showDialog(getContext(), title, message, listener);
     }
+
+    protected void setViewByAccessType (View view) {
+        if (null == view) return;
+
+        if (isAccessTypeAccepted()) {
+            view.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        view.setVisibility(View.GONE);
+    }
+
+    protected abstract boolean isAccessTypeAccepted ();
 }

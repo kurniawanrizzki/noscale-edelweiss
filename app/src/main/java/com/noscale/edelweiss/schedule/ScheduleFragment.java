@@ -8,8 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Schedule;
+import com.noscale.edelweiss.data.User;
+
 import java.util.List;
 
 /**
@@ -40,6 +43,11 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
     @Override
     protected int getResLayout() {
         return R.layout.widget_fragment_with_title;
+    }
+
+    @Override
+    protected boolean isAccessTypeAccepted() {
+        return false;
     }
 
     @Override
