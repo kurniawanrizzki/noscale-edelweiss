@@ -19,4 +19,6 @@ public interface PaymentAPI {
     @POST("payment")
     Call<BaseResponse> submit (@Body PaymentSubmissionRequest request);
 
+    @GET("history-payment")
+    Call<PaymentResponse> getHistoryPayment ();
 }

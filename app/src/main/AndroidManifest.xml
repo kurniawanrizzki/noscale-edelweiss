@@ -77,6 +77,10 @@
             />
 
         <activity
+            android:name=".payment.list.PaymentListActivity"
+            />
+
+        <activity
             android:name=".payment.complete.CompletePaymentActivity"
             />
 

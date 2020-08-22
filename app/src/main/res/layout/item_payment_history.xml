@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_3sdp"
+    android:layout_marginLeft="@dimen/_13sdp"
+    android:layout_marginRight="@dimen/_13sdp"
+    android:layout_marginBottom="@dimen/_3sdp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:contentPadding="@dimen/_13sdp"
+    app:cardCornerRadius="@dimen/_3sdp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
+            android:id="@+id/tv_history_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle1TextView
+            android:id="@+id/tv_history_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_history_name"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_history_name"
+            tools:text="@tools:sample/lorem"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_history_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_arrow_down"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_history_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_history_email"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history_booking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_history_email"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_booking"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

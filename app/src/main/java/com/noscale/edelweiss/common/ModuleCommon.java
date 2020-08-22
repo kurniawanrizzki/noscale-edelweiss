@@ -11,6 +11,7 @@ import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.gallery.GalleryActivity;
 import com.noscale.edelweiss.login.LoginActivity;
 import com.noscale.edelweiss.payment.PaymentActivity;
+import com.noscale.edelweiss.payment.list.PaymentListActivity;
 import com.noscale.edelweiss.schedule.ScheduleActivity;
 import com.noscale.edelweiss.testimonial.TestimonialActivity;
 import com.noscale.edelweiss.wp.WeddingPackageActivity;
@@ -58,15 +59,16 @@ public class ModuleCommon {
             activity.startActivity(i);
         }));
 
-        if (type.equals(User.Type.DEFAULT)) {
-            modules.add(new Module(R.string.payment_txt, R.drawable.ic_money, (v) -> {
+        modules.add(new Module(R.string.payment_txt, R.drawable.ic_money, (v) -> {
+            if (type.equals(User.Type.DEFAULT)) {
                 Intent i = new Intent(activity, PaymentActivity.class);
-                activity.startActivityForResult(
-                        i,
-                        PaymentActivity.PAYMENT_CREATION_REQUEST_CODE)
-                ;
-            }));
-        }
+                activity.startActivityForResult(i, PaymentActivity.PAYMENT_CREATION_REQUEST_CODE);
+                return;
+            }
+
+            Intent i = new Intent(activity, PaymentListActivity.class);
+            activity.startActivity(i);
+        }));
 
         modules.add(new Module(R.string.about_us_txt, R.drawable.ic_lamp, (v) -> {
             Intent i = new Intent(activity, AboutUsActivity.class);
