@@ -89,6 +89,10 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
 
                 tvDeletion.setOnClickListener((v) -> delete(item));
                 tvDetail.setOnClickListener((v) -> goToDetail(item));
+
+                if (AppConfiguration.getInstance(getContext()).getAuthenticatedUserType() == User.Type.DEFAULT) {
+                    tvDeletion.setVisibility(View.GONE);
+                }
             }
         });
 
