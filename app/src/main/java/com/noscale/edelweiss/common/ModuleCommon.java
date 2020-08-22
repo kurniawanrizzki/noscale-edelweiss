@@ -74,13 +74,17 @@ public class ModuleCommon {
         }));
 
         modules.add(new Module(R.string.sign_out_txt, R.drawable.ic_logout, (v) -> {
-            AppConfiguration.getInstance(activity).setAuthenticated(false);
-            AppConfiguration.getInstance(activity).setAuthenticatedId(0);
-            AppConfiguration.getInstance(activity).setAuthenticatedUserName("");
-            AppConfiguration.getInstance(activity).setAuthenticatedUserType(0);
+            UICommon.showDialog(activity, activity.getString(R.string.warning_title_txt), activity.getString(R.string.sign_out_message_txt), (dialogInterface, i) -> {
+                AppConfiguration.getInstance(activity).setAuthenticated(false);
+                AppConfiguration.getInstance(activity).setAuthenticatedId(0);
+                AppConfiguration.getInstance(activity).setAuthenticatedUserName("");
+                AppConfiguration.getInstance(activity).setAuthenticatedUserType(0);
 
-            Intent i = new Intent(activity, LoginActivity.class);
-            activity.startActivity(i);
+                Intent intent = new Intent(activity, LoginActivity.class);
+                activity.startActivity(intent);
+            }, (dialogInterface, i) -> {
+
+            });
         }));
 
         return modules;

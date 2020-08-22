@@ -84,6 +84,8 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
 
             }
 
+            if (!isBuffetDetailIsNotEmpty && !isPackageDetailIsNotEmpty) return;
+
             showProgressView(true);
             ((WeddingPackageCreationContract.Presenter) mPresenter).edit();
         });
@@ -233,10 +235,6 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
             CheckBox cbMain = view.findViewById(R.id.cb_form_wp_main);
             RecyclerView rvChild = view.findViewById(R.id.rv_form_wp_child);
 
-            if (null != orderDetails) {
-                cbMain.setChecked(orderDetails.contains(item));
-            }
-
             cbMain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -252,6 +250,10 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
             });
 
             cbMain.setText(item.getName());
+
+            if (null != orderDetails) {
+                cbMain.setChecked(orderDetails.contains(item));
+            }
 
             SimpleRecyclerAdapter<String> detailsAdapter = new SimpleRecyclerAdapter<>(itemDetails, R.layout.item_edelweiss_spinner, (cHolder, cItem) -> {
                 View cView = cHolder.itemView;
@@ -306,8 +308,9 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
     @Override
     protected void showProgressView(boolean isShow) {
         boolean isDataSuccessFulLoad = ((WeddingPackageCreationContract.Presenter) mPresenter).isSuccessfulLoad();
+        boolean isDataSuccessFulEdited= ((WeddingPackageCreationContract.Presenter) mPresenter).isSuccessfulEdited();
 
-        if (isDataSuccessFulLoad && !isShow) {
+        if ((isDataSuccessFulLoad || isDataSuccessFulEdited) && !isShow) {
             super.showProgressView(false);
             return;
         }

@@ -1,5 +1,6 @@
 package com.noscale.edelweiss.wp.details;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -121,5 +122,15 @@ public class WeddingPackageDetailFragment extends BaseFragment implements Weddin
     @Override
     public void setPresenter(WeddingPackageDetailContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if ((requestCode == WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE) && (resultCode == WeddingPackageCreationActivity.RESULT_OK)) {
+            getActivity().setResult(Activity.RESULT_OK);
+            getActivity().finish();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
