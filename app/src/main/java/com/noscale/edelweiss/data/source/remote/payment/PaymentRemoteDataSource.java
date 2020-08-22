@@ -1,6 +1,7 @@
 package com.noscale.edelweiss.data.source.remote.payment;
 
 import com.noscale.edelweiss.data.Booking;
+import com.noscale.edelweiss.data.PaymentHistory;
 import com.noscale.edelweiss.data.source.PaymentDataSource;
 import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.APIService;
@@ -29,6 +30,30 @@ public class PaymentRemoteDataSource implements PaymentDataSource {
 
     public PaymentRemoteDataSource() {
         mService = APIService.getInstance();
+    }
+
+    @Override
+    public void getPaymentList(GetCallback callback) {
+        Call<PaymentResponse> response = mService.getPaymentApi().getHistoryPayment();
+        response.enqueue(new Callback<PaymentResponse>() {
+            @Override
+            public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
+                PaymentResponse res = response.body();
+                List<PaymentHistory> histories = new ArrayList<>();
+
+                if ((null != res) && res.isOk()) {
+                    histories = res.getPaymentHistories();
+                }
+
+                callback.onSuccess(histories);
+            }
+
+            @Override
+            public void onFailure(Call<PaymentResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                callback.onError(message);
+            }
+        });
     }
 
     @Override

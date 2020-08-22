@@ -18,6 +18,26 @@ public class Booking {
     @Expose
     private String bookingNumber;
 
+    @SerializedName("address")
+    @Expose
+    private String address;
+
+    @SerializedName("phoneNumber")
+    @Expose
+    private String phoneNumber;
+
+    @SerializedName("category")
+    @Expose
+    private String categoryName;
+
+    @SerializedName("weddingPackage")
+    @Expose
+    private String weddingPackage;
+
+    @SerializedName("dateTime")
+    @Expose
+    private String dateTime;
+
     @SerializedName("paymentList")
     @Expose
     private List<Payment> paymentList;
@@ -44,5 +64,45 @@ public class Booking {
 
     public void setPaymentList(List<Payment> paymentList) {
         this.paymentList = paymentList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getWeddingPackage() {
+        return weddingPackage;
+    }
+
+    public void setWeddingPackage(String weddingPackage) {
+        this.weddingPackage = weddingPackage;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 }
