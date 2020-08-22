@@ -10,7 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
+import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.data.WeddingPackage;
 import com.noscale.edelweiss.data.WeddingPackageDetail;
 import com.noscale.edelweiss.wp.creation.WeddingPackageCreationActivity;
@@ -37,19 +39,21 @@ public class WeddingPackageDetailFragment extends BaseFragment implements Weddin
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TextView tvActionTool = getActivity().findViewById(R.id.tv_action_bar_tool);
-        tvActionTool.setText(R.string.edit_txt);
-        tvActionTool.setVisibility(View.VISIBLE);
+        if (AppConfiguration.getInstance(getContext()).getAuthenticatedUserType() == User.Type.ADMIN) {
+            TextView tvActionTool = getActivity().findViewById(R.id.tv_action_bar_tool);
+            tvActionTool.setText(R.string.edit_txt);
+            tvActionTool.setVisibility(View.VISIBLE);
 
-        tvActionTool.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(), WeddingPackageCreationActivity.class);
-                i.setAction(WeddingPackageCreationActivity.ACTION_EDIT);
-                i.putExtra(WeddingPackageDetailActivity.DETAIL_ARG, mWeddingPackage);
-                startActivityForResult(i, WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE);
-            }
-        });
+            tvActionTool.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getContext(), WeddingPackageCreationActivity.class);
+                    i.setAction(WeddingPackageCreationActivity.ACTION_EDIT);
+                    i.putExtra(WeddingPackageDetailActivity.DETAIL_ARG, mWeddingPackage);
+                    startActivityForResult(i, WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE);
+                }
+            });
+        }
     }
 
     @Override
