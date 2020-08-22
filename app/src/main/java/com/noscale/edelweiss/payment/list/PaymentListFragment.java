@@ -1,5 +1,7 @@
 package com.noscale.edelweiss.payment.list;
 
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +16,9 @@ import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Booking;
 import com.noscale.edelweiss.data.PaymentHistory;
 import com.noscale.edelweiss.data.User;
+import com.noscale.edelweiss.payment.detail.PaymentDetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,6 +88,15 @@ public class PaymentListFragment extends BaseFragment implements PaymentListCont
                                 tvCategory.setText(i.getCategoryName());
                                 tvTotal.setText(i.getWeddingPackage());
                                 tvAddress.setText(i.getAddress());
+
+                                h.itemView.setOnClickListener((vCard) -> {
+                                    Intent intent = new Intent(getContext(), PaymentDetailActivity.class);
+
+                                    intent.putParcelableArrayListExtra(PaymentDetailActivity.PAYMENT_LIST_ARG, (ArrayList<? extends Parcelable>) i.getPaymentList());
+                                    intent.putExtra(PaymentDetailActivity.PAYMENT_BOOKING_NUMBER_ARG, i.getBookingNumber());
+
+                                    startActivity(intent);
+                                });
                             }
                     );
 
