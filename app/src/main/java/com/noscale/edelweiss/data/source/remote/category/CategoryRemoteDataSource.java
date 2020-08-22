@@ -3,6 +3,7 @@ package com.noscale.edelweiss.data.source.remote.category;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.source.CategoryDataSource;
 import com.noscale.edelweiss.data.source.remote.APIService;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,11 +35,13 @@ public class CategoryRemoteDataSource implements CategoryDataSource {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 CategoryResponse res = response.body();
+                List<Category> categories = new ArrayList<>();
 
                 if ((null != res) && res.isOk()) {
-                    List<Category> categories = res.getCategories();
-                    callback.onLoadCategory(categories);
+                    categories = res.getCategories();
                 }
+
+                callback.onLoadCategory(categories);
             }
 
             @Override

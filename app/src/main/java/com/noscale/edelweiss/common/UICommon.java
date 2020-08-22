@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.LinearLayout;
+import androidx.core.content.ContextCompat;
 import com.noscale.edelweiss.R;
 
 /**
@@ -15,15 +17,11 @@ import com.noscale.edelweiss.R;
  */
 public class UICommon {
 
-    public static void showProgressView (View mainView, View progressView, boolean isShow) {
-        if (isShow) {
-            mainView.setVisibility(View.GONE);
-            progressView.setVisibility(View.VISIBLE);
-            return;
-        }
+    public static void applyMarginToView (View v, int topBottomMargin) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, topBottomMargin, 0, topBottomMargin);
 
-        mainView.setVisibility(View.VISIBLE);
-        progressView.setVisibility(View.GONE);
+        v.setLayoutParams(params);
     }
 
     public static void showDialog (Context context, String resTitle, String resContent) {
@@ -31,24 +29,36 @@ public class UICommon {
     }
 
     public static void showDialog (Context context, String resTitle, String resContent, DialogInterface.OnClickListener listener) {
-        AlertDialog dialog = new AlertDialog.Builder(context)
+        showDialog(context, resTitle, resContent, listener, null);
+    }
+
+    public static void showDialog (Context context, String resTitle, String resContent, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.AppTheme_AlertDialog)
                 .setCancelable(false)
                 .setTitle(resTitle)
                 .setMessage(resContent)
-                .setPositiveButton(R.string.ok_txt, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (null == listener) {
-                            dialogInterface.dismiss();
-                            return;
-                        }
+                .setPositiveButton(R.string.ok_txt, (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
 
-                        listener.onClick(dialogInterface, i);
+                    if (null == positiveListener) {
+                        return;
                     }
-                })
-                .create();
 
+                    positiveListener.onClick(dialogInterface, i);
+                });
+
+        if (null != negativeListener) {
+            builder.setNegativeButton(R.string.no_txt, (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+                negativeListener.onClick(dialogInterface, i);
+            });
+        }
+
+        AlertDialog dialog = builder.create();
         dialog.show();
+
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.colorBlue));
     }
 
     public static boolean isInputStringValidated (String... input) {

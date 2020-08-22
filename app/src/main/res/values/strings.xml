@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Edelweiss</string>
+    <string name="app_name">Edelwish</string>
 
+    <string name="sign_up_title_txt">Sign up to Edelwish</string>
     <string name="waiting_txt">Please waiting...</string>
     <string name="welcome_txt">Welcome,</string>
 
@@ -22,6 +23,7 @@
     <string name="workshop_txt">Workshop</string>
     <string name="phone_txt">Phone</string>
     <string name="detail_txt">Detail</string>
+    <string name="delete_txt">Delete</string>
 
     <string name="name_txt">Name</string>
     <string name="address_txt">Address</string>
@@ -52,17 +54,24 @@
     <string name="about_us_txt">About Us</string>
     <string name="sign_out_txt">Sign out</string>
 
+    <string name="path_txt">Path</string>
+
     <string name="package_name_txt">Package Name</string>
     <string name="package_price_txt">Package Price</string>
     <string name="total_buffet_txt">Total Buffet</string>
     <string name="buffet_type_txt">Buffet</string>
+    <string name="buffet_detail_txt">Detail Buffet</string>
     <string name="detail_package_txt">Detail Package</string>
     <string name="bonus_package_txt">Bonus</string>
     <string name="add_bonus_txt">+ Add Bonus</string>
 
+    <string name="edit_txt">Edit</string>
     <string name="ok_txt">OK</string>
+    <string name="no_txt">NO</string>
+    <string name="filter_txt">Filter</string>
     <string name="success_txt">Success</string>
     <string name="warning_title_txt">Warning</string>
+    <string name="deletion_txt">Do you want to delete it?</string>
     <string name="error_title_txt">Error</string>
     <string name="package_success_txt">Package Success!</string>
     <string name="payment_success_txt">Payment Success!</string>

@@ -8,29 +8,19 @@
     android:padding="@dimen/_17sdp"
     >
 
-    <TextView
-        android:id="@+id/tv_about_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/about_us_txt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
     <ScrollView
         android:id="@+id/sv_about_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_17sdp"
-        android:layout_marginBottom="@dimen/_17sdp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ll_about_container"
-        app:layout_constraintTop_toBottomOf="@id/tv_about_title"
         >
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissBody1TextView
             android:id="@+id/tv_about_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
             tools:text="@tools:sample/lorem/random"/>
 
     </ScrollView>
@@ -56,7 +46,7 @@
                 android:layout_marginRight="@dimen/_7sdp"
                 app:srcCompat="@drawable/ic_office"/>
 
-            <TextView
+            <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -78,7 +68,7 @@
                 android:layout_marginRight="@dimen/_7sdp"
                 app:srcCompat="@drawable/ic_home"/>
 
-            <TextView
+            <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -100,7 +90,7 @@
                 android:layout_marginRight="@dimen/_7sdp"
                 app:srcCompat="@drawable/ic_phone"/>
 
-            <TextView
+            <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

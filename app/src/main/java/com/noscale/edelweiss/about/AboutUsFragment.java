@@ -1,5 +1,12 @@
 package com.noscale.edelweiss.about;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 
@@ -14,8 +21,13 @@ public class AboutUsFragment extends BaseFragment implements AboutUsContract.Vie
     }
 
     @Override
-    public void setPresenter(AboutUsContract.Presenter presenter) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 
+    @Override
+    public void setPresenter(AboutUsContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
@@ -26,5 +38,18 @@ public class AboutUsFragment extends BaseFragment implements AboutUsContract.Vie
     @Override
     protected boolean isAccessTypeAccepted() {
         return true;
+    }
+
+    @Override
+    public void append(String content) {
+        showProgressView(false);
+
+        TextView tvContent = getView().findViewById(R.id.tv_about_content);
+        tvContent.setText(content);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        showMessage(getString(R.string.error_title_txt), message);
     }
 }

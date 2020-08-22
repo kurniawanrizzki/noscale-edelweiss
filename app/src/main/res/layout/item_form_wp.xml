@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardview_light_background"
+    android:layout_margin="@dimen/_7sdp"
+    app:cardCornerRadius="@dimen/_4sdp"
+    app:contentPadding="@dimen/_13sdp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_form_wp_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
+            android:id="@+id/tv_form_wp_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/lorem/random"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_form_wp_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginLeft="@dimen/_17sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_form_wp_main"
+            app:layout_constraintLeft_toLeftOf="@id/tv_form_wp_main"
+            tools:itemCount="3"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

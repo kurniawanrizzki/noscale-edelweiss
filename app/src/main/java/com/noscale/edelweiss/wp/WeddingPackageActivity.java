@@ -2,6 +2,7 @@ package com.noscale.edelweiss.wp;
 
 import android.os.Bundle;
 import com.noscale.edelweiss.BaseActivity;
+import com.noscale.edelweiss.R;
 
 /**
  * TODO: Add class header description
@@ -16,5 +17,10 @@ public class WeddingPackageActivity extends BaseActivity {
                 (WeddingPackageContract.View) mFragment,
                 shouldLoadDataFromRepository(savedInstanceState)
         );
+    }
+
+    @Override
+    protected int getActivityTitle() {
+        return R.string.package_txt;
     }
 }

@@ -39,7 +39,7 @@ public class SimpleRecyclerAdapter<T> extends RecyclerView.Adapter<SimpleRecycle
 
     @Override
     public int getItemCount() {
-        return mMainData.size();
+        return (null == mMainData) ? 0 : mMainData.size();
     }
 
     @Override
@@ -58,6 +58,10 @@ public class SimpleRecyclerAdapter<T> extends RecyclerView.Adapter<SimpleRecycle
 
     public List<T> getMainData () {
         return mMainData;
+    }
+
+    public void setMainData (List<T> mainData) {
+        this.mMainData = mainData;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {

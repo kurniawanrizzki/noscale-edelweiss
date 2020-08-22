@@ -3,12 +3,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/_17sdp">
+    android:padding="@dimen/_7sdp">
     
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_gallery_item"
-        android:layout_width="@dimen/_64sdp"
-        android:layout_height="@dimen/_43sdp"
+        android:layout_width="@dimen/_84sdp"
+        android:layout_height="@dimen/_64sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/default_gallery"

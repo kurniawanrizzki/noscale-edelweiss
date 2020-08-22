@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginRight="@dimen/_13sdp"
+    android:layout_marginLeft="@dimen/_13sdp"
     android:layout_marginBottom="@dimen/_7sdp"
     android:background="@color/cardview_light_background"
     app:cardCornerRadius="@dimen/_4sdp"
@@ -18,16 +20,28 @@
         android:padding="@dimen/_13sdp"
         >
 
-        <TextView
-            android:id="@+id/tv_wp_detail"
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
+            android:id="@+id/tv_wp_deletion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/detail_txt"
+            android:text="@string/delete_txt"
+            app:textColor="@color/colorRed"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
+            android:id="@+id/tv_wp_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_txt"
+            android:layout_marginRight="@dimen/_7sdp"
+            app:textColor="@color/colorBlue"
+            app:layout_constraintRight_toLeftOf="@id/tv_wp_deletion"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
             android:id="@+id/tv_wp_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +50,7 @@
             tools:text="@tools:sample/lorem"
             />
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
             android:id="@+id/tv_wp_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

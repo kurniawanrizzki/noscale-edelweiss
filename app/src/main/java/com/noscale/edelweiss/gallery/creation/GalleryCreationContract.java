@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface GalleryCreationContract {
     interface View extends BaseView<Presenter> {
+        void openGallery ();
         void appendCategories (List<Category> categories);
         void showSuccessMessageView ();
         void showErrorMessageView (String message, Runnable runnable);

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_action_bar_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_48sdp"
+    android:paddingRight="@dimen/_13sdp"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_action_bar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back"
+        />
+
+    <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
+        android:id="@+id/tv_action_bar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textColor="@color/colorWhite"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="@tools:sample/lorem"
+        />
+
+    <com.noscale.edelweiss.common.widget.typography.EdelweissBody2TextView
+        android:id="@+id/tv_action_bar_tool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textColor="@color/colorWhite"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="@tools:sample/lorem"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

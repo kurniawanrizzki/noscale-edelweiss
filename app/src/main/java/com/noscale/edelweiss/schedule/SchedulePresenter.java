@@ -43,12 +43,22 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
             }
 
             @Override
-            public void onEmptySchedule() {
-                mView.showEmptyPage();
+            public void onLoadScheduleFailure(String message) {
+                mView.showErrorMessage(message);
+            }
+        });
+    }
+
+    @Override
+    public void update(int id, String status) {
+        ScheduleRemoteDataSource.getInstance().update(id, status, new ScheduleDataSource.PostStatusUpdateCallback() {
+            @Override
+            public void onSuccessUpdate() {
+                fetch();
             }
 
             @Override
-            public void onLoadScheduleFailure(String message) {
+            public void onErrorUpdate(String message) {
                 mView.showErrorMessage(message);
             }
         });

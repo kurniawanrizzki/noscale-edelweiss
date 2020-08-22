@@ -14,20 +14,22 @@ import java.util.List;
  */
 public interface BookingContract {
     interface View extends BaseView<Presenter> {
-        void completeBooking ();
+        void goToCompletionBooking();
         void appendCategory (List<Category> categories);
         void appendPackage (List<WeddingPackage> packages);
-        void notifyProgressDone ();
-        void showSingleErrorMessage(String message);
-        void showErrorMessage (String message);
+        void showErrorMessage (String message, Runnable runnable);
     }
 
     interface Presenter extends BasePresenter {
-        void submit (int userId, String address, String phoneNumber, String eventDate, String eventTime, String bookingFee);
+        void submit (int userId, String address, String phoneNumber, String eventDate, String eventTime, Float bookingFee);
         void setSelectedCategory (Category category);
         void setSelectedWeddingPackage (WeddingPackage wp);
         void getCategories ();
         void getPackages ();
-        Calendar getCalendar ();
+        void setTimeInput (int hour, int minutes);
+        void setDateInput (int year, int month, int day);
+        String getTimeInput ();
+        String getDateInput ();
+        boolean isDataSuccessfulLoad ();
     }
 }

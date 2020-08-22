@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/cardview_light_background"
-    android:layout_marginTop="@dimen/_7sdp"
-    android:layout_marginBottom="@dimen/_7sdp"
+    android:layout_margin="@dimen/_7sdp"
     app:cardCornerRadius="@dimen/_4sdp"
     app:contentPadding="@dimen/_13sdp"
     >
@@ -17,13 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <CheckBox
+        <com.noscale.edelweiss.common.EdelweissCheckBox
             android:id="@+id/cb_form_wp_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:ems="30"
-            android:ellipsize="end"
+            android:buttonTint="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem/random"
@@ -33,7 +30,7 @@
             android:id="@+id/rv_form_wp_child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginLeft="@dimen/_17sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/cb_form_wp_main"

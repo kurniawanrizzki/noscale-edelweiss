@@ -5,7 +5,6 @@ import com.noscale.edelweiss.data.source.PaymentDataSource;
 import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.APIService;
 import com.noscale.edelweiss.data.source.remote.BaseResponse;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +68,7 @@ public class PaymentRemoteDataSource implements PaymentDataSource {
 
                     if ((null != res) && res.isOk()) {
                         callback.onSuccess();
+                        return;
                     }
 
                     callback.onError(response.errorBody().string());

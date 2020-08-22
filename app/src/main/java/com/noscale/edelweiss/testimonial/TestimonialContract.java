@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface TestimonialContract {
     interface View extends BaseView<Presenter> {
+        void goToTestimonialCreation ();
         void showPage (List<Testimonial> testimonials);
-        void showEmptyPage ();
         void showErrorMessage (String message);
     }
 

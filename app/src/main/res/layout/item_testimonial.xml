@@ -7,6 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_7sdp"
     android:layout_marginBottom="@dimen/_7sdp"
+    android:layout_marginLeft="@dimen/_13sdp"
+    android:layout_marginRight="@dimen/_13sdp"
     android:background="@color/cardview_light_background"
     app:cardCornerRadius="@dimen/_4sdp"
     >
@@ -18,7 +20,7 @@
         android:padding="@dimen/_13sdp"
         >
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
             android:id="@+id/tv_wp_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +29,7 @@
             tools:text="@tools:sample/lorem"
             />
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle1TextView
             android:id="@+id/tv_wp_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

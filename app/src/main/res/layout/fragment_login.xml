@@ -18,29 +18,37 @@
         app:layout_constraintRight_toRightOf="parent"
         >
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_login_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="@dimen/_17sdp"
+            app:srcCompat="@drawable/ic_logo_alt"
+            />
+
+        <com.noscale.edelweiss.common.EdelweissEditText
             android:id="@+id/et_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:hint="@string/email_txt"
             android:maxLines="1"
             />
 
-        <EditText
+        <com.noscale.edelweiss.common.EdelweissEditText
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:hint="@string/password_txt"
             android:inputType="textPassword"
             android:maxLines="1"
             />
 
-        <Button
+        <com.noscale.edelweiss.common.widget.EdelweissButton
             android:id="@+id/b_login_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:textAllCaps="false"
             android:text="@string/sign_in_txt"
             />
 
@@ -49,24 +57,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
                 android:id="@+id/tv_login_signup_guidance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginRight="@dimen/_4sdp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/sign_up_guidance_txt"
                 />
 
-            <TextView
+            <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
                 android:id="@+id/tv_login_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlue"
-                android:layout_marginTop="@dimen/_7sdp"
+                app:textColor="@color/colorBlue"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/sign_up_action_txt"
                 />

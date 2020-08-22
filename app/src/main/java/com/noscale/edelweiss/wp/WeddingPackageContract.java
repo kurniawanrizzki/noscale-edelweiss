@@ -12,11 +12,15 @@ import java.util.List;
  */
 public interface WeddingPackageContract {
     interface View extends BaseView<Presenter> {
+        void goToDetail (WeddingPackage wp);
+        void goToPackageCreation ();
+        void delete (WeddingPackage item);
         void appendView (List<WeddingPackage> wps);
         void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
         void getPackages ();
+        void delete (int id);
     }
 }

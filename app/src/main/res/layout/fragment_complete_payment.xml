@@ -7,7 +7,7 @@
     android:padding="@dimen/_17sdp"
     >
 
-    <TextView
+    <com.noscale.edelweiss.common.widget.typography.EdelweissBody1TextView
         android:id="@+id/tv_payment_booking_uploaded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
-    <TextView
+    <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
         android:id="@+id/tv_payment_booking_contact_us"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/ic_whatsapp"
         />
 
-    <TextView
+    <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
         android:id="@+id/tv_payment_booking_click"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
-    <TextView
+    <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
         android:id="@+id/tv_payment_booking_guidance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

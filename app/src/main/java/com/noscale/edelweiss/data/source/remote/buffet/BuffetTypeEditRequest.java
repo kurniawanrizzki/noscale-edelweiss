@@ -1,20 +1,21 @@
-package com.noscale.edelweiss.data;
+package com.noscale.edelweiss.data.source.remote.buffet;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * TODO: Add class header description
- * Created by kurniawanrizzki on 19/08/20.
+ * Created by kurniawanrizzki on 22/08/20.
  */
-public class DetailBuffet {
+public class BuffetTypeEditRequest {
+
     @SerializedName("id")
     @Expose
     private int id;
 
-    @SerializedName("name")
+    @SerializedName("buffetId")
     @Expose
-    private String name;
+    private int buffetId;
 
     public int getId() {
         return id;
@@ -24,11 +25,11 @@ public class DetailBuffet {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getBuffetId() {
+        return buffetId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBuffetId(int buffetId) {
+        this.buffetId = buffetId;
     }
 }

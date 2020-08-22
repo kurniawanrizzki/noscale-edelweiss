@@ -18,6 +18,8 @@ public class EdelweissConstraintLayout extends ConstraintLayout {
 
     private View mProgressView;
 
+    private View mEmptyView;
+
     public EdelweissConstraintLayout(Context context) {
         super(context);
         init(context);
@@ -34,10 +36,11 @@ public class EdelweissConstraintLayout extends ConstraintLayout {
     }
 
     private void init (Context context) {
-        LayoutInflater.from(context).inflate(R.layout.widget_fragment, this);
+        LayoutInflater.from(context).inflate(R.layout.layout_edelweiss_constraint_layout, this);
 
-        mMainView = findViewById(R.id.cl_fragment_container);
-        mProgressView = findViewById(R.id.ll_progress_container);
+        mMainView = findViewById(R.id.cl_layout_container);
+        mProgressView = findViewById(R.id.inc_layout_progress);
+        mEmptyView = findViewById(R.id.inc_layout_empty);
     }
 
     @Override
@@ -48,5 +51,31 @@ public class EdelweissConstraintLayout extends ConstraintLayout {
         }
 
         mMainView.addView(child, index, params);
+    }
+
+    public void showProgressView (boolean isShow) {
+        if (isShow) {
+            mProgressView.setVisibility(VISIBLE);
+            mMainView.setVisibility(GONE);
+
+            return;
+        }
+
+        mProgressView.setVisibility(GONE);
+        mMainView.setVisibility(VISIBLE);
+    }
+
+    public void showEmptyView (boolean isShow) {
+        if (isShow) {
+            mProgressView.setVisibility(GONE);
+            mMainView.setVisibility(GONE);
+            mEmptyView.setVisibility(VISIBLE);
+
+            return;
+        }
+
+        mProgressView.setVisibility(GONE);
+        mMainView.setVisibility(VISIBLE);
+        mEmptyView.setVisibility(GONE);
     }
 }

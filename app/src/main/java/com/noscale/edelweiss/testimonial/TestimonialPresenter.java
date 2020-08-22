@@ -43,11 +43,6 @@ public class TestimonialPresenter implements TestimonialContract.Presenter {
             }
 
             @Override
-            public void onEmptyTestimonial() {
-                mView.showEmptyPage();
-            }
-
-            @Override
             public void onLoadTestimonialFailure(String message) {
                 mView.showErrorMessage(message);
             }

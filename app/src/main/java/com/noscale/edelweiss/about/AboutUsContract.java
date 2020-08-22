@@ -9,10 +9,11 @@ import com.noscale.edelweiss.BaseView;
  */
 public interface AboutUsContract {
     interface View extends BaseView<Presenter> {
-
+        void append (String content);
+        void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
-
+        void loadContent ();
     }
 }

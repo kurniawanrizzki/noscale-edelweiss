@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginLeft="@dimen/_13sdp"
+    android:layout_marginRight="@dimen/_13sdp"
     android:layout_marginBottom="@dimen/_7sdp"
     android:background="@color/cardview_light_background"
     app:cardCornerRadius="@dimen/_4sdp"
@@ -18,7 +20,7 @@
         android:padding="@dimen/_13sdp"
         >
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissSubtitle2TextView
             android:id="@+id/tv_schedule_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +29,7 @@
             tools:text="@tools:sample/lorem"
             />
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
             android:id="@+id/tv_schedule_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,13 +38,24 @@
             tools:text="@tools:sample/lorem"
             />
 
-        <TextView
+        <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
             android:id="@+id/tv_schedule_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@+id/tv_schedule_date"
             app:layout_constraintTop_toBottomOf="@+id/tv_schedule_date"
             tools:text="@tools:sample/lorem"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_schedule_more"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_more"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

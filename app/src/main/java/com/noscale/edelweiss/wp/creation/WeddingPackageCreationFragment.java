@@ -1,7 +1,5 @@
 package com.noscale.edelweiss.wp.creation;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,8 +23,8 @@ import com.noscale.edelweiss.common.widget.DynamicSimpleRecyclerAdapter;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Bonus;
 import com.noscale.edelweiss.data.BuffetType;
+import com.noscale.edelweiss.data.WeddingBuffet;
 import com.noscale.edelweiss.data.WeddingPackageDetail;
-import com.noscale.edelweiss.wp.WeddingPackageActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +33,6 @@ import java.util.List;
  * Created by kurniawanrizzki on 18/08/20.
  */
 public class WeddingPackageCreationFragment extends BaseFragment implements WeddingPackageCreationContract.View {
-
-    private SimpleRecyclerAdapter<WeddingPackageDetail> mWpAdapter;
 
     private DynamicSimpleRecyclerAdapter<Bonus> mBonusAdapter;
 
@@ -47,8 +43,6 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mMainView = view.findViewById(R.id.cl_package_container);
 
         List<Bonus> bonuses = new ArrayList<>();
 
@@ -61,26 +55,37 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
 
         ScrollView svMainView = view.findViewById(R.id.sv_package_container);
         view.findViewById(R.id.b_package_create).setOnClickListener((v) -> {
-            String packageName = tvName.getText().toString();
-            String packagePrice = tvPrice.getText().toString();
-            String totalBuffet = tvTotalBuffet.getText().toString();
-
-            boolean isValidated = UICommon.isInputStringValidated(
-                    packageName,
-                    packagePrice,
-                    totalBuffet
-            );
-
             boolean isPackageDetailIsNotEmpty = ((WeddingPackageCreationContract.Presenter) mPresenter).isDetailPackageNotEmpty();
+            boolean isBuffetDetailIsNotEmpty = ((WeddingPackageCreationContract.Presenter) mPresenter).isBuffetDetailNotEmpty();
+            boolean isEdited = ((WeddingPackageCreationContract.Presenter) mPresenter).isEdited();
 
-            if (!isValidated && !isPackageDetailIsNotEmpty) return;
+            if (!isEdited) {
+                String packageName = tvName.getText().toString();
+                String packagePrice = tvPrice.getText().toString();
+                String totalBuffet = tvTotalBuffet.getText().toString();
 
-            ((WeddingPackageCreationContract.Presenter) mPresenter).submit(
-                    packageName,
-                    packagePrice,
-                    totalBuffet,
-                    mBonusAdapter.getMainData()
-            );
+                boolean isValidated = UICommon.isInputStringValidated(
+                        packageName,
+                        packagePrice,
+                        totalBuffet
+                );
+
+                if (!isValidated && !isPackageDetailIsNotEmpty) return;
+
+                showProgressView(true);
+                ((WeddingPackageCreationContract.Presenter) mPresenter).submit(
+                        packageName,
+                        packagePrice,
+                        totalBuffet,
+                        mBonusAdapter.getMainData()
+                );
+
+                return;
+
+            }
+
+            showProgressView(true);
+            ((WeddingPackageCreationContract.Presenter) mPresenter).edit();
         });
 
         mBonusAdapter = new DynamicSimpleRecyclerAdapter<>(
@@ -123,6 +128,8 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
 
         RecyclerView rvBonus = view.findViewById(R.id.rv_package_bonus);
         rvBonus.setAdapter(mBonusAdapter);
+
+        hideWhenEdit();
     }
 
     @Override
@@ -141,14 +148,35 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
     }
 
     @Override
-    public void appendBuffetType(List<BuffetType> buffetTypes) {
-        ArrayAdapter<BuffetType> adapter = new ArrayAdapter<BuffetType>(getContext(), android.R.layout.simple_spinner_dropdown_item, buffetTypes) {
+    public void appendBuffetType(List<BuffetType> buffetTypes, BuffetType selectedType) {
+        SimpleRecyclerAdapter<WeddingBuffet> wbAdapter = new SimpleRecyclerAdapter<>(new ArrayList<>(), R.layout.item_edelweiss_cb_spinner, (holder,item) -> {
+            View view = holder.itemView;
+            CheckBox cbItem = view.findViewById(R.id.text1);
+            cbItem.setText(item.getName());
+            cbItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        ((WeddingPackageCreationContract.Presenter) mPresenter).addDetailBuffet(item.getId());
+                        return;
+                    }
+
+                    ((WeddingPackageCreationContract.Presenter) mPresenter).removeDetailBuffet(item.getId());
+                }
+            });
+
+            if ((null != selectedType) && (((WeddingPackageCreationContract.Presenter) mPresenter).getBuffetTypeId() == selectedType.getId())) {
+                cbItem.setChecked(selectedType.getDetailBuffets().contains(item));
+            }
+        });
+
+        ArrayAdapter<BuffetType> adapter = new ArrayAdapter<BuffetType>(getContext(), R.layout.item_edelweiss_spinner, R.id.text1, buffetTypes) {
             @Override
             public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 BuffetType type = getItem(position);
                 View view = super.getDropDownView(position, convertView, parent);
 
-                TextView tvText = view.findViewById(android.R.id.text1);
+                TextView tvText = view.findViewById(R.id.text1);
                 tvText.setText(type.getName());
 
                 return view;
@@ -160,21 +188,31 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
                 BuffetType type = getItem(position);
                 View view = super.getView(position, convertView, parent);
 
-                TextView tvText = view.findViewById(android.R.id.text1);
+                TextView tvText = view.findViewById(R.id.text1);
                 tvText.setText(type.getName());
 
                 return view;
             }
         };
 
+        RecyclerView rvBuffetDetail = getView().findViewById(R.id.rv_package_buffet_detail);
         AppCompatSpinner spBuffetType = getView().findViewById(R.id.sp_package_buffet);
+
+        rvBuffetDetail.setAdapter(wbAdapter);
         spBuffetType.setAdapter(adapter);
+
+        if (null != selectedType) {
+            spBuffetType.setSelection(buffetTypes.indexOf(selectedType));
+        }
 
         spBuffetType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 BuffetType type = buffetTypes.get(i);
                 ((WeddingPackageCreationContract.Presenter) mPresenter).setBuffetType(type);
+
+                wbAdapter.setMainData(type.getDetailBuffets());
+                wbAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -182,25 +220,22 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
 
             }
         });
+
+        showProgressView(false);
     }
 
     @Override
-    public void appendPackageDetails(List<WeddingPackageDetail> details) {
-        mWpAdapter = new SimpleRecyclerAdapter<>(details, R.layout.item_form_wp_option, (holder,item) -> {
+    public void appendPackageDetails(List<WeddingPackageDetail> details, List<WeddingPackageDetail> orderDetails) {
+        SimpleRecyclerAdapter<WeddingPackageDetail> wpAdapter = new SimpleRecyclerAdapter<>(details, R.layout.item_form_wp_option, (holder,item) -> {
             View view = holder.itemView;
-
             List<String> itemDetails = item.getDetails();
-
-            SimpleRecyclerAdapter<String> detailsAdapter = new SimpleRecyclerAdapter<>(
-                    itemDetails, android.R.layout.simple_spinner_dropdown_item, (cHolder, cItem) -> {
-                        View cView = cHolder.itemView;
-
-                        TextView tvText = cView.findViewById(android.R.id.text1);
-                        tvText.setText(cItem);
-            });
 
             CheckBox cbMain = view.findViewById(R.id.cb_form_wp_main);
             RecyclerView rvChild = view.findViewById(R.id.rv_form_wp_child);
+
+            if (null != orderDetails) {
+                cbMain.setChecked(orderDetails.contains(item));
+            }
 
             cbMain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -218,6 +253,12 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
 
             cbMain.setText(item.getName());
 
+            SimpleRecyclerAdapter<String> detailsAdapter = new SimpleRecyclerAdapter<>(itemDetails, R.layout.item_edelweiss_spinner, (cHolder, cItem) -> {
+                View cView = cHolder.itemView;
+                TextView tvText = cView.findViewById(R.id.text1);
+                tvText.setText(cItem);
+            });
+
             if ((null != itemDetails) && !itemDetails.isEmpty()) {
                 rvChild.setAdapter(detailsAdapter);
                 return;
@@ -227,31 +268,50 @@ public class WeddingPackageCreationFragment extends BaseFragment implements Wedd
         });
 
         RecyclerView rvWeddingPackageDetail = getView().findViewById(R.id.rv_package_detail);
-        rvWeddingPackageDetail.setAdapter(mWpAdapter);
-
+        rvWeddingPackageDetail.setAdapter(wpAdapter);
+        showProgressView(false);
     }
 
     @Override
     public void showSuccessMessage() {
-        showMessage(getString(R.string.success_txt), getString(R.string.package_success_txt), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
-                Intent intent = new Intent(getContext(), WeddingPackageActivity.class);
-                startActivity(intent);
-            }
+        showMessage(getString(R.string.success_txt), getString(R.string.package_success_txt), (dialogInterface, i) -> {
+            getActivity().setResult(WeddingPackageCreationActivity.RESULT_OK);
+            getActivity().finish();
         });
     }
 
     @Override
     public void showErrorMessage(String message, Runnable runnable) {
-        showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                runnable.run();
-            }
+        showMessage(getString(R.string.error_title_txt), message, (dialogInterface, i) -> runnable.run(), (dialogInterface, i) -> {
+            getActivity().setResult(WeddingPackageCreationActivity.RESULT_CANCELED);
+            getActivity().finish();
         });
+    }
+
+    @Override
+    public void hideWhenEdit() {
+        boolean isEdited = ((WeddingPackageCreationContract.Presenter) mPresenter).isEdited();
+
+        if (!isEdited) return;
+
+        getView().findViewById(R.id.et_package_name).setVisibility(View.GONE);
+        getView().findViewById(R.id.et_package_price).setVisibility(View.GONE);
+        getView().findViewById(R.id.et_package_total).setVisibility(View.GONE);
+        getView().findViewById(R.id.rv_package_bonus).setVisibility(View.GONE);
+        getView().findViewById(R.id.tv_package_bonus).setVisibility(View.GONE);
+        getView().findViewById(R.id.tv_package_buffet_detail).setVisibility(View.VISIBLE);
+        getView().findViewById(R.id.nsv_package_buffet_detail_container).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void showProgressView(boolean isShow) {
+        boolean isDataSuccessFulLoad = ((WeddingPackageCreationContract.Presenter) mPresenter).isSuccessfulLoad();
+
+        if (isDataSuccessFulLoad && !isShow) {
+            super.showProgressView(false);
+            return;
+        }
+
+        super.showProgressView(true);
     }
 }

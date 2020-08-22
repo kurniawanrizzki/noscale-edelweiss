@@ -9,11 +9,10 @@ import com.noscale.edelweiss.data.source.remote.booking.BookingRemoteDataSource;
 import com.noscale.edelweiss.data.source.remote.booking.BookingSubmissionRequest;
 import com.noscale.edelweiss.data.source.remote.category.CategoryRemoteDataSource;
 import com.noscale.edelweiss.data.source.remote.wp.PackageRemoteDataSource;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * TODO: Add class header description
@@ -23,18 +22,19 @@ public class BookingPresenter implements BookingContract.Presenter {
 
     private BookingContract.View mView;
 
-    private final Calendar mCalendar = Calendar.getInstance(Locale.getDefault());
-
-    private final static LinkedHashMap<String, Boolean> APIMap = new LinkedHashMap<>(2);
-
     private boolean mIsDataMissing;
 
-    private final BookingSubmissionRequest mRequest = new BookingSubmissionRequest();
+    private boolean mIsPackageLoad;
 
-    static {
-        APIMap.put("category", false);
-        APIMap.put("package", false);
-    }
+    private boolean mIsCategoryLoad;
+
+    private final Calendar mCalendar = Calendar.getInstance(Locale.getDefault());
+
+    private static final String DATE_FORMAT = "YYYY-MM-dd";
+
+    private static final String TIME_FORMAT = "HH:mm";
+
+    private final BookingSubmissionRequest mRequest = new BookingSubmissionRequest();
 
     public BookingPresenter (BookingContract.View view, boolean isDataMissing) {
         view.setPresenter(this);
@@ -57,23 +57,30 @@ public class BookingPresenter implements BookingContract.Presenter {
     }
 
     @Override
-    public void submit(int userId, String address, String phoneNumber, String eventDate, String eventTime, String bookingFee) {
+    public void submit(int userId, String address, String phoneNumber, String eventDate, String eventTime, Float bookingFee) {
 
         mRequest.setUserId(userId);
         mRequest.setAddress(address);
         mRequest.setPhoneNumber(phoneNumber);
         mRequest.setEventDateTime(eventDate+" "+eventTime);
-        mRequest.setBookingFee(Float.parseFloat(bookingFee));
+        mRequest.setBookingFee(bookingFee);
 
         BookingRemoteDataSource.getInstance().submit(mRequest, new BookingDataSource.PostCallback() {
             @Override
             public void onSuccess() {
-                mView.completeBooking();
+                mView.goToCompletionBooking();
             }
 
             @Override
             public void onFailure(String message) {
-                mView.showErrorMessage(message);
+                mView.showErrorMessage(message, () -> submit(
+                        userId,
+                        address,
+                        phoneNumber,
+                        eventDate,
+                        eventTime,
+                        bookingFee
+                ));
             }
         });
     }
@@ -90,66 +97,75 @@ public class BookingPresenter implements BookingContract.Presenter {
 
     @Override
     public void getCategories() {
-        boolean isCategoryDone = APIMap.get("category");
-
-        if (isCategoryDone) return;
+        mIsCategoryLoad = false;
 
         CategoryRemoteDataSource.getInstance().getList(new CategoryDataSource.GetLoadCallback() {
             @Override
             public void onLoadCategory(List<Category> categories) {
-                boolean isDone = false;
-                APIMap.put("category", true);
-
-                for (Map.Entry<String, Boolean> entry : APIMap.entrySet()) {
-                    isDone = entry.getValue();
-                }
-
-                if (isDone) {
-                    mView.notifyProgressDone();
-                }
-
+                mIsCategoryLoad = true;
                 mView.appendCategory(categories);
             }
 
             @Override
             public void onFailureCategory(String message) {
-                mView.showSingleErrorMessage(message);
+                mIsCategoryLoad = true;
+                mView.showErrorMessage(message, () -> {
+                    getCategories();
+                    getPackages();
+                });
             }
         });
     }
 
     @Override
     public void getPackages() {
-        boolean isPackageDone = APIMap.get("package");
-
-        if (isPackageDone) return;
+        mIsPackageLoad = false;
 
         PackageRemoteDataSource.getInstance().getList(new PackageDataSource.GetLoadCallback() {
             @Override
             public void onLoadWeddingPackages(List<WeddingPackage> packages) {
-                boolean isDone = false;
-                APIMap.put("package", true);
-
-                for (Map.Entry<String, Boolean> entry : APIMap.entrySet()) {
-                    isDone = entry.getValue();
-                }
-
-                if (isDone) {
-                    mView.notifyProgressDone();
-                }
-
+                mIsPackageLoad = true;
                 mView.appendPackage(packages);
             }
 
             @Override
             public void onFailureWeddingPackages(String message) {
-                mView.showSingleErrorMessage(message);
+                mIsPackageLoad = true;
+                mView.showErrorMessage(message, () -> {
+                    getCategories();
+                    getPackages();
+                });
             }
         });
     }
 
     @Override
-    public Calendar getCalendar() {
-        return mCalendar;
+    public void setTimeInput(int hour, int minutes) {
+        mCalendar.set(Calendar.HOUR_OF_DAY, hour);
+        mCalendar.set(Calendar.MINUTE, minutes);
+    }
+
+    @Override
+    public String getTimeInput () {
+        SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
+        return sdf.format(mCalendar.getTime());
+    }
+
+    @Override
+    public void setDateInput(int year, int month, int day) {
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, day);
+    }
+
+    @Override
+    public String getDateInput() {
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+        return sdf.format(mCalendar.getTime());
+    }
+
+    @Override
+    public boolean isDataSuccessfulLoad() {
+        return mIsCategoryLoad && mIsPackageLoad;
     }
 }

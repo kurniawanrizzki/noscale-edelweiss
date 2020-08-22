@@ -2,6 +2,7 @@ package com.noscale.edelweiss.data.source;
 
 import com.noscale.edelweiss.data.WeddingPackage;
 import com.noscale.edelweiss.data.WeddingPackageDetail;
+import com.noscale.edelweiss.data.source.remote.wp.PackageEditRequest;
 import com.noscale.edelweiss.data.source.remote.wp.PackageSubmissionRequest;
 
 import java.util.List;
@@ -32,4 +33,8 @@ public interface PackageDataSource {
     void getPackageDetails (GetLoadPackageDetailsCallback callback);
 
     void submit (PackageSubmissionRequest request, PostCallback callback);
+
+    void edit (PackageEditRequest request, PostCallback callback);
+
+    void delete (int id, PostCallback callback);
 }

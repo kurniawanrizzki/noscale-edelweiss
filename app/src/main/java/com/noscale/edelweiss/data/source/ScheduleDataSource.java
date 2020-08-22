@@ -11,9 +11,15 @@ public interface ScheduleDataSource {
 
     interface GetLoadCallback {
         void onLoadSchedule (List<Schedule> schedules);
-        void onEmptySchedule ();
         void onLoadScheduleFailure (String message);
     }
 
+    interface PostStatusUpdateCallback {
+        void onSuccessUpdate ();
+        void onErrorUpdate (String message);
+    }
+
     void getList (GetLoadCallback callback);
+
+    void update (int id, String status, PostStatusUpdateCallback callback);
 }

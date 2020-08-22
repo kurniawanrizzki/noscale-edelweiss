@@ -1,14 +1,10 @@
 package com.noscale.edelweiss.wp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
@@ -16,6 +12,7 @@ import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.data.WeddingPackage;
 import com.noscale.edelweiss.wp.creation.WeddingPackageCreationActivity;
+import com.noscale.edelweiss.wp.details.WeddingPackageDetailActivity;
 import java.util.List;
 
 /**
@@ -31,28 +28,13 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mMainView = view.findViewById(R.id.rv_fragment_list);
-        mEmptyView = view.findViewById(R.id.inc_fragment_empty);
-
-        TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
-        FloatingActionButton bCreation = view.findViewById(R.id.fab_fragment_create);
-
-        tvTitle.setText(getString(R.string.package_txt));
-
-        bCreation.setOnClickListener((v) -> {
-            Intent i = new Intent(getContext(), WeddingPackageCreationActivity.class);
-            startActivity(i);
-        });
-
-        showProgressView(true);
+    protected int getResLayout() {
+        return R.layout.layout_fragment_list;
     }
 
     @Override
-    protected int getResLayout() {
-        return R.layout.widget_fragment_with_title;
+    protected View.OnClickListener getFabClickedListener() {
+        return (v) -> goToPackageCreation();
     }
 
     @Override
@@ -67,23 +49,46 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
     }
 
     @Override
+    public void goToDetail(WeddingPackage wp) {
+        Intent i = new Intent(getContext(), WeddingPackageDetailActivity.class);
+        i.putExtra(WeddingPackageDetailActivity.DETAIL_ARG, wp);
+        startActivity(i);
+    }
+
+    @Override
+    public void goToPackageCreation() {
+        Intent i = new Intent(getContext(), WeddingPackageCreationActivity.class);
+        startActivityForResult(i, WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE);
+    }
+
+    @Override
+    public void delete(WeddingPackage item) {
+        showMessage(getString(R.string.warning_title_txt), getString(R.string.deletion_txt), (dialogInterface, i) -> {
+            showProgressView(true);
+            ((WeddingPackageContract.Presenter) mPresenter).delete(item.getId());
+        }, (dialogInterface, i) -> {
+
+        });
+    }
+
+    @Override
     public void appendView(List<WeddingPackage> wps) {
         showProgressView(false);
-
-        if (wps.isEmpty()) {
-            mMainView.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-            return;
-        }
+        showEmptyView(wps.isEmpty());
 
         mAdapter = new SimpleRecyclerAdapter<>(wps, R.layout.item_wedding_package, new SimpleRecyclerAdapter.OnViewHolder<WeddingPackage>() {
             @Override
             public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, WeddingPackage item) {
                 TextView tvName = holder.itemView.findViewById(R.id.tv_wp_name);
                 TextView tvPrice = holder.itemView.findViewById(R.id.tv_wp_price);
+                TextView tvDetail = holder.itemView.findViewById(R.id.tv_wp_detail);
+                TextView tvDeletion = holder.itemView.findViewById(R.id.tv_wp_deletion);
 
                 tvName.setText(item.getName());
                 tvPrice.setText(item.getPrice());
+
+                tvDeletion.setOnClickListener((v) -> delete(item));
+                tvDetail.setOnClickListener((v) -> goToDetail(item));
             }
         });
 
@@ -93,14 +98,22 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
 
     @Override
     public void showErrorMessage(String message) {
-        showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+        showMessage(getString(R.string.error_title_txt), message, (dialogInterface, i) -> {
+            showProgressView(true);
+            ((WeddingPackageContract.Presenter) mPresenter).getPackages();
+        }, ((dialogInterface, i) -> getActivity().finish()
+        ));
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE) {
+            if (resultCode == WeddingPackageCreationActivity.RESULT_OK) {
                 showProgressView(true);
                 ((WeddingPackageContract.Presenter) mPresenter).getPackages();
             }
-        });
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

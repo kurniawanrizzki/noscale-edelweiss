@@ -1,26 +1,24 @@
 package com.noscale.edelweiss.gallery;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
+import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.Gallery;
 import com.noscale.edelweiss.data.User;
 import com.noscale.edelweiss.gallery.creation.GalleryCreationActivity;
 import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.util.List;
 
@@ -32,31 +30,36 @@ public class GalleryFragment extends BaseFragment  implements GalleryContract.Vi
 
     private SimpleRecyclerAdapter<Gallery> mAdapter;
 
+    private PopupMenu mFilterMenu;
+
     public static GalleryFragment newInstance () {
         return new GalleryFragment();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        mMainView = view.findViewById(R.id.rv_fragment_list);
-        mEmptyView = view.findViewById(R.id.inc_fragment_empty);
+        TextView tvActionTool = getActivity().findViewById(R.id.tv_action_bar_tool);
+        tvActionTool.setText(R.string.filter_txt);
+        tvActionTool.setVisibility(View.VISIBLE);
+        tvActionTool.setOnClickListener((v) -> mFilterMenu.show());
 
-        TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
-        FloatingActionButton fabCreation = view.findViewById(R.id.fab_fragment_create);
-        tvTitle.setText(getString(R.string.gallery_txt));
-        fabCreation.setOnClickListener((v) -> {
-            Intent i = new Intent(getContext(), GalleryCreationActivity.class);
-            startActivity(i);
+        mFilterMenu = new PopupMenu(getContext(), tvActionTool);
+        mFilterMenu.getMenu().add("All");
+
+        mFilterMenu.setOnMenuItemClickListener((menuItem) -> {
+            showProgressView(true);
+
+            String title = menuItem.getTitle().toString();
+            ((GalleryContract.Presenter) mPresenter).filter(title);
+            return false;
         });
-
-        showProgressView(true);
     }
 
     @Override
     protected int getResLayout() {
-        return R.layout.widget_fragment_with_title;
+        return R.layout.layout_fragment_list;
     }
 
     @Override
@@ -66,13 +69,32 @@ public class GalleryFragment extends BaseFragment  implements GalleryContract.Vi
     }
 
     @Override
+    protected View.OnClickListener getFabClickedListener() {
+        return (v) -> goToGalleryCreation();
+    }
+
+    @Override
     public void setPresenter(GalleryContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
     @Override
+    public void goToGalleryCreation() {
+        Intent i = new Intent(getContext(), GalleryCreationActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void addToFilter(List<Category> categories) {
+        for (Category c : categories) {
+            mFilterMenu.getMenu().add(1, c.getId(), c.getId(), c.getName());
+        }
+    }
+
+    @Override
     public void append(List<Gallery> galleries) {
         showProgressView(false);
+        showEmptyView(galleries.isEmpty());
 
         mAdapter = new SimpleRecyclerAdapter<>(galleries, R.layout.item_gallery, new SimpleRecyclerAdapter.OnViewHolder<Gallery>() {
             @Override
@@ -97,15 +119,22 @@ public class GalleryFragment extends BaseFragment  implements GalleryContract.Vi
     }
 
     @Override
-    public void showErrorMessage(String message) {
-        showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == GalleryCreationActivity.GALLERY_CREATION_REQUEST_CODE) {
+            if (resultCode == GalleryCreationActivity.RESULT_OK) {
                 showProgressView(true);
                 ((GalleryContract.Presenter) mPresenter).fetch();
             }
-        });
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        showMessage(getString(R.string.error_title_txt), message, (dialogInterface, i) -> {
+            showProgressView(true);
+            ((GalleryContract.Presenter) mPresenter).fetch();
+        }, (dialogInterface, i) -> getActivity().finish());
     }
 }

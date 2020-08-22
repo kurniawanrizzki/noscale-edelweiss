@@ -29,7 +29,7 @@ public class TestimonialCreateFragment extends BaseFragment implements Testimoni
         super.onViewCreated(view, savedInstanceState);
 
         mMainView = view.findViewById(R.id.cl_testimonial_container);
-        mProgressView = view.findViewById(R.id.inc_fragment_progress);
+        mProgressView = view.findViewById(R.id.inc_layout_progress);
 
         TextView tvContent = view.findViewById(R.id.et_testimonial_content);
         TextView tvTitle = view.findViewById(R.id.tv_fragment_title);
@@ -73,8 +73,6 @@ public class TestimonialCreateFragment extends BaseFragment implements Testimoni
         showMessage(getString(R.string.success_txt), getString(R.string.testimonial_success_txt), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
                 Intent intent = new Intent(getContext(), TestimonialActivity.class);
                 startActivity(intent);
             }
@@ -86,7 +84,6 @@ public class TestimonialCreateFragment extends BaseFragment implements Testimoni
         showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
                 runnable.run();
             }
         });
