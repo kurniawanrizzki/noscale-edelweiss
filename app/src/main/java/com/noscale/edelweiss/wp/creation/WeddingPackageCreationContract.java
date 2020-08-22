@@ -37,6 +37,7 @@ public interface WeddingPackageCreationContract {
         void submit (String packageName, String packagePrice, String totalBuffet, List<Bonus> bonuses);
         void edit ();
         boolean isSuccessfulLoad ();
+        boolean isSuccessfulEdited ();
         boolean isEdited ();
     }
 }

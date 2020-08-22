@@ -41,6 +41,12 @@ public class WeddingPackageCreationPresenter implements WeddingPackageCreationCo
 
     private boolean mIsBuffetLoad;
 
+    private boolean mIsPackageEdited;
+
+    private boolean mIsBuffetTypeEdited;
+
+    private boolean mIsBuffetDetailsEdited;
+
     private WeddingPackage mWeddingPackage;
 
     public WeddingPackageCreationPresenter (WeddingPackageCreationContract.View view, WeddingPackage weddingPackage, boolean isDataMissing) {
@@ -95,46 +101,72 @@ public class WeddingPackageCreationPresenter implements WeddingPackageCreationCo
         mBuffetDetailsEditRequest.setId(mWeddingPackage.getBuffetId());
         mBuffetDetailsEditRequest.setDetailBuffetIds(mInputDetailBuffets.toArray(new Integer[mInputDetailBuffets.size()]));
 
-        PackageRemoteDataSource.getInstance().edit(mEditRequest, new PackageDataSource.PostCallback() {
-            @Override
-            public void onSuccess() {
-                mView.showSuccessMessage();
-            }
+        if (!mIsPackageEdited) {
+            PackageRemoteDataSource.getInstance().edit(mEditRequest, new PackageDataSource.PostCallback() {
+                @Override
+                public void onSuccess() {
+                    mIsPackageEdited = true;
 
-            @Override
-            public void onError(String message) {
-                mView.showErrorMessage(message, () -> edit());
-            }
-        });
+                    if (isSuccessfulEdited()) {
+                        mView.showSuccessMessage();
+                    }
+                }
 
-        BuffetRemoteDataSource.getInstance().editBuffetType(mBuffetEditRequest, new BuffetDataSource.PostCallback() {
-            @Override
-            public void onSuccess() {
-                mView.showSuccessMessage();
-            }
+                @Override
+                public void onError(String message) {
+                    mIsPackageEdited = false;
+                    mView.showErrorMessage(message, () -> edit());
+                }
+            });
+        }
 
-            @Override
-            public void onError(String message) {
-                mView.showErrorMessage(message, () -> edit());
-            }
-        });
+        if (!mIsBuffetTypeEdited) {
+            BuffetRemoteDataSource.getInstance().editBuffetType(mBuffetEditRequest, new BuffetDataSource.PostCallback() {
+                @Override
+                public void onSuccess() {
+                    mIsBuffetTypeEdited = true;
 
-        BuffetRemoteDataSource.getInstance().editBuffetDetails(mBuffetDetailsEditRequest, new BuffetDataSource.PostCallback() {
-            @Override
-            public void onSuccess() {
-                mView.showSuccessMessage();
-            }
+                    if (isSuccessfulEdited()) {
+                        mView.showSuccessMessage();
+                    }
+                }
 
-            @Override
-            public void onError(String message) {
-                mView.showErrorMessage(message, () -> edit());
-            }
-        });
+                @Override
+                public void onError(String message) {
+                    mIsBuffetTypeEdited = false;
+                    mView.showErrorMessage(message, () -> edit());
+                }
+            });
+        }
+
+        if (!mIsBuffetDetailsEdited) {
+            BuffetRemoteDataSource.getInstance().editBuffetDetails(mBuffetDetailsEditRequest, new BuffetDataSource.PostCallback() {
+                @Override
+                public void onSuccess() {
+                    mIsBuffetDetailsEdited = true;
+
+                    if (isSuccessfulEdited()) {
+                        mView.showSuccessMessage();
+                    }
+                }
+
+                @Override
+                public void onError(String message) {
+                    mIsBuffetDetailsEdited = false;
+                    mView.showErrorMessage(message, () -> edit());
+                }
+            });
+        }
     }
 
     @Override
     public boolean isSuccessfulLoad() {
         return mIsBuffetLoad &&  mIsPackageLoad;
+    }
+
+    @Override
+    public boolean isSuccessfulEdited() {
+        return mIsPackageEdited && mIsBuffetDetailsEdited && mIsBuffetTypeEdited;
     }
 
     @Override

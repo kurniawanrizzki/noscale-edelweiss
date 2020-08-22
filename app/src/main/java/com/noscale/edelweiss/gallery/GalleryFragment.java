@@ -2,6 +2,7 @@ package com.noscale.edelweiss.gallery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -87,6 +88,9 @@ public class GalleryFragment extends BaseFragment  implements GalleryContract.Vi
     @Override
     public void addToFilter(List<Category> categories) {
         for (Category c : categories) {
+            MenuItem item = mFilterMenu.getMenu().findItem(c.getId());
+            if (null != item) continue;
+
             mFilterMenu.getMenu().add(1, c.getId(), c.getId(), c.getName());
         }
     }

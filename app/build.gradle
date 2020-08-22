@@ -15,7 +15,7 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 
-        buildConfigField("String","APP_HOST","\"192.168.1.22\"")
+        buildConfigField("String","APP_HOST","\"192.168.56.1\"")
         buildConfigField("int", "APP_PORT", "6666")
     }
 

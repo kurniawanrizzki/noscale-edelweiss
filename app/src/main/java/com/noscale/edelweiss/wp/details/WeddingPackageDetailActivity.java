@@ -11,6 +11,8 @@ import com.noscale.edelweiss.data.WeddingPackage;
  */
 public class WeddingPackageDetailActivity extends BaseActivity {
 
+    public static final int DETAIL_REQUEST_CODE = 700;
+
     public static final String DETAIL_ARG = "DETAIL_ARG";
 
     @Override

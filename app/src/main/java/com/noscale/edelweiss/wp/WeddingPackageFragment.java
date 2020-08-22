@@ -52,7 +52,7 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
     public void goToDetail(WeddingPackage wp) {
         Intent i = new Intent(getContext(), WeddingPackageDetailActivity.class);
         i.putExtra(WeddingPackageDetailActivity.DETAIL_ARG, wp);
-        startActivity(i);
+        startActivityForResult(i, WeddingPackageDetailActivity.DETAIL_REQUEST_CODE);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class WeddingPackageFragment extends BaseFragment implements WeddingPacka
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE) {
+        if ((requestCode == WeddingPackageCreationActivity.WEDDING_PACKAGE_CREATION_REQUEST_CODE) || requestCode == WeddingPackageDetailActivity.DETAIL_REQUEST_CODE) {
             if (resultCode == WeddingPackageCreationActivity.RESULT_OK) {
                 showProgressView(true);
                 ((WeddingPackageContract.Presenter) mPresenter).getPackages();
