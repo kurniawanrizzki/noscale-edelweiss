@@ -1,7 +1,10 @@
 package com.noscale.edelweiss.dashboard;
 
+import com.noscale.edelweiss.BaseActivity;
 import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
+import com.noscale.edelweiss.data.Module;
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -13,6 +16,6 @@ public interface DashboardContract {
     }
 
     interface Presenter extends BasePresenter {
-
+        List<Module> getAvailableModules (BaseActivity activity);
     }
 }

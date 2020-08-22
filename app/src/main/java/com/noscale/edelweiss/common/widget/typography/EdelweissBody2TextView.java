@@ -25,6 +25,6 @@ public class EdelweissBody2TextView extends EdelweissTextView {
 
     @Override
     protected int getAppliedStyle() {
-        return R.style.AppTheme_Body2;
+        return R.style.AppTheme_TextAppearance_Body2;
     }
 }

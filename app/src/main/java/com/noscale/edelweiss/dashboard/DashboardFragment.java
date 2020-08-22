@@ -7,14 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.noscale.edelweiss.BaseActivity;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
-import com.noscale.edelweiss.common.ModuleCommon;
-import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Module;
+import java.util.List;
 
 /**
  * TODO: Add class header description
@@ -32,27 +31,20 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mAdapter = new SimpleRecyclerAdapter<>(ModuleCommon.getModules(getContext()), R.layout.item_module, new SimpleRecyclerAdapter.OnViewHolder<Module>() {
-            @Override
-            public void onBindView(SimpleRecyclerAdapter.SimpleViewHolder holder, Module item) {
-                AppCompatImageView ivIcon = holder.itemView.findViewById(R.id.iv_module_icon);
-                TextView tvTitle = holder.itemView.findViewById(R.id.tv_module_title);
+        List<Module> availableModules = ((DashboardContract.Presenter) mPresenter).getAvailableModules((BaseActivity) getActivity());
 
-                ivIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getIcon()));
-                tvTitle.setText(item.getTitle());
+        mAdapter = new SimpleRecyclerAdapter<>(availableModules, R.layout.item_module, (holder, item) -> {
+            AppCompatImageView ivIcon = holder.itemView.findViewById(R.id.iv_module_icon);
+            TextView tvTitle = holder.itemView.findViewById(R.id.tv_module_title);
 
-                holder.itemView.setOnClickListener(item.getListener());
-            }
+            ivIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), item.getIcon()));
+            tvTitle.setText(item.getTitle());
+
+            holder.itemView.setOnClickListener(item.getListener());
         });
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         RecyclerView rvModule = view.findViewById(R.id.rv_dashboard_modules);
-        TextView tvSubTitle = view.findViewById(R.id.tv_dashboard_subtitle);
-
-        rvModule.setLayoutManager(layoutManager);
         rvModule.setAdapter(mAdapter);
-
-        tvSubTitle.setText(AppConfiguration.getInstance(getContext()).getAuthenticatedUserName());
     }
 
     @Override

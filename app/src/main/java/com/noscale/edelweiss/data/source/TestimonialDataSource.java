@@ -12,7 +12,6 @@ public interface TestimonialDataSource {
 
     interface GetLoadCallback {
         void onLoadTestimonial (List<Testimonial> testimonials);
-        void onEmptyTestimonial ();
         void onLoadTestimonialFailure (String message);
     }
 

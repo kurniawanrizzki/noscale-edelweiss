@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.noscale.edelweiss.common.UICommon;
+import com.noscale.edelweiss.common.widget.EdelweissConstraintLayout;
 
 /**
  * TODO: Add class header description
@@ -16,11 +18,13 @@ import com.noscale.edelweiss.common.UICommon;
  */
 public abstract class BaseFragment extends Fragment {
 
+    private EdelweissConstraintLayout mView;
+
+    protected FloatingActionButton mFab;
+
     protected View mMainView;
 
     protected View mProgressView;
-
-    protected View mEmptyView;
 
     protected BasePresenter mPresenter;
 
@@ -42,10 +46,18 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMainView = view.findViewById(R.id.cl_fragment_container);
-        mProgressView = view.findViewById(R.id.inc_fragment_progress);
+        if (getView() instanceof EdelweissConstraintLayout) {
+            mView = (EdelweissConstraintLayout) getView();
+        } else {
+            mView = view.findViewById(R.id.cl_fragment_container);
+        }
 
-        setViewByAccessType(view.findViewById(R.id.fab_fragment_create));
+        mFab = view.findViewById(R.id.fab_fragment_create);
+        if (null != mFab) mFab.setOnClickListener(getFabClickedListener());
+
+        setViewByAccessType(mFab);
+
+        initialLoad();
     }
 
     @Override
@@ -59,9 +71,42 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getResLayout ();
 
+    protected View.OnClickListener getFabClickedListener () {
+        return null;
+    };
+
     protected void showProgressView(boolean isShow) {
         isProgressShown = isShow;
-        UICommon.showProgressView(mMainView, mProgressView, isShow);
+
+        showFab(!isShow);
+        mView.showProgressView(isShow);
+    }
+
+    protected void showEmptyView (boolean isShow) {
+        showFab(isShow);
+        mView.showEmptyView(isShow);
+    }
+
+    private void showFab (boolean isShow) {
+        if (null == mFab) return;
+
+        if (isShow && isAccessTypeAccepted()) {
+            mFab.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (!isProgressShown && isAccessTypeAccepted()) {
+            showFab(true);
+            return;
+        }
+
+        mFab.setVisibility(View.GONE);
+    }
+
+    private void initialLoad () {
+        if ((null != mPresenter) && mPresenter.isDataMissing()) {
+            showProgressView(true);
+        }
     }
 
     protected void showMessage(String title, String message) {
@@ -70,7 +115,12 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showMessage(String title, String message, DialogInterface.OnClickListener listener) {
         showProgressView(false);
-        UICommon.showDialog(getContext(), title, message, listener);
+        showMessage(title, message, listener, null);
+    }
+
+    protected void showMessage(String title, String message, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
+        showProgressView(false);
+        UICommon.showDialog(getContext(), title, message, positiveListener, negativeListener);
     }
 
     protected void setViewByAccessType (View view) {

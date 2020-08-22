@@ -23,7 +23,7 @@ public class PaymentSubmissionRequest {
 
     @SerializedName("amount")
     @Expose
-    private float amount;
+    private String amount;
 
     public int getPaymentTypeId() {
         return paymentTypeId;
@@ -49,11 +49,11 @@ public class PaymentSubmissionRequest {
         this.receipt = receipt;
     }
 
-    public float getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }

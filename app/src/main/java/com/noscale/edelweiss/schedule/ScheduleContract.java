@@ -13,11 +13,11 @@ import java.util.List;
 public interface ScheduleContract {
     interface View extends BaseView<Presenter> {
         void showPage (List<Schedule> schedules);
-        void showEmptyPage ();
         void showErrorMessage (String message);
     }
 
     interface Presenter extends BasePresenter {
         void fetch ();
+        void update (int id, String status);
     }
 }

@@ -1,18 +1,16 @@
 package com.noscale.edelweiss.booking;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -23,20 +21,13 @@ import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.WeddingPackage;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * TODO: Add class header description
  * Created by kurniawanrizzki on 16/08/20.
  */
 public class BookingFragment extends BaseFragment implements BookingContract.View {
-
-    private ArrayAdapter<WeddingPackage> mWpAdapter;
-
-    private ArrayAdapter<Category> mCategoryAdapter;
 
     public static BookingFragment newInstance () {
         return new BookingFragment();
@@ -46,113 +37,82 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMainView = view.findViewById(R.id.cl_booking_container);
+        BookingContract.Presenter p = (BookingContract.Presenter) mPresenter;
 
         EditText tvAddress = view.findViewById(R.id.et_booking_address);
         EditText tvPhoneNumber = view.findViewById(R.id.et_booking_phone);
         EditText tvEventDate = view.findViewById(R.id.et_booking_date);
         EditText tvEventTime = view.findViewById(R.id.et_booking_time);
-        EditText tvBookingFee = view.findViewById(R.id.et_booking_fee);
 
-        view.findViewById(R.id.b_booking_submit).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int userId = AppConfiguration.getInstance(getContext()).getAuthenticatedId();
-                        String address = tvAddress.getText().toString();
-                        String phoneNumber = tvPhoneNumber.getText().toString();
-                        String eventDate = tvEventDate.getText().toString();
-                        String eventTime = tvEventTime.getText().toString();
-                        String bookingFee = tvBookingFee.getText().toString();
+        view.findViewById(R.id.b_booking_submit).setOnClickListener((v) -> {
+            int userId = AppConfiguration.getInstance(getContext()).getAuthenticatedId();
+            String address = tvAddress.getText().toString();
+            String phoneNumber = tvPhoneNumber.getText().toString();
+            String eventDate = tvEventDate.getText().toString();
+            String eventTime = tvEventTime.getText().toString();
 
-                        boolean isValidated = UICommon.isInputStringValidated(
-                                address,
-                                phoneNumber,
-                                eventDate,
-                                eventTime,
-                                bookingFee
-                        );
+            boolean isValidated = UICommon.isInputStringValidated(
+                    address,
+                    phoneNumber,
+                    eventDate,
+                    eventTime
+            );
 
-                        if (!isValidated) return;
+            if (!isValidated) return;
 
-                        showProgressView(true);
-                        ((BookingContract.Presenter) mPresenter).submit(
-                                userId,
-                                address,
-                                phoneNumber,
-                                eventDate,
-                                eventTime,
-                                bookingFee
-                        );
-                    }
-                }
-        );
-
-        BookingContract.Presenter p = (BookingContract.Presenter) mPresenter;
-
-        String myFormat = "YYYY-MM-dd"; //In which you need put here
-        int hourOfDay = p.getCalendar().get(Calendar.HOUR_OF_DAY);
-        int minutes = p.getCalendar().get(Calendar.MINUTE);
-
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-
-        tvEventDate.setText(sdf.format(p.getCalendar().getTime()));
-        tvEventTime.setText(hourOfDay+":"+minutes);
-
-        DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
-                p.getCalendar().set(Calendar.YEAR, i);
-                p.getCalendar().set(Calendar.MONTH, i1);
-                p.getCalendar().set(Calendar.DAY_OF_MONTH, i2);
-
-                String myFormat = "YYYY-MM-dd"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-
-                tvEventDate.setText(sdf.format(p.getCalendar().getTime()));
-            }
-        };
-
-        TimePickerDialog.OnTimeSetListener timeListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                p.getCalendar().set(Calendar.HOUR_OF_DAY, i);
-                p.getCalendar().set(Calendar.MINUTE, i1);
-
-                tvEventTime.setText(i+":"+i1);
-            }
-        };
-
-        tvEventTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new TimePickerDialog(
-                        getContext(),
-                        timeListener,
-                        p.getCalendar().get(Calendar.HOUR_OF_DAY),
-                        p.getCalendar().get(Calendar.MINUTE),
-                        true
-                        ).show();
-            }
+            showProgressView(true);
+            p.submit(
+                    userId,
+                    address,
+                    phoneNumber,
+                    eventDate,
+                    eventTime,
+                    0F
+            );
         });
 
+        DatePickerDialog.OnDateSetListener dateListener = (datePicker, i, i1, i2) -> {
+            p.setDateInput(i, i1, i2);
+            String date = p.getDateInput();
 
-        tvEventDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BookingContract.Presenter p = (BookingContract.Presenter) mPresenter;
+            tvEventDate.setText(date);
+        };
 
-                int year = p.getCalendar().get(Calendar.YEAR);
-                int month = p.getCalendar().get(Calendar.MONTH);
-                int dayOfMonth = p.getCalendar().get(Calendar.DAY_OF_MONTH);
+        TimePickerDialog.OnTimeSetListener timeListener = (timePicker, i, i1) -> {
+            p.setTimeInput(i,i1);
+            String time = p.getTimeInput();
 
-                new DatePickerDialog(getContext(), dateListener, year, month, dayOfMonth)
-                        .show();
-            }
+            tvEventTime.setText(time);
+        };
+
+        tvEventTime.setOnClickListener((v) -> {
+            String[] timeArray = p.getTimeInput().split(":");
+
+            int hour = Integer.parseInt(timeArray[0]);
+            int minutes = Integer.parseInt(timeArray[1]);
+
+            new TimePickerDialog(
+                    getContext(),
+                    timeListener,
+                    hour,
+                    minutes,
+                    true
+            ).show();
         });
 
-        showProgressView(true);
+        tvEventDate.setOnClickListener((v) -> {
+            String[] dateArray = p.getDateInput().split("-");
+
+            int year = Integer.parseInt(dateArray[0]);
+            int month = Integer.parseInt(dateArray[1]);
+            int dayOfMonth = Integer.parseInt(dateArray[2]);
+
+            new DatePickerDialog(getContext(), dateListener, year, month, dayOfMonth)
+                    .show();
+        });
+
+        tvEventDate.setText(p.getDateInput());
+        tvEventTime.setText(p.getTimeInput());
     }
 
     @Override
@@ -171,16 +131,18 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
     }
 
     @Override
-    public void completeBooking() {
+    public void goToCompletionBooking() {
         showProgressView(false);
 
         Intent i = new Intent(getContext(), CompleteBookingActivity.class);
-        startActivity(i);
+        startActivityForResult(i, CompleteBookingActivity.COMPLETE_BOOKING_REQUEST_CODE);
     }
 
     @Override
     public void appendCategory(List<Category> categories) {
-        mCategoryAdapter = new ArrayAdapter<Category>(getContext(), android.R.layout.simple_spinner_dropdown_item, categories) {
+        AppCompatSpinner spCategory = getView().findViewById(R.id.sp_booking_category);
+
+        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(getContext(), R.layout.item_edelweiss_spinner, R.id.text1, categories) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -188,7 +150,7 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
                 Category type = categories.get(position);
 
-                TextView tvTitle = view.findViewById(android.R.id.text1);
+                TextView tvTitle = view.findViewById(R.id.text1);
                 tvTitle.setText(type.getName());
 
                 return view;
@@ -200,15 +162,12 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
                 Category type = categories.get(position);
 
-                TextView tvTitle = view.findViewById(android.R.id.text1);
+                TextView tvTitle = view.findViewById(R.id.text1);
                 tvTitle.setText(type.getName());
 
                 return view;
             }
         };
-
-        AppCompatSpinner spCategory = getView().findViewById(R.id.sp_booking_category);
-        spCategory.setAdapter(mCategoryAdapter);
 
         spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -222,11 +181,16 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
             }
         });
+
+        spCategory.setAdapter(categoryAdapter);
+        showProgressView(false);
     }
 
     @Override
     public void appendPackage(List<WeddingPackage> packages) {
-        mWpAdapter = new ArrayAdapter<WeddingPackage>(getContext(), android.R.layout.simple_spinner_dropdown_item, packages) {
+        AppCompatSpinner spWeddingPackage = getView().findViewById(R.id.sp_booking_package);
+
+        ArrayAdapter<WeddingPackage> wpAdapter = new ArrayAdapter<WeddingPackage>(getContext(), R.layout.item_edelweiss_spinner, R.id.text1, packages) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -234,7 +198,7 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
                 WeddingPackage type = packages.get(position);
 
-                TextView tvTitle = view.findViewById(android.R.id.text1);
+                TextView tvTitle = view.findViewById(R.id.text1);
                 tvTitle.setText(type.getName());
 
                 return view;
@@ -246,15 +210,12 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
                 WeddingPackage type = packages.get(position);
 
-                TextView tvTitle = view.findViewById(android.R.id.text1);
+                TextView tvTitle = view.findViewById(R.id.text1);
                 tvTitle.setText(type.getName());
 
                 return view;
             }
         };
-
-        AppCompatSpinner spWeddingPackage = getView().findViewById(R.id.sp_booking_package);
-        spWeddingPackage.setAdapter(mWpAdapter);
 
         spWeddingPackage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -268,32 +229,45 @@ public class BookingFragment extends BaseFragment implements BookingContract.Vie
 
             }
         });
-    }
 
-    @Override
-    public void notifyProgressDone() {
+        spWeddingPackage.setAdapter(wpAdapter);
         showProgressView(false);
     }
 
     @Override
-    public void showSingleErrorMessage(String message) {
-        if (isProgressShown) return;
+    protected void showProgressView(boolean isShow) {
+        boolean isDataSuccessFulLoad = ((BookingContract.Presenter) mPresenter).isDataSuccessfulLoad();
 
-        showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+        if (isDataSuccessFulLoad && !isShow) {
+            super.showProgressView(false);
+            return;
+        }
 
-                showProgressView(true);
+        super.showProgressView(true);
+    }
 
-                ((BookingContract.Presenter) mPresenter).getCategories();
-                ((BookingContract.Presenter) mPresenter).getPackages();
-            }
+    @Override
+    public void showErrorMessage(String message, Runnable runnable) {
+        boolean isDataSuccessFulLoad = ((BookingContract.Presenter) mPresenter).isDataSuccessfulLoad();
+
+        if (!isDataSuccessFulLoad) return;
+
+        showMessage(getString(R.string.error_title_txt), message, (dialogInterface, i) -> {
+            showProgressView(true);
+            runnable.run();
+        }, (dialogInterface, i) -> {
+            getActivity().setResult(Activity.RESULT_CANCELED);
+            getActivity().finish();
         });
     }
 
     @Override
-    public void showErrorMessage(String message) {
-        showMessage(getString(R.string.error_title_txt), message);
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if ((requestCode == CompleteBookingActivity.COMPLETE_BOOKING_REQUEST_CODE) && (resultCode == CompleteBookingActivity.RESULT_OK)) {
+            getActivity().setResult(BookingActivity.RESULT_OK);
+            getActivity().finish();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

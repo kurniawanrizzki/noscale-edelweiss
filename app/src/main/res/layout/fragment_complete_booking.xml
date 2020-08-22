@@ -7,38 +7,44 @@
     android:padding="@dimen/_17sdp"
     >
 
-    <TextView
-        android:id="@+id/tv_booking_complete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/booking_success_txt"
-        android:layout_marginBottom="@dimen/_27sdp"
-        app:layout_constraintBottom_toTopOf="@id/tv_booking_go_to_payment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/tv_booking_go_to_payment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/payment_direction_txt"
-        android:layout_marginTop="@dimen/_17sdp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        <com.noscale.edelweiss.common.widget.typography.EdelweissBody1TextView
+            android:id="@+id/tv_booking_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booking_success_txt"
+            android:layout_marginBottom="@dimen/_24sdp"
+            />
 
-    <Button
-        android:id="@+id/b_booking_later"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:text="@string/later_txt"
-        app:layout_constraintTop_toBottomOf="@id/tv_booking_go_to_payment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_86sdp"
+            android:layout_height="@dimen/_86sdp"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_baseline_check_circle_outline_24"
+            />
+
+        <com.noscale.edelweiss.common.widget.typography.EdelweissCaptionTextView
+            android:id="@+id/tv_booking_go_to_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_direction_txt"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            />
+
+        <com.noscale.edelweiss.common.widget.EdelweissButton
+            android:id="@+id/b_booking_later"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/later_txt"
+            />
+
+    </LinearLayout>
 
 </com.noscale.edelweiss.common.widget.EdelweissConstraintLayout>

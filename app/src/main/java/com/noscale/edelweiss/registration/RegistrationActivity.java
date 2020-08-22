@@ -2,6 +2,7 @@ package com.noscale.edelweiss.registration;
 
 import android.os.Bundle;
 import com.noscale.edelweiss.BaseActivity;
+import com.noscale.edelweiss.R;
 
 /**
  * TODO: Add class header description
@@ -18,4 +19,8 @@ public class RegistrationActivity extends BaseActivity {
         );
     }
 
+    @Override
+    protected int getActivityTitle() {
+        return R.string.sign_up_txt;
+    }
 }

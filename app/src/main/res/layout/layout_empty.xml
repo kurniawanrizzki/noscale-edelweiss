@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
-    tools:visibility="visible"
     >
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -21,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <TextView
+    <com.noscale.edelweiss.common.widget.typography.EdelweissBody1TextView
         android:id="@+id/tv_empty_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

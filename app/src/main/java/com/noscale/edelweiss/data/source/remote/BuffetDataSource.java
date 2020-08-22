@@ -1,6 +1,8 @@
 package com.noscale.edelweiss.data.source.remote;
 
 import com.noscale.edelweiss.data.BuffetType;
+import com.noscale.edelweiss.data.source.remote.buffet.BuffetDetailsEditRequest;
+import com.noscale.edelweiss.data.source.remote.buffet.BuffetTypeEditRequest;
 import java.util.List;
 
 /**
@@ -13,5 +15,14 @@ public interface BuffetDataSource {
         void onErrorBuffetTypes(String message);
     }
 
+    interface PostCallback {
+        void onSuccess ();
+        void onError (String message);
+    }
+
     void getList (GetLoadCallback callback);
+
+    void editBuffetType (BuffetTypeEditRequest request, PostCallback callback);
+
+    void editBuffetDetails (BuffetDetailsEditRequest request, PostCallback callback);
 }

@@ -13,8 +13,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
 
-        buildConfigField("String","APP_HOST","\"192.168.43.254\"")
+        buildConfigField("String","APP_HOST","\"192.168.1.22\"")
         buildConfigField("int", "APP_PORT", "6666")
     }
 

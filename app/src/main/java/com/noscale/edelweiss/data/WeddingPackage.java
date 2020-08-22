@@ -1,5 +1,8 @@
 package com.noscale.edelweiss.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
  * TODO: Add class header description
  * Created by kurniawanrizzki on 15/08/20.
  */
-public class WeddingPackage {
+public class WeddingPackage implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -45,6 +48,30 @@ public class WeddingPackage {
     @SerializedName("bonus")
     @Expose
     private List<String> bonus;
+
+    protected WeddingPackage(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        price = in.readString();
+        totalBuffet = in.readString();
+        buffetId = in.readInt();
+        buffetName = in.readString();
+        detailBuffets = in.createTypedArrayList(WeddingBuffet.CREATOR);
+        detailPackages = in.createTypedArrayList(WeddingPackageDetail.CREATOR);
+        bonus = in.createStringArrayList();
+    }
+
+    public static final Creator<WeddingPackage> CREATOR = new Creator<WeddingPackage>() {
+        @Override
+        public WeddingPackage createFromParcel(Parcel in) {
+            return new WeddingPackage(in);
+        }
+
+        @Override
+        public WeddingPackage[] newArray(int size) {
+            return new WeddingPackage[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -116,5 +143,23 @@ public class WeddingPackage {
 
     public void setBonus(List<String> bonus) {
         this.bonus = bonus;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(price);
+        parcel.writeString(totalBuffet);
+        parcel.writeInt(buffetId);
+        parcel.writeString(buffetName);
+        parcel.writeTypedList(detailBuffets);
+        parcel.writeTypedList(detailPackages);
+        parcel.writeStringList(bonus);
     }
 }

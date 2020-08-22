@@ -25,6 +25,6 @@ public class EdelweissCaptionTextView extends EdelweissTextView {
 
     @Override
     protected int getAppliedStyle() {
-        return R.style.AppTheme_Caption;
+        return R.style.AppTheme_TextAppearance_Caption;
     }
 }

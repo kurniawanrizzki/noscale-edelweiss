@@ -15,7 +15,7 @@
 
         <include
             android:id="@+id/inc_gallery_progress"
-            layout="@layout/widget_progress"/>
+            layout="@layout/layout_progress"/>
 
         <FrameLayout
             android:id="@+id/fr_gallery_container"

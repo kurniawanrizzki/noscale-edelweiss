@@ -49,4 +49,19 @@ public class WeddingPackagePresenter implements WeddingPackageContract.Presenter
             }
         });
     }
+
+    @Override
+    public void delete(int id) {
+        PackageRemoteDataSource.getInstance().delete(id, new PackageDataSource.PostCallback() {
+            @Override
+            public void onSuccess() {
+                getPackages();
+            }
+
+            @Override
+            public void onError(String message) {
+                mView.showErrorMessage(message);
+            }
+        });
+    }
 }

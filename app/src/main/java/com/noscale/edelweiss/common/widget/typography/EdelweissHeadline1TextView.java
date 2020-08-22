@@ -25,6 +25,6 @@ public class EdelweissHeadline1TextView extends EdelweissTextView {
 
     @Override
     protected int getAppliedStyle() {
-        return R.style.AppTheme_Headline1;
+        return R.style.AppTheme_TextAppearance_Headline1;
     }
 }

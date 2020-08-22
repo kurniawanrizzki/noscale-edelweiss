@@ -4,8 +4,8 @@ import com.noscale.edelweiss.data.Testimonial;
 import com.noscale.edelweiss.data.source.TestimonialDataSource;
 import com.noscale.edelweiss.data.source.remote.APIService;
 import com.noscale.edelweiss.data.source.remote.BaseResponse;
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,14 +37,13 @@ public class TestimonialRemoteDataSource implements TestimonialDataSource {
             @Override
             public void onResponse(Call<TestimonialResponse> call, Response<TestimonialResponse> response) {
                 TestimonialResponse res = response.body();
+                List<Testimonial> testimonials = new ArrayList<>();
 
                 if ((null != res) && res.isOk()) {
-                    List<Testimonial> testimonials = res.getTestimonials();
-                    callback.onLoadTestimonial(testimonials);
-                    return;
+                    testimonials = res.getTestimonials();
                 }
 
-                callback.onEmptyTestimonial();
+                callback.onLoadTestimonial(testimonials);
             }
 
             @Override

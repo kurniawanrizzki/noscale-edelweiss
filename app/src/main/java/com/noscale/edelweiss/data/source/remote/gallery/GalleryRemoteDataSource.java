@@ -5,6 +5,7 @@ import com.noscale.edelweiss.data.source.GalleryDataSource;
 import com.noscale.edelweiss.data.source.remote.APIService;
 import com.noscale.edelweiss.data.source.remote.BaseResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,11 +37,12 @@ public class GalleryRemoteDataSource implements GalleryDataSource {
             @Override
             public void onResponse(Call<GalleryResponse> call, Response<GalleryResponse> response) {
                 GalleryResponse res = response.body();
-
+                List<Gallery> galleries = new ArrayList<>();
                 if ((null != res) && res.isOk()) {
-                    List<Gallery> galleries = res.getGalleries();
-                    callback.onLoadGallery(galleries);
+                    galleries = res.getGalleries();
                 }
+
+                callback.onLoadGallery(galleries);
             }
 
             @Override

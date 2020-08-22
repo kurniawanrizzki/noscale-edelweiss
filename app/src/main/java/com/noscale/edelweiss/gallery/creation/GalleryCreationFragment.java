@@ -1,7 +1,6 @@
 package com.noscale.edelweiss.gallery.creation;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,7 +21,8 @@ import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.data.Category;
-import com.noscale.edelweiss.gallery.GalleryActivity;
+import com.squareup.picasso.Picasso;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -31,8 +31,6 @@ import java.util.List;
  */
 public class GalleryCreationFragment extends BaseFragment implements GalleryCreationContract.View {
 
-    private EditText mEtGalleryPhoto;
-
     public static GalleryCreationFragment newInstance () {
         return new GalleryCreationFragment();
     }
@@ -40,27 +38,11 @@ public class GalleryCreationFragment extends BaseFragment implements GalleryCrea
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mMainView = view.findViewById(R.id.cl_gallery_container);
-        mEtGalleryPhoto = view.findViewById(R.id.et_gallery_photo);
-
-        mEtGalleryPhoto.setOnClickListener((v) -> {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(pickPhoto , 1);
-                    return;
-                }
-
-                ActivityCompat.requestPermissions(getActivity(), new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                }, 1);
-            }
-        });
+        view.findViewById(R.id.iv_gallery_picker).setOnClickListener((v) -> openGallery());
 
         view.findViewById(R.id.b_gallery_submit).setOnClickListener((v) -> {
-            String photoUrl = mEtGalleryPhoto.getText().toString();
+            TextView tvPath = view.findViewById(R.id.tv_gallery_path);
+            String photoUrl = tvPath.getText().toString();
 
             boolean isValidated = UICommon.isInputStringValidated(photoUrl);
 
@@ -69,8 +51,6 @@ public class GalleryCreationFragment extends BaseFragment implements GalleryCrea
             showProgressView(true);
             ((GalleryCreationContract.Presenter) mPresenter).submit(photoUrl);
         });
-
-        showProgressView(true);
     }
 
     @Override
@@ -86,6 +66,22 @@ public class GalleryCreationFragment extends BaseFragment implements GalleryCrea
     @Override
     public void setPresenter(GalleryCreationContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void openGallery() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(pickPhoto , GalleryCreationActivity.GALLERY_PICK_REQUEST_CODE);
+                return;
+            }
+
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            }, GalleryCreationActivity.GALLERY_PICK_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -136,48 +132,42 @@ public class GalleryCreationFragment extends BaseFragment implements GalleryCrea
 
     @Override
     public void showSuccessMessageView() {
-        showMessage(getString(R.string.success_txt), getString(R.string.success_txt), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
-                Intent intent = new Intent(getContext(), GalleryActivity.class);
-                startActivity(intent);
-            }
+        showMessage(getString(R.string.success_txt), getString(R.string.success_txt), (dialogInterface, i) -> {
+            getActivity().setResult(GalleryCreationActivity.RESULT_OK);
+            getActivity().finish();
         });
     }
 
     @Override
     public void showErrorMessageView(String message, Runnable runnable) {
-        showMessage(getString(R.string.error_title_txt), message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
-                showProgressView(true);
-                runnable.run();
-            }
-        });
+        showMessage(getString(R.string.error_title_txt), message, (dialogInterface, i) -> {
+            showProgressView(true);
+            runnable.run();
+        }, (dialogInterface, i) -> getActivity().finish());
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if ((requestCode == 1) && resultCode == getActivity().RESULT_OK) {
+        if ((requestCode == GalleryCreationActivity.GALLERY_PICK_REQUEST_CODE) && resultCode == getActivity().RESULT_OK) {
             Uri selectedImage = data.getData();
             String path = UICommon.getImageFilePath(getContext(), selectedImage);
 
-            mEtGalleryPhoto.setText(path);
+            AppCompatImageView ivPhoto = getView().findViewById(R.id.iv_gallery_picker);
+            TextView tvPath = getView().findViewById(R.id.tv_gallery_path);
+
+            Picasso.get().load(new File(path)).into(ivPhoto);
+            tvPath.setText(path);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == GalleryCreationActivity.GALLERY_PICK_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(pickPhoto , 1);
+            startActivityForResult(pickPhoto , GalleryCreationActivity.GALLERY_PICK_REQUEST_CODE);
             return;
         }
 

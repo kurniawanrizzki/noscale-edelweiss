@@ -8,15 +8,19 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/inc_fragment_progress"
-            layout="@layout/widget_progress"/>
+            android:id="@+id/inc_layout_progress"
+            layout="@layout/layout_progress"/>
+
+        <include
+            android:id="@+id/inc_layout_empty"
+            layout="@layout/layout_empty"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_fragment_container"
+            android:id="@+id/cl_layout_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

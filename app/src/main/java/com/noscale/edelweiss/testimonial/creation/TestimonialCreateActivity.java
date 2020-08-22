@@ -2,6 +2,7 @@ package com.noscale.edelweiss.testimonial.creation;
 
 import android.os.Bundle;
 import com.noscale.edelweiss.BaseActivity;
+import com.noscale.edelweiss.R;
 
 /**
  * TODO: Add class header description
@@ -14,5 +15,15 @@ public class TestimonialCreateActivity extends BaseActivity {
         mPresenter = new TestimonialCreatePresenter(
                 (TestimonialCreateContract.View) mFragment
         );
+    }
+
+    @Override
+    protected int getResContentView() {
+        return R.layout.activity_base_no_action_bar;
+    }
+
+    @Override
+    protected int getActivityTitle() {
+        return 0;
     }
 }

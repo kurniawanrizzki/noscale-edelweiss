@@ -25,6 +25,6 @@ public class EdelweissSubtitle1TextView extends EdelweissTextView {
 
     @Override
     protected int getAppliedStyle() {
-        return R.style.AppTheme_Subtitle1;
+        return R.style.AppTheme_TextAppearance_Subtitle1;
     }
 }

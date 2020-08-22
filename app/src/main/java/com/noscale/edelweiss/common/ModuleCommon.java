@@ -1,8 +1,7 @@
 package com.noscale.edelweiss.common;
 
-import android.content.Context;
 import android.content.Intent;
-import android.view.View;
+import com.noscale.edelweiss.BaseActivity;
 import com.noscale.edelweiss.R;
 import com.noscale.edelweiss.about.AboutUsActivity;
 import com.noscale.edelweiss.booking.BookingActivity;
@@ -24,82 +23,64 @@ import java.util.List;
  */
 public class ModuleCommon {
 
-    public static List<Module> getModules (final Context context) {
+    public static List<Module> getModules (final BaseActivity activity) {
         List<Module> modules = new ArrayList<>();
 
-        User.Type type = AppConfiguration.getInstance(context).getAuthenticatedUserType();
+        User.Type type = AppConfiguration.getInstance(activity).getAuthenticatedUserType();
 
-        modules.add(new Module(R.string.gallery_txt, R.drawable.ic_gallery, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, GalleryActivity.class);
-                context.startActivity(i);
-            }
+        modules.add(new Module(R.string.gallery_txt, R.drawable.ic_camera, (v) -> {
+            Intent i = new Intent(activity, GalleryActivity.class);
+            activity.startActivity(i);
         }));
 
-        modules.add(new Module(R.string.package_txt, R.drawable.ic_package, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, WeddingPackageActivity.class);
-                context.startActivity(i);
-            }
+        modules.add(new Module(R.string.package_txt, R.drawable.ic_ring, (v) -> {
+            Intent i = new Intent(activity, WeddingPackageActivity.class);
+            activity.startActivity(i);
         }));
 
         if (type.equals(User.Type.DEFAULT)) {
-            modules.add(new Module(R.string.booking_txt, R.drawable.ic_book, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(context, BookingActivity.class);
-                    context.startActivity(i);
-                }
+            modules.add(new Module(R.string.booking_txt, R.drawable.ic_booking, (v) -> {
+                Intent i = new Intent(activity, BookingActivity.class);
+                activity.startActivityForResult(
+                        i,
+                        BookingActivity.BOOKING_REQUEST_CODE
+                );
             }));
         }
 
-        modules.add(new Module(R.string.schedule_txt, R.drawable.ic_schedule, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, ScheduleActivity.class);
-                context.startActivity(i);
-            }
+        modules.add(new Module(R.string.schedule_txt, R.drawable.ic_date, (v) -> {
+            Intent i = new Intent(activity, ScheduleActivity.class);
+            activity.startActivity(i);
         }));
 
-        modules.add(new Module(R.string.testimonial_txt, R.drawable.ic_testimonial, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, TestimonialActivity.class);
-                context.startActivity(i);
-            }
+        modules.add(new Module(R.string.testimonial_txt, R.drawable.ic_testimoni, (v) -> {
+            Intent i = new Intent(activity, TestimonialActivity.class);
+            activity.startActivity(i);
         }));
 
         if (type.equals(User.Type.DEFAULT)) {
-            modules.add(new Module(R.string.payment_txt, R.drawable.ic_payment, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(context, PaymentActivity.class);
-                    context.startActivity(i);
-                }
+            modules.add(new Module(R.string.payment_txt, R.drawable.ic_money, (v) -> {
+                Intent i = new Intent(activity, PaymentActivity.class);
+                activity.startActivityForResult(
+                        i,
+                        PaymentActivity.PAYMENT_CREATION_REQUEST_CODE)
+                ;
             }));
         }
 
-        modules.add(new Module(R.string.about_us_txt, R.drawable.ic_info, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, AboutUsActivity.class);
-                context.startActivity(i);
-            }
+        modules.add(new Module(R.string.about_us_txt, R.drawable.ic_lamp, (v) -> {
+            Intent i = new Intent(activity, AboutUsActivity.class);
+            activity.startActivity(i);
         }));
 
-        modules.add(new Module(R.string.sign_out_txt, R.drawable.ic_logout, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppConfiguration.getInstance(context).setAuthenticated(false);
-                AppConfiguration.getInstance(context).setAuthenticatedId(0);
-                AppConfiguration.getInstance(context).setAuthenticatedUserName("");
-                AppConfiguration.getInstance(context).setAuthenticatedUserType(0);
+        modules.add(new Module(R.string.sign_out_txt, R.drawable.ic_logout, (v) -> {
+            AppConfiguration.getInstance(activity).setAuthenticated(false);
+            AppConfiguration.getInstance(activity).setAuthenticatedId(0);
+            AppConfiguration.getInstance(activity).setAuthenticatedUserName("");
+            AppConfiguration.getInstance(activity).setAuthenticatedUserType(0);
 
-                Intent i = new Intent(context, LoginActivity.class);
-                context.startActivity(i);
-            }
+            Intent i = new Intent(activity, LoginActivity.class);
+            activity.startActivity(i);
         }));
 
         return modules;

@@ -6,7 +6,6 @@ import com.noscale.edelweiss.data.source.PaymentDataSource;
 import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentRemoteDataSource;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentSubmissionRequest;
-
 import java.util.List;
 
 /**
@@ -63,18 +62,13 @@ public class PaymentPresenter implements PaymentContract.Presenter {
 
             @Override
             public void onFailurePaymentType(String message) {
-                mView.showErrorMessage(message, new Runnable() {
-                    @Override
-                    public void run() {
-                        fetch();
-                    }
-                });
+                mView.showErrorMessage(message, () -> fetch());
             }
         });
     }
 
     @Override
-    public void submit(String receipt, float amount) {
+    public void submit(String receipt, String amount) {
 
         mRequest.setAmount(amount);
         mRequest.setReceipt(receipt);
@@ -87,12 +81,7 @@ public class PaymentPresenter implements PaymentContract.Presenter {
 
             @Override
             public void onError(String message) {
-                mView.showErrorMessage(message, new Runnable() {
-                    @Override
-                    public void run() {
-                        submit(receipt, amount);
-                    }
-                });
+                mView.showErrorMessage(message, () -> submit(receipt, amount));
             }
         });
     }

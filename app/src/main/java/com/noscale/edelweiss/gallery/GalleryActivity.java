@@ -2,6 +2,7 @@ package com.noscale.edelweiss.gallery;
 
 import android.os.Bundle;
 import com.noscale.edelweiss.BaseActivity;
+import com.noscale.edelweiss.R;
 
 /**
  * TODO: Add class header description
@@ -15,5 +16,10 @@ public class GalleryActivity extends BaseActivity {
                 (GalleryContract.View) mFragment,
                 shouldLoadDataFromRepository(savedInstanceState)
         );
+    }
+
+    @Override
+    protected int getActivityTitle() {
+        return R.string.gallery_txt;
     }
 }

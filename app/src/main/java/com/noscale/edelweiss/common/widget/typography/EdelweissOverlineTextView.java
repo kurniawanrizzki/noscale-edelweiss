@@ -25,6 +25,6 @@ public class EdelweissOverlineTextView extends EdelweissTextView {
 
     @Override
     protected int getAppliedStyle() {
-        return R.style.AppTheme_Overline;
+        return R.style.AppTheme_TextAppearance_Overline;
     }
 }
