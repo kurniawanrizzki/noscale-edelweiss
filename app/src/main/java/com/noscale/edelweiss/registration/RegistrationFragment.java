@@ -3,6 +3,7 @@ package com.noscale.edelweiss.registration;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,23 +26,24 @@ public class RegistrationFragment extends BaseFragment implements RegistrationCo
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tvFirstName = view.findViewById(R.id.et_registration_first_name);
-        TextView tvLastName = view.findViewById(R.id.et_registration_last_name);
-        TextView tvEmail = view.findViewById(R.id.et_registration_email);
-        TextView tvPassword = view.findViewById(R.id.et_registration_password);
-        TextView tvConfirmPassword = view.findViewById(R.id.et_registration_repassword);
+        EditText etFirstName = view.findViewById(R.id.et_registration_first_name);
+        EditText etLastName = view.findViewById(R.id.et_registration_last_name);
+        EditText etEmail = view.findViewById(R.id.et_registration_email);
+        EditText etPassword = view.findViewById(R.id.et_registration_password);
+        EditText etConfirmPassword = view.findViewById(R.id.et_registration_repassword);
 
         view.findViewById(R.id.b_registration_submit).setOnClickListener((v) -> {
-            String firstName = tvFirstName.getText().toString();
-            String lastName = tvLastName.getText().toString();
-            String email = tvEmail.getText().toString();
-            String password = tvPassword.getText().toString();
-            String confirmPassword = tvConfirmPassword.getText().toString();
+            String firstName = etFirstName.getText().toString();
+            String lastName = etLastName.getText().toString();
+            String email = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
+            String confirmPassword = etConfirmPassword.getText().toString();
 
             boolean isFormValidated = UICommon.isInputStringValidated(firstName, lastName, email);
             boolean isPasswordValidated = UICommon.isInputStringValidated(password, confirmPassword) && password.equals(confirmPassword);
 
-            if (!isFormValidated && !isPasswordValidated) return;
+            if (!isFormValidated) return;
+            if (!isPasswordValidated) return;
 
             showProgressView(true);
             ((RegistrationContract.Presenter) mPresenter).signUp(
