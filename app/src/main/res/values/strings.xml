@@ -71,6 +71,8 @@
     <string name="filter_txt">Filter</string>
     <string name="success_txt">Success</string>
     <string name="warning_title_txt">Warning</string>
+    <string name="warning_registration_txt">Required fields must be filled in</string>
+    <string name="warning_registration_password_confirmation_txt">Please make sure your password match.</string>
     <string name="sign_out_message_txt">Do you want to sign out?</string>
     <string name="deletion_txt">Do you want to delete it?</string>
     <string name="error_title_txt">Error</string>

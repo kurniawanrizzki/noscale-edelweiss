@@ -42,8 +42,14 @@ public class RegistrationFragment extends BaseFragment implements RegistrationCo
             boolean isFormValidated = UICommon.isInputStringValidated(firstName, lastName, email);
             boolean isPasswordValidated = UICommon.isInputStringValidated(password, confirmPassword) && password.equals(confirmPassword);
 
-            if (!isFormValidated) return;
-            if (!isPasswordValidated) return;
+            if (!isFormValidated) {
+                UICommon.showDialog(getContext(), getString(R.string.warning_title_txt), getString(R.string.warning_registration_txt));
+                return;
+            }
+            if (!isPasswordValidated) {
+                UICommon.showDialog(getContext(), getString(R.string.warning_title_txt), getString(R.string.warning_registration_password_confirmation_txt));
+                return;
+            }
 
             showProgressView(true);
             ((RegistrationContract.Presenter) mPresenter).signUp(
