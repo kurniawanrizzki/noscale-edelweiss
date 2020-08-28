@@ -4,6 +4,8 @@ import com.noscale.edelweiss.BasePresenter;
 import com.noscale.edelweiss.BaseView;
 import com.noscale.edelweiss.data.Booking;
 import com.noscale.edelweiss.data.PaymentType;
+
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -20,8 +22,10 @@ public interface PaymentContract {
 
     interface Presenter extends BasePresenter {
         void setBooking (Booking booking);
+        String getBooking ();
         void setPaymentType (PaymentType type);
+        int getPaymentType ();
         void fetch ();
-        void submit (String receipt, String amount);
+        void submit (String receipt, BigInteger amount);
     }
 }

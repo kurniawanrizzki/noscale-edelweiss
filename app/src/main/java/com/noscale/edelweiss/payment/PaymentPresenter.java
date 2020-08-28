@@ -6,6 +6,8 @@ import com.noscale.edelweiss.data.source.PaymentDataSource;
 import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentRemoteDataSource;
 import com.noscale.edelweiss.data.source.remote.payment.PaymentSubmissionRequest;
+
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -48,8 +50,18 @@ public class PaymentPresenter implements PaymentContract.Presenter {
     }
 
     @Override
+    public String getBooking() {
+        return mRequest.getBookingNumber();
+    }
+
+    @Override
     public void setPaymentType(PaymentType type) {
         mRequest.setPaymentTypeId(type.getId());
+    }
+
+    @Override
+    public int getPaymentType() {
+        return mRequest.getPaymentTypeId();
     }
 
     @Override
@@ -68,7 +80,7 @@ public class PaymentPresenter implements PaymentContract.Presenter {
     }
 
     @Override
-    public void submit(String receipt, String amount) {
+    public void submit(String receipt, BigInteger amount) {
 
         mRequest.setAmount(amount);
         mRequest.setReceipt(receipt);

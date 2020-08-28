@@ -3,6 +3,8 @@ package com.noscale.edelweiss.data.source.remote.payment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigInteger;
+
 /**
  * TODO: Add class header description
  * Created by kurniawanrizzki on 17/08/20.
@@ -21,9 +23,9 @@ public class PaymentSubmissionRequest {
     @Expose
     private String receipt;
 
-    @SerializedName("amount")
+    @SerializedName("total")
     @Expose
-    private String amount;
+    private BigInteger amount;
 
     public int getPaymentTypeId() {
         return paymentTypeId;
@@ -49,11 +51,11 @@ public class PaymentSubmissionRequest {
         this.receipt = receipt;
     }
 
-    public String getAmount() {
+    public BigInteger getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigInteger amount) {
         this.amount = amount;
     }
 }

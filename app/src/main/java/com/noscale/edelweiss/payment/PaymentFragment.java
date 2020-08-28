@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -21,12 +20,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.EdelweissCurrencyEditText;
 import com.noscale.edelweiss.common.UICommon;
 import com.noscale.edelweiss.data.Booking;
 import com.noscale.edelweiss.data.PaymentType;
 import com.noscale.edelweiss.payment.complete.CompletePaymentActivity;
 import com.squareup.picasso.Picasso;
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -44,10 +45,11 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
         super.onViewCreated(view, savedInstanceState);
 
         TextView tvPath = view.findViewById(R.id.tv_payment_path);
-        EditText etAmount = view.findViewById(R.id.et_payment_amount);
+        EdelweissCurrencyEditText etAmount = view.findViewById(R.id.et_payment_amount);
         ImageView ivPhoto = view.findViewById(R.id.iv_payment_pick);
 
         view.findViewById(R.id.b_payment_submit).setOnClickListener((v) -> {
+            PaymentContract.Presenter p = (PaymentContract.Presenter) mPresenter;
             String receipt = tvPath.getText().toString();
             String amount = etAmount.getText().toString();
 
@@ -57,9 +59,12 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
             );
 
             if (!isValidated) return;
+            if (receipt.equalsIgnoreCase("path")) return;
 
-            showProgressView(true);
-            ((PaymentContract.Presenter) mPresenter).submit(receipt, amount);
+            if (((null != p.getBooking()) && !p.getBooking().isEmpty()) && (p.getPaymentType() > 0) && (etAmount.getDoubleValue() > 0)) {
+                showProgressView(true);
+                p.submit(receipt, BigDecimal.valueOf(etAmount.getDoubleValue()).toBigInteger());
+            }
         });
 
         ivPhoto.setOnClickListener((v) -> openGallery());
