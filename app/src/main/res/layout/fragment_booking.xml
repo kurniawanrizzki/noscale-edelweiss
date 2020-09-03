@@ -86,6 +86,13 @@
                 tools:entries="@tools:sample/cities"
                 />
 
+            <com.noscale.edelweiss.common.EdelweissSpinner
+                android:id="@+id/sp_booking_building"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:entries="@tools:sample/cities"
+                />
+
         </LinearLayout>
 
     </ScrollView>
