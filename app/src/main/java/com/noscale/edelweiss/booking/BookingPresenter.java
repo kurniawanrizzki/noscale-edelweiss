@@ -1,5 +1,6 @@
 package com.noscale.edelweiss.booking;
 
+import com.noscale.edelweiss.data.Building;
 import com.noscale.edelweiss.data.Category;
 import com.noscale.edelweiss.data.WeddingPackage;
 import com.noscale.edelweiss.data.source.BookingDataSource;
@@ -57,13 +58,12 @@ public class BookingPresenter implements BookingContract.Presenter {
     }
 
     @Override
-    public void submit(int userId, String address, String phoneNumber, String eventDate, String eventTime, Float bookingFee) {
+    public void submit(int userId, String address, String phoneNumber, String eventDate, String eventTime) {
 
         mRequest.setUserId(userId);
         mRequest.setAddress(address);
         mRequest.setPhoneNumber(phoneNumber);
         mRequest.setEventDateTime(eventDate+" "+eventTime);
-        mRequest.setBookingFee(bookingFee);
 
         BookingRemoteDataSource.getInstance().submit(mRequest, new BookingDataSource.PostCallback() {
             @Override
@@ -78,8 +78,7 @@ public class BookingPresenter implements BookingContract.Presenter {
                         address,
                         phoneNumber,
                         eventDate,
-                        eventTime,
-                        bookingFee
+                        eventTime
                 ));
             }
         });
@@ -93,6 +92,13 @@ public class BookingPresenter implements BookingContract.Presenter {
     @Override
     public void setSelectedWeddingPackage(WeddingPackage wp) {
         mRequest.setWeddingPackage(wp.getId());
+        getBuilding(wp.getId());
+    }
+
+    @Override
+    public void setBuilding(Building b) {
+        if (null == b) mRequest.setWeddingBuilding(0);
+        mRequest.setWeddingBuilding(b.getId());
     }
 
     @Override
@@ -135,6 +141,21 @@ public class BookingPresenter implements BookingContract.Presenter {
                     getCategories();
                     getPackages();
                 });
+            }
+        });
+    }
+
+    @Override
+    public void getBuilding(int packageId) {
+        BookingRemoteDataSource.getInstance().getBuilding(packageId, new BookingDataSource.GetCallback() {
+            @Override
+            public void onSuccess(List<Building> data) {
+                mView.appendBuilding(data);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                mView.showErrorMessage(message, () -> getBuilding(packageId));
             }
         });
     }

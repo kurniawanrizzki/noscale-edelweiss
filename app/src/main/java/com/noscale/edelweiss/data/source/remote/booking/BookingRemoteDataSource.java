@@ -1,10 +1,11 @@
 package com.noscale.edelweiss.data.source.remote.booking;
 
+import com.noscale.edelweiss.data.Building;
 import com.noscale.edelweiss.data.source.BookingDataSource;
 import com.noscale.edelweiss.data.source.remote.APIService;
-
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,6 +51,30 @@ public class BookingRemoteDataSource implements BookingDataSource {
 
             @Override
             public void onFailure(Call<BookingSubmissionResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                callback.onFailure(message);
+            }
+        });
+    }
+
+    @Override
+    public void getBuilding(int packageId, GetCallback callback) {
+        Call<BuildingResponse> response = mService.getBookingApi().getBuildingListByPackageId(packageId);
+        response.enqueue(new Callback<BuildingResponse>() {
+            @Override
+            public void onResponse(Call<BuildingResponse> call, Response<BuildingResponse> response) {
+                BuildingResponse res = response.body();
+                List<Building> data = new ArrayList<>();
+
+                if ((null != res) && res.isOk()) {
+                    data = res.getData();
+                }
+
+                callback.onSuccess(data);
+            }
+
+            @Override
+            public void onFailure(Call<BuildingResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 callback.onFailure(message);
             }

@@ -33,9 +33,9 @@ public class BookingSubmissionRequest {
     @Expose
     private int weddingPackage;
 
-    @SerializedName("bookingFee")
+    @SerializedName("weddingBuilding")
     @Expose
-    private float bookingFee;
+    private int weddingBuilding;
 
     public int getUserId() {
         return userId;
@@ -85,11 +85,11 @@ public class BookingSubmissionRequest {
         this.weddingPackage = weddingPackage;
     }
 
-    public float getBookingFee() {
-        return bookingFee;
+    public int getWeddingBuilding() {
+        return weddingBuilding;
     }
 
-    public void setBookingFee(float bookingFee) {
-        this.bookingFee = bookingFee;
+    public void setWeddingBuilding(int weddingBuilding) {
+        this.weddingBuilding = weddingBuilding;
     }
 }
