@@ -15,6 +15,8 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
 
     private boolean isDataMissing;
 
+    private List<Schedule> mSchedules;
+
     public SchedulePresenter (ScheduleContract.View view, boolean isDataMissing) {
         view.setPresenter(this);
 
@@ -39,7 +41,8 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
         ScheduleRemoteDataSource.getInstance().getList(new ScheduleDataSource.GetLoadCallback() {
             @Override
             public void onLoadSchedule(List<Schedule> schedules) {
-                mView.showPage(schedules);
+                mSchedules = schedules;
+                mView.showPage(mSchedules);
             }
 
             @Override
@@ -47,6 +50,18 @@ public class SchedulePresenter implements ScheduleContract.Presenter {
                 mView.showErrorMessage(message);
             }
         });
+    }
+
+    @Override
+    public String getScheduleContent() {
+        String content = "";
+
+        for (Schedule  s : mSchedules) {
+            if (null == s) continue;
+            content += s.getName() + "\n" + s.getBookingNumber() + "\n" + s.getDateTime() + "\n" + s.getStatus().name() + "\n\n";
+        }
+
+        return content;
     }
 
     @Override

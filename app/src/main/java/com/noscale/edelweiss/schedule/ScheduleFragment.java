@@ -1,13 +1,16 @@
 package com.noscale.edelweiss.schedule;
 
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import com.itextpdf.text.Paragraph;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
+import com.noscale.edelweiss.common.PDFCommon;
 import com.noscale.edelweiss.common.configuration.AppConfiguration;
 import com.noscale.edelweiss.common.widget.SimpleRecyclerAdapter;
 import com.noscale.edelweiss.data.Schedule;
@@ -24,6 +27,28 @@ public class ScheduleFragment extends BaseFragment implements ScheduleContract.V
 
     public static ScheduleFragment newInstance () {
         return new ScheduleFragment();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        TextView tvActionTool = getActivity().findViewById(R.id.tv_action_bar_tool);
+        tvActionTool.setText(R.string.export_txt);
+        tvActionTool.setVisibility(View.VISIBLE);
+        tvActionTool.setOnClickListener((v) -> PDFCommon.createPdf(getContext(), new PDFCommon.PDFContainerListener() {
+            @Override
+            public Paragraph getContent() {
+                Paragraph p1 = new Paragraph(((SchedulePresenter) mPresenter).getScheduleContent());
+                p1.setAlignment(Paragraph.ALIGN_LEFT);
+                return p1;
+            }
+
+            @Override
+            public void showError(String message) {
+                showErrorMessage(message);
+            }
+        }));
     }
 
     @Override
