@@ -24,6 +24,7 @@ object Version {
     val vMaterial = "1.2.0"
     val vRetrofit = "2.9.0"
     val vPicasso = "2.71828"
+    val vItextg = "5.5.9"
 
     val vJunit = "4.12"
     val vExtJunit = "1.1.1"
@@ -43,6 +44,7 @@ object Lib {
     val retrofit = "com.squareup.retrofit2:retrofit:${Version.vRetrofit}"
     val gson = "com.squareup.retrofit2:converter-gson:${Version.vRetrofit}"
     val picasso = "com.squareup.picasso:picasso:${Version.vPicasso}"
+    val iTextg = "com.itextpdf:itextg:${Version.vItextg}"
 
     val junit = "junit:junit:${Version.vJunit}"
     val extJunit = "androidx.test.ext:junit:${Version.vExtJunit}"

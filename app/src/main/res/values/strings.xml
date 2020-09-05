@@ -69,6 +69,7 @@
     <string name="ok_txt">OK</string>
     <string name="no_txt">NO</string>
     <string name="filter_txt">Filter</string>
+    <string name="export_txt">Export</string>
     <string name="success_txt">Success</string>
     <string name="warning_title_txt">Warning</string>
     <string name="warning_registration_txt">Required fields must be filled in</string>

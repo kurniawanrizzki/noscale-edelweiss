@@ -18,6 +18,7 @@ public interface ScheduleContract {
 
     interface Presenter extends BasePresenter {
         void fetch ();
+        String getScheduleContent ();
         void update (int id, String status);
     }
 }
