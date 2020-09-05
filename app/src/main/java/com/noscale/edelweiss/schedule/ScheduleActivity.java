@@ -10,6 +10,9 @@ import com.noscale.edelweiss.R;
  * Created by kurniawanrizzki on 13/08/20.
  */
 public class ScheduleActivity extends BaseActivity {
+
+    public static final int EXPORT_SCHEDULE_REQUEST_CODE = 1111;
+
     @Override
     protected void init(Bundle savedInstanceState) {
         mFragment = ScheduleFragment.newInstance();

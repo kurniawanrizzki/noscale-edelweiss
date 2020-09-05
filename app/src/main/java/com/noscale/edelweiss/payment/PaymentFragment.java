@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.noscale.edelweiss.BaseFragment;
 import com.noscale.edelweiss.R;
@@ -95,7 +94,7 @@ public class PaymentFragment extends BaseFragment implements PaymentContract.Vie
                 return;
             }
 
-            ActivityCompat.requestPermissions(getActivity(), new String[]{
+            requestPermissions(new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE
             }, PaymentActivity.PAYMENT_PICK_REQUEST_CODE);
         }
