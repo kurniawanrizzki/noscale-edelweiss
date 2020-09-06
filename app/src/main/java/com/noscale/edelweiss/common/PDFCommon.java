@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.widget.Toast;
+
 import androidx.core.content.FileProvider;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -69,7 +71,9 @@ public class PDFCommon {
             context.startActivity(pdfIntent);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
-            listener.showError(e.getLocalizedMessage());
+
+            Toast.makeText(context, "There is no app to open file", Toast.LENGTH_SHORT).show();
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=pdf")));
         }
     }
 
